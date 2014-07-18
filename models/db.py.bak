@@ -13,7 +13,7 @@ if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
     db = DAL('postgres://postgres:postgres@localhost/dummy_db',pool_size=1,check_reserved=['all']) # postgres://username:password@localhost/db_name
     db.define_table('librarian', 
-                    Field('username'),
+                    Filed('username'),
                     Field('password'))
 else:
     ## connect to Google BigTable (optional 'google:datastore://namespace')
