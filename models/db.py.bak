@@ -11,6 +11,7 @@
 
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
+<<<<<<< HEAD
     db = DAL('postgres://postgres:1234asdf@localhost/libman',pool_size=1,check_reserved=['all']) # postgres://username:password@localhost/db_name
     
     db.define_table('library',
@@ -51,7 +52,7 @@ if not request.env.web2py_runtime_gae:
                     primarykey=['id_num'])
     
     db.define_table('borrowing',
-					Field('ISBN' 'reference book'),
+					Field('ISBN', 'reference book'),
 					Field('borrwer_id', 'reference borrower'),
 					Field('startdate', 'date'),
                     Field('duedate', 'date'))
@@ -76,6 +77,63 @@ if not request.env.web2py_runtime_gae:
     
     db.borrowing.startdate.requires= IS_NOT_EMPTY()
     db.borrowing.duedate.requires= IS_NOT_EMPTY()
+=======
+	db=DAL("postgres://postgres:postgres@localhost:5432/librarymanagement", pool_size=1, lazy_tables=True)
+	
+	db.define_table('library',
+				Field('name', unique=True))
+
+	db.define_table('librarian',
+					Field('library_id', 'reference library'),
+					Field('username', unique=True),
+					Field('password', 'password'))
+					
+	db.define_table('book',
+					Field('ISBN', 'integer', unique=True, ondelete='CASCADE'),
+					Field('library_id', 'reference library'),
+					Field('title'),
+					Field('publisher_last_name'),
+					Field('publisher_first_name'),
+					Field('isAvailable', 'boolean'),
+					primarykey=['ISBN'])
+					
+	db.define_table('author',
+					Field('ISBN', 'reference book'),
+					Field('last_name'),
+					Field('first_name'))
+
+	db.define_table('manage',
+					Field('ISBN', 'reference book'),
+					Field('librarian_id', 'reference librarian'),
+					Field('action'))
+
+	db.define_table('borrower',
+					Field('last_name'),
+					Field('first_name'))
+
+	db.define_table('borrowing',
+					Field('ISBN' 'reference book'),
+					Field('borrwer_id', 'reference borrower'),
+					Field('date', 'date'))
+	
+	db.librarian.username.requires= IS_NOT_EMPTY()
+	db.librarian.password.requiers= IS_NOT_EMPTY()
+
+	db.book.ISBN.requires= IS_NOT_EMPTY()
+	db.book.title.requires= IS_NOT_EMPTY()
+	db.book.publisher_last_name.requires= IS_NOT_EMPTY()
+	db.book.publisher_first_name.requires= IS_NOT_EMPTY()
+	db.book.isAvailable.requires= IS_NOT_EMPTY()
+
+	db.author.last_name.requires= IS_NOT_EMPTY()
+	db.author.first_name.requires= IS_NOT_EMPTY()
+
+	db.manage.action.requires= IS_NOT_EMPTY()
+
+	db.borrower.last_name.requires= IS_NOT_EMPTY()
+	db.borrower.first_name.requires= IS_NOT_EMPTY()
+
+>>>>>>> 4af0b0db7e96edbe2c80c9340e101cfe6194c0f9
 else:
     ## connect to Google BigTable (optional 'google:datastore://namespace')
     db = DAL('google:datastore')
@@ -103,30 +161,6 @@ response.generic_patterns = ['*'] if request.is_local else []
 ## - old style crud actions
 ## (more options discussed in gluon/tools.py)
 #########################################################################
-
-from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
-auth = Auth(db)
-crud, service, plugins = Crud(db), Service(), PluginManager()
-
-## create all tables needed by auth if not custom tables
-auth.define_tables(username=False, signature=False)
-
-## configure email
-mail = auth.settings.mailer
-mail.settings.server = 'logging' or 'smtp.gmail.com:587'
-mail.settings.sender = 'you@gmail.com'
-mail.settings.login = 'username:password'
-
-## configure auth policy
-auth.settings.registration_requires_verification = False
-auth.settings.registration_requires_approval = False
-auth.settings.reset_password_requires_verification = True
-
-## if you need to use OpenID, Facebook, MySpace, Twitter, Linkedin, etc.
-## register with janrain.com, write your domain:api_key in private/janrain.key
-from gluon.contrib.login_methods.rpx_account import use_janrain
-use_janrain(auth, filename='private/janrain.key')
-
 #########################################################################
 ## Define your tables below (or better in another model file) for example
 ##
@@ -145,4 +179,3 @@ use_janrain(auth, filename='private/janrain.key')
 #########################################################################
 
 ## after defining tables, uncomment below to enable auditing
-# auth.enable_record_versioning(db)
