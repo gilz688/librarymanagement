@@ -451,3 +451,9 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2014-08-04T05:44:32.901686
+CREATE TABLE library(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(512) UNIQUE,
+    address VARCHAR(50)
+);
