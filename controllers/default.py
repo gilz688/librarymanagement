@@ -74,3 +74,12 @@ def data():
       LOAD('default','data.load',args='tables',ajax=True,user_signature=True)
     """
     return dict(form=crud())
+
+def index():
+	response.view="libman/template.html"
+	return dict()
+
+def viewBooks():
+	lib_id= request.args(0,cast=int)
+	books=db(db.book.library_id==lib_id).select(db.book.title, db.book.ISBN, orderby=db.book.title)
+	return response.json(books)
