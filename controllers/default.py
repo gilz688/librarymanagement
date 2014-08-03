@@ -83,3 +83,13 @@ def viewBooks():
 	lib_id= request.args(0,cast=int)
 	books=db(db.book.library_id==lib_id).select(db.book.title, db.book.ISBN, orderby=db.book.title)
 	return response.json(books)
+
+def viewSpecificBook():
+	ISBN=request.args(0,cast=int, otherwise=URL('viewBooks'))
+	book_details=db(db.book.ISBN==ISBN).select().first()
+	authors=db(db.author.ISBN==ISBN).select(orderby=db.author.last_name)
+	return response.json(book_details)
+	
+def viewAuthors():
+    authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
+    return response.json(authors)
