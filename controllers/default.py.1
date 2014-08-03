@@ -92,11 +92,11 @@ def viewBooks():
 	
 def getBookAuthors():
     ISBN = request.args(0, cast=int,otherwise=URL('viewBooks'))
-    authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, orderby=db.author.last_name)
-    #authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
+    author=db(db.author.ISBN==ISBN).select(orderby=db.author.last_name)
+    authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
     return response.json(authors)
 
 def getSpecificBookInfo():
     ISBN = request.args(0, cast=int, otherwise=URL('viewBooks'))
-    bookInfo = db(db.book.ISBN == ISBN).select(db.book.isbn, db.book.lib_name, db.book.title, db.book.publisher, db.book.no_of_copies, db.book.available_copies, db.book.description)
-    return response.json(bookInfo)
+    bookInfo = db(db.book).select(db.book.title, db.book.publisher, db.book.no_of_copies, db.book.available_copies, db.book.description)
+    return response.json(bookTitle)
