@@ -225,3 +225,229 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2014-08-03T08:53:16.049000
+CREATE TABLE librarian(
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(512),
+    password VARCHAR(512)
+);
+success!
+timestamp: 2014-08-03T08:53:28.057000
+CREATE TABLE auth_user(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email VARCHAR(512),
+    password VARCHAR(512),
+    registration_key VARCHAR(512),
+    reset_password_key VARCHAR(512),
+    registration_id VARCHAR(512)
+);
+success!
+timestamp: 2014-08-03T08:53:29.097000
+CREATE TABLE auth_group(
+    id SERIAL PRIMARY KEY,
+    role VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-08-03T08:53:30.145000
+CREATE TABLE auth_membership(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-08-03T08:53:31.167000
+CREATE TABLE auth_permission(
+    id SERIAL PRIMARY KEY,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name VARCHAR(512),
+    table_name VARCHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2014-08-03T08:53:32.543000
+CREATE TABLE auth_event(
+    id SERIAL PRIMARY KEY,
+    time_stamp TIMESTAMP,
+    client_ip VARCHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-08-03T08:53:33.742000
+CREATE TABLE auth_cas(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service VARCHAR(512),
+    ticket VARCHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2014-08-03T16:14:59.988000
+ALTER TABLE librarian ADD username__tmp VARCHAR(30);
+UPDATE librarian SET username__tmp=username;
+ALTER TABLE librarian DROP COLUMN username;
+ALTER TABLE librarian ADD username VARCHAR(30);
+UPDATE librarian SET username=username__tmp;
+ALTER TABLE librarian DROP COLUMN username__tmp;
+timestamp: 2014-08-03T16:15:01.403000
+ALTER TABLE librarian ADD password__tmp VARCHAR(30);
+UPDATE librarian SET password__tmp=password;
+ALTER TABLE librarian DROP COLUMN password;
+ALTER TABLE librarian ADD password VARCHAR(30);
+UPDATE librarian SET password=password__tmp;
+ALTER TABLE librarian DROP COLUMN password__tmp;
+success!
+timestamp: 2014-08-03T16:31:08.180000
+ALTER TABLE librarian ADD name VARCHAR(50);
+timestamp: 2014-08-03T16:31:08.225000
+ALTER TABLE librarian ADD id_num VARCHAR(9);
+timestamp: 2014-08-03T16:31:08.295000
+ALTER TABLE librarian ADD birthday DATE;
+success!
+timestamp: 2014-08-03T22:31:42.008000
+CREATE TABLE library(
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(512) UNIQUE,
+    place VARCHAR(50)
+);
+success!
+timestamp: 2014-08-03T22:31:43.537000
+CREATE TABLE librarian(
+    id_num VARCHAR(9) NOT NULL,
+    name VARCHAR(50),
+    username VARCHAR(30),
+    password VARCHAR(30),
+    PRIMARY KEY(id_num)) ;
+success!
+timestamp: 2014-08-03T22:31:44.165000
+CREATE TABLE book(
+    ISBN INTEGER NOT NULL UNIQUE,
+    library_id INTEGER REFERENCES library (id) ON DELETE CASCADE,
+    title VARCHAR(100),
+    publisher_last_name VARCHAR(50),
+    publisher_first_name VARCHAR(50),
+    isAvailable CHAR(1),
+    PRIMARY KEY(ISBN)) ;
+success!
+timestamp: 2014-08-03T22:31:44.948000
+CREATE TABLE author(
+    id SERIAL PRIMARY KEY,
+    ISBN INTEGER, CONSTRAINT  "FK_author_ISBN__constraint" FOREIGN KEY (ISBN) REFERENCES book (ISBN) ON DELETE CASCADE,
+    last_name VARCHAR(20),
+    first_name VARCHAR(30)
+);
+success!
+timestamp: 2014-08-03T22:40:13.563000
+ALTER TABLE library ADD address VARCHAR(50);
+timestamp: 2014-08-03T22:40:13.721000
+ALTER TABLE library DROP COLUMN place;
+success!
+timestamp: 2014-08-03T22:47:22.137000
+CREATE TABLE manage(
+    id SERIAL PRIMARY KEY,
+    ISBN INTEGER, CONSTRAINT  "FK_manage_ISBN__constraint" FOREIGN KEY (ISBN) REFERENCES book (ISBN) ON DELETE CASCADE,
+    librarian_id VARCHAR(9), CONSTRAINT  "FK_manage_librarian_id__constraint" FOREIGN KEY (librarian_id) REFERENCES librarian (id_num) ON DELETE CASCADE,
+    trans VARCHAR(512),
+    transdate DATE
+);
+success!
+timestamp: 2014-08-03T22:47:22.990000
+CREATE TABLE borrower(
+    id_num VARCHAR(9) NOT NULL,
+    last_name VARCHAR(20),
+    first_name VARCHAR(30),
+    PRIMARY KEY(id_num)) ;
+success!
+timestamp: 2014-08-03T22:47:23.568000
+CREATE TABLE borrowing(
+    id SERIAL PRIMARY KEY,
+    ISBNreference book VARCHAR(512),
+    borrwer_id VARCHAR(9), CONSTRAINT  "FK_borrowing_borrwer_id__constraint" FOREIGN KEY (borrwer_id) REFERENCES borrower (id_num) ON DELETE CASCADE,
+    startdate DATE,
+    duedate DATE
+);
+timestamp: 2014-08-03T22:54:06.022000
+CREATE TABLE borrowing(
+    id SERIAL PRIMARY KEY,
+    ISBNreference book VARCHAR(512),
+    borrwer_id VARCHAR(9), CONSTRAINT  "FK_borrowing_borrwer_id__constraint" FOREIGN KEY (borrwer_id) REFERENCES borrower (id_num) ON DELETE CASCADE,
+    startdate DATE,
+    duedate DATE
+);
+timestamp: 2014-08-03T22:56:42.686000
+CREATE TABLE borrowing(
+    id SERIAL PRIMARY KEY,
+    ISBNreference book VARCHAR(512),
+    borrwer_id VARCHAR(9), CONSTRAINT  "FK_borrowing_borrwer_id__constraint" FOREIGN KEY (borrwer_id) REFERENCES borrower (id_num) ON DELETE CASCADE,
+    startdate DATE,
+    duedate DATE
+);
+timestamp: 2014-08-03T22:57:24.839000
+CREATE TABLE borrowing(
+    id SERIAL PRIMARY KEY,
+    ISBN INTEGER, CONSTRAINT  "FK_borrowing_ISBN__constraint" FOREIGN KEY (ISBN) REFERENCES book (ISBN) ON DELETE CASCADE,
+    borrwer_id VARCHAR(9), CONSTRAINT  "FK_borrowing_borrwer_id__constraint" FOREIGN KEY (borrwer_id) REFERENCES borrower (id_num) ON DELETE CASCADE,
+    startdate DATE,
+    duedate DATE
+);
+success!
+timestamp: 2014-08-03T22:57:25.648000
+CREATE TABLE auth_user(
+    id SERIAL PRIMARY KEY,
+    first_name VARCHAR(128),
+    last_name VARCHAR(128),
+    email VARCHAR(512),
+    password VARCHAR(512),
+    registration_key VARCHAR(512),
+    reset_password_key VARCHAR(512),
+    registration_id VARCHAR(512)
+);
+success!
+timestamp: 2014-08-03T22:57:26.687000
+CREATE TABLE auth_group(
+    id SERIAL PRIMARY KEY,
+    role VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-08-03T22:57:27.645000
+CREATE TABLE auth_membership(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-08-03T22:57:28.493000
+CREATE TABLE auth_permission(
+    id SERIAL PRIMARY KEY,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name VARCHAR(512),
+    table_name VARCHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2014-08-03T22:57:29.422000
+CREATE TABLE auth_event(
+    id SERIAL PRIMARY KEY,
+    time_stamp TIMESTAMP,
+    client_ip VARCHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin VARCHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-08-03T22:57:30.319000
+CREATE TABLE auth_cas(
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service VARCHAR(512),
+    ticket VARCHAR(512),
+    renew CHAR(1)
+);
+success!

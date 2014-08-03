@@ -15,7 +15,7 @@ if not request.env.web2py_runtime_gae:
     
     db.define_table('library',
 				Field('name', unique=True),
-                Field('address', length=50))
+                Field('loc', length=50))
     
     db.define_table('librarian',
                     Field('id_num', length=9),
@@ -41,8 +41,8 @@ if not request.env.web2py_runtime_gae:
     db.define_table('manage',
 					Field('ISBN', 'reference book'),
 					Field('librarian_id', 'reference librarian'),
-					Field('trans'),
-                    Field('transdate', 'date'))
+					Field('action'),
+                    Field('date', 'date'))
     
     db.define_table('borrower',
                     Field('id_num', length=9),
@@ -51,7 +51,7 @@ if not request.env.web2py_runtime_gae:
                     primarykey=['id_num'])
     
     db.define_table('borrowing',
-					Field('ISBN', 'reference book'),
+					Field('ISBN' 'reference book'),
 					Field('borrwer_id', 'reference borrower'),
 					Field('startdate', 'date'),
                     Field('duedate', 'date'))
@@ -68,8 +68,8 @@ if not request.env.web2py_runtime_gae:
     db.author.last_name.requires= IS_NOT_EMPTY()
     db.author.first_name.requires= IS_NOT_EMPTY()
     
-    db.manage.trans.requires= IS_NOT_EMPTY()
-    db.manage.transdate.requires= IS_NOT_EMPTY()
+    db.manage.action.requires= IS_NOT_EMPTY()
+    db.manage.date.requires= IS_NOT_EMPTY()
     
     db.borrower.last_name.requires= IS_NOT_EMPTY()
     db.borrower.first_name.requires= IS_NOT_EMPTY()

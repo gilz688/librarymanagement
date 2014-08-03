@@ -11,10 +11,71 @@
 
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
-    db = DAL('postgres://postgres:postgres@localhost/dummy_db',pool_size=1,check_reserved=['all']) # postgres://username:password@localhost/db_name
-    db.define_table('librarian', 
-                    Filed('username'),
-                    Field('password'))
+    db = DAL('postgres://postgres:1234asdf@localhost/libman',pool_size=1,check_reserved=['all']) # postgres://username:password@localhost/db_name
+    
+    db.define_table('library',
+				Field('name', unique=True),
+                Field('address', length=50))
+    
+    db.define_table('librarian',
+                    Field('id_num', length=9),
+                    Field('name', length=50),
+                    Field('username', length=30),
+                    Field('password', 'password', length=30),
+                    primarykey=['id_num'])
+    
+    db.define_table('book',
+					Field('ISBN', 'integer', unique=True, ondelete='CASCADE'),
+					Field('library_id', 'reference library'),
+					Field('title', length=100),
+					Field('publisher_last_name', length=50),
+					Field('publisher_first_name', length=50),
+					Field('isAvailable', 'boolean'),
+					primarykey=['ISBN'])
+    
+    db.define_table('author',
+					Field('ISBN', 'reference book'),
+					Field('last_name', length=20),
+					Field('first_name', length=30))
+    
+    db.define_table('manage',
+					Field('ISBN', 'reference book'),
+					Field('librarian_id', 'reference librarian'),
+					Field('trans'),
+                    Field('transdate', 'date'))
+    
+    db.define_table('borrower',
+                    Field('id_num', length=9),
+					Field('last_name', length=20),
+					Field('first_name', length=30),
+                    primarykey=['id_num'])
+    
+    db.define_table('borrowing',
+					Field('ISBN' 'reference book'),
+					Field('borrwer_id', 'reference borrower'),
+					Field('startdate', 'date'),
+                    Field('duedate', 'date'))
+    
+    db.librarian.username.requires= IS_NOT_EMPTY()
+    db.librarian.password.requiers= IS_NOT_EMPTY()
+    
+    db.book.ISBN.requires= IS_NOT_EMPTY()
+    db.book.title.requires= IS_NOT_EMPTY()
+    db.book.publisher_last_name.requires= IS_NOT_EMPTY()
+    db.book.publisher_first_name.requires= IS_NOT_EMPTY()
+    db.book.isAvailable.requires= IS_NOT_EMPTY()
+    
+    db.author.last_name.requires= IS_NOT_EMPTY()
+    db.author.first_name.requires= IS_NOT_EMPTY()
+    
+    db.manage.trans.requires= IS_NOT_EMPTY()
+    db.manage.transdate.requires= IS_NOT_EMPTY()
+    
+    db.borrower.last_name.requires= IS_NOT_EMPTY()
+    db.borrower.first_name.requires= IS_NOT_EMPTY()
+    
+    db.borrowing.startdate.requires= IS_NOT_EMPTY()
+    db.borrowing.duedate.requires= IS_NOT_EMPTY()
 else:
     ## connect to Google BigTable (optional 'google:datastore://namespace')
     db = DAL('google:datastore')
