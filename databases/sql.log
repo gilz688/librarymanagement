@@ -600,3 +600,23 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2014-08-04T09:29:59.391637
+CREATE TABLE library(
+    lib_name VARCHAR(512) NOT NULL UNIQUE,
+    address VARCHAR(20),
+    PRIMARY KEY(lib_name)) ;
+timestamp: 2014-08-04T09:30:24.963712
+CREATE TABLE library(
+    lib_name VARCHAR(512) NOT NULL UNIQUE,
+    address VARCHAR(20),
+    PRIMARY KEY(lib_name)) ;
+timestamp: 2014-08-04T09:30:26.338714
+CREATE TABLE library(
+    lib_name VARCHAR(512) NOT NULL UNIQUE,
+    address VARCHAR(20),
+    PRIMARY KEY(lib_name)) ;
+timestamp: 2014-08-04T09:30:27.127593
+CREATE TABLE library(
+    lib_name VARCHAR(512) NOT NULL UNIQUE,
+    address VARCHAR(20),
+    PRIMARY KEY(lib_name)) ;
