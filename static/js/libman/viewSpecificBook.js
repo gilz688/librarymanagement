@@ -1,5 +1,5 @@
 function viewSpecificBook(ISBN){
-	$("#bookInfo").modal();
+	$("#bookInfo").modal("show");
 	$.ajax({
 		type: "post",
 		url: local_site+ "viewSpecificBook/" + ISBN,

@@ -8,29 +8,25 @@
   </head>
   <body>
     <center>
-      <div>
       <div id="header">
         <h1>Welcome to Library Management</h1>
       </div>
-      
-      <table id="data-container" class="table table-hover">
-      </table>
+      <div style="min-width:300px;max-width:600px">
+        <table id="data-container" class="table table-bordered">
+          <tr>
+            <th style="text-align:center">Book Title</th>
+          </tr>
+          <tr><td onClick='viewSpecificBook("1")'>The Legend of Sleepy Hollow and Other Tales</td></tr>
+        </table>
       </div>
     </center>
 
-
-    <!-- Button trigger modal -->
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#bookInfo">
-      View Book Info
-    </button>
-
-    <!-- Modal -->
-    <div class="modal fade" id="bookInfo" tabindex="-1" role="dialog" aria-labelledby="bookTitle" aria-hidden="true">
+    <div class="modal fade" id="bookInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="bookTitle">The Legend of Sleepy Hollow and Other Tales</h4>
+            <h4 class="modal-title" id="myModalLabel">The Legend of Sleepy Hollow and Other Tales</h4>
           </div>
           <div class="modal-body">
             <div class="row">

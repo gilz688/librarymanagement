@@ -3,3 +3,4 @@ mlbc/merges
 databases/
 sessions/
 errors/
+databases/sql.log

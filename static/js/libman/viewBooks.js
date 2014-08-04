@@ -12,7 +12,7 @@ function viewBooks(libraryName){
 		},
 		dataType: "json",
 		success: function(books){
-			var output= "<tr><th>Book Title</th></tr>";
+			var output= "";
 			for(var i in books)
 			{
 				output+="<tr><td><a href='#' onClick='viewSpecificBook(" +books[i].ISBN+ ");'>"+ books[i].title+ "</a></td></tr>";

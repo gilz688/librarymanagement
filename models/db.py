@@ -11,7 +11,7 @@
 
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
-    db = DAL('postgres://postgres:1234asdf@localhost:5432/libman',pool_size=1,check_reserved=['all'], migrate=True) # postgres://username:password@localhost/db_name
+    db = DAL('postgres://postgres:1234asdf@127.0.0.1:5432/libman',pool_size=1,check_reserved=['all'], migrate=True) # postgres://username:password@localhost/db_name
     
     db.define_table('library',
 				Field('lib_name', unique=True, ondelete='CASCADE'),
