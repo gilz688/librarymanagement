@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+      <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <center>
+      <div>
+      <div id="header">
+        <h1>Welcome to Library Management</h1>
+      </div>
+      
+      <table id="data-container" class="table table-hover">
+      </table>
+      </div>
+    </center>
+
+
+    <!-- Button trigger modal -->
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#bookInfo">
+      View Book Info
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="bookInfo" tabindex="-1" role="dialog" aria-labelledby="bookTitle" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            <h4 class="modal-title" id="bookTitle">The Legend of Sleepy Hollow and Other Tales</h4>
+          </div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-4">
+                <img src="http://ecx.images-amazon.com/images/I/51i1XrIJIiL._SX200_.jpg" alt="book_image" height="240" width="180">
+              </div>
+              <div class="col-md-8">
+                <ul class="list-group">
+                  <li class="list-group-item"><b>ISBN :</b> <span id="isbn">09059366722</span></li>
+                  <li class="list-group-item"><b>Publisher:</b> <span id="publisher">Random House Childrens Books</span></li>
+                  <li class="list-group-item"><b>Auhtor:</b> <span id="author">Irving, Washington; Rackham, Arthur</span></li>
+                  <li class="list-group-item"><b>Location:</b> <span id="location">CED library</span></li>
+                </ul>
+                <div class="list-group">
+                  <a href="#" class="list-group-item">
+                    <h4 class="list-group-item-heading">Description</h4>
+                    <p class="list-group-item-text" id="description">Dust Cover Missing. Book shows minor use. Cover and Binding have minimal wear and the pages have only minimal creases.</p>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <script src="../static/js/jquery-2.1.1.min.js"></script>
+  <script src="../static/js/bootstrap.min.js"></script>
+  <script src="../static/js/libman/viewBooks.js"></script>
+  </body>
+</html>

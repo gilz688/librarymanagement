@@ -1,5 +1,9 @@
 var local_site= "http://localhost:8000/wlbc/default/";
 
+$(document).ready(function(){
+	viewBooks(1);
+})
+
 function viewBooks(libraryID){
 	$.ajax({
 		type: "post",

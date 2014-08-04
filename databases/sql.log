@@ -451,6 +451,7 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+
 timestamp: 2014-08-04T06:27:23.693000
 ALTER TABLE library ADD address__tmp VARCHAR(20);
 UPDATE library SET address__tmp=address;
