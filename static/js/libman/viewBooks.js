@@ -1,13 +1,13 @@
 var local_site= "http://localhost:8000/wlbc/default/";
 
 $(document).ready(function(){
-	viewBooks(1);
+	viewBooks("SCS");
 })
 
-function viewBooks(libraryID){
+function viewBooks(libraryName){
 	$.ajax({
 		type: "post",
-		url: local_site+ "viewBooks/" +libraryID,
+		url: local_site+ "viewBooks/" +libraryName,
 		data: {
 		},
 		dataType: "json",
