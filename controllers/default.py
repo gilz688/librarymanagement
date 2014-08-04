@@ -81,7 +81,7 @@ def index():
 
 def viewBooks():
 	lib_id= request.args(0,cast=int)
-	books=db(db.book.library_id==lib_id).select(db.book.title, db.book.ISBN, db.book.pu, orderby=db.book.title)
+	books=db(db.book.library_id==lib_id).select(db.book.title, db.book.ISBN, orderby=db.book.title)
 	return response.json(books)
 
 #def getSpecificBook():
