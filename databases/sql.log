@@ -599,3 +599,19 @@ CREATE TABLE auth_cas(
     renew CHAR(1)
 );
 success!
+timestamp: 2014-08-04T08:07:53.273000
+ALTER TABLE library ADD lib_name VARCHAR(512) NOT NULL UNIQUE;
+timestamp: 2014-08-04T08:07:54.581000
+ALTER TABLE library ADD address__tmp VARCHAR(20);
+UPDATE library SET address__tmp=address;
+ALTER TABLE library DROP COLUMN address;
+ALTER TABLE library ADD address VARCHAR(20);
+UPDATE library SET address=address__tmp;
+ALTER TABLE library DROP COLUMN address__tmp;
+timestamp: 2014-08-04T08:07:56.001000
+ALTER TABLE library DROP COLUMN id;
+timestamp: 2014-08-04T09:22:43.525000
+CREATE TABLE library(
+    lib_name VARCHAR(512) NOT NULL UNIQUE,
+    address VARCHAR(20),
+    PRIMARY KEY(lib_name)) ;

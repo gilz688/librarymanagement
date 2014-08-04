@@ -11,129 +11,53 @@
 
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
-<<<<<<< HEAD
-    db = DAL('postgres://postgres:1234asdf@localhost/libman',pool_size=1,check_reserved=['all']) # postgres://username:password@localhost/db_name
+    db = DAL('postgres://postgres:1234asdf@localhost/libman',pool_size=1,check_reserved=['all'], migrate=True) # postgres://username:password@localhost/db_name
     
     db.define_table('library',
-				Field('name', unique=True),
-                Field('address', length=50))
+				Field('lib_name', unique=True, ondelete='CASCADE'),
+                Field('address', length=20),
+				primarykey=['lib_name'])
     
     db.define_table('librarian',
-                    Field('id_num', length=9),
-                    Field('name', length=50),
-                    Field('username', length=30),
-                    Field('password', 'password', length=30),
-                    primarykey=['id_num'])
+                    Field('librarian_id', unique=True, ondelete='CASCADE'),
+					Field('lib_name', 'reference library'),
+                    Field('username', length=10),
+                    Field('password', 'password', length=20),
+					Field('lname', length=15),
+					Field('fname', length=15),
+                    primarykey=['librarian_id'])
     
     db.define_table('book',
-					Field('ISBN', 'integer', unique=True, ondelete='CASCADE'),
-					Field('library_id', 'reference library'),
+					Field('ISBN', length=20, unique=True, ondelete='CASCADE'),
+					Field('lib_name', 'reference library'),
 					Field('title', length=100),
-					Field('publisher_last_name', length=50),
-					Field('publisher_first_name', length=50),
-					Field('isAvailable', 'boolean'),
+					Field('publisher_lname', length=50),
+					Field('publisher_fname', length=50),
+					Field('no_of_copies', 'integer'),
+					Field('available_copies', 'integer'),
+					Field('description', length=255),
 					primarykey=['ISBN'])
-    
+	
     db.define_table('author',
 					Field('ISBN', 'reference book'),
-					Field('last_name', length=20),
-					Field('first_name', length=30))
-    
-    db.define_table('manage',
-					Field('ISBN', 'reference book'),
-					Field('librarian_id', 'reference librarian'),
-					Field('trans'),
-                    Field('transdate', 'date'))
+					Field('lname', length=15),
+					Field('fname', length=15))
     
     db.define_table('borrower',
-                    Field('id_num', length=9),
-					Field('last_name', length=20),
-					Field('first_name', length=30),
-                    primarykey=['id_num'])
-    
-    db.define_table('borrowing',
-					Field('ISBN', 'reference book'),
-					Field('borrwer_id', 'reference borrower'),
-					Field('startdate', 'date'),
-                    Field('duedate', 'date'))
-    
-    db.librarian.username.requires= IS_NOT_EMPTY()
-    db.librarian.password.requiers= IS_NOT_EMPTY()
-    
-    db.book.ISBN.requires= IS_NOT_EMPTY()
-    db.book.title.requires= IS_NOT_EMPTY()
-    db.book.publisher_last_name.requires= IS_NOT_EMPTY()
-    db.book.publisher_first_name.requires= IS_NOT_EMPTY()
-    db.book.isAvailable.requires= IS_NOT_EMPTY()
-    
-    db.author.last_name.requires= IS_NOT_EMPTY()
-    db.author.first_name.requires= IS_NOT_EMPTY()
-    
-    db.manage.trans.requires= IS_NOT_EMPTY()
-    db.manage.transdate.requires= IS_NOT_EMPTY()
-    
-    db.borrower.last_name.requires= IS_NOT_EMPTY()
-    db.borrower.first_name.requires= IS_NOT_EMPTY()
-    
-    db.borrowing.startdate.requires= IS_NOT_EMPTY()
-    db.borrowing.duedate.requires= IS_NOT_EMPTY()
-=======
-	db=DAL("postgres://postgres:postgres@localhost:5432/librarymanagement", pool_size=1, lazy_tables=True)
+                    Field('borrower_id', length=15),
+					Field('lib_name', 'reference library'),
+					Field('lname', length=15),
+					Field('fname', length=15),
+                    primarykey=['borrower_id'])
 	
-	db.define_table('library',
-				Field('name', unique=True))
-
-	db.define_table('librarian',
-					Field('library_id', 'reference library'),
-					Field('username', unique=True),
-					Field('password', 'password'))
-					
-	db.define_table('book',
-					Field('ISBN', 'integer', unique=True, ondelete='CASCADE'),
-					Field('library_id', 'reference library'),
-					Field('title'),
-					Field('publisher_last_name'),
-					Field('publisher_first_name'),
-					Field('isAvailable', 'boolean'),
-					primarykey=['ISBN'])
-					
-	db.define_table('author',
-					Field('ISBN', 'reference book'),
-					Field('last_name'),
-					Field('first_name'))
-
-	db.define_table('manage',
+    db.define_table('borrow_book',
 					Field('ISBN', 'reference book'),
 					Field('librarian_id', 'reference librarian'),
-					Field('action'))
-
-	db.define_table('borrower',
-					Field('last_name'),
-					Field('first_name'))
-
-	db.define_table('borrowing',
-					Field('ISBN' 'reference book'),
 					Field('borrwer_id', 'reference borrower'),
-					Field('date', 'date'))
-	
-	db.librarian.username.requires= IS_NOT_EMPTY()
-	db.librarian.password.requiers= IS_NOT_EMPTY()
+					Field('startdate', 'date'),
+                    Field('duedate', 'date'),
+					Field('return_date', 'date'))
 
-	db.book.ISBN.requires= IS_NOT_EMPTY()
-	db.book.title.requires= IS_NOT_EMPTY()
-	db.book.publisher_last_name.requires= IS_NOT_EMPTY()
-	db.book.publisher_first_name.requires= IS_NOT_EMPTY()
-	db.book.isAvailable.requires= IS_NOT_EMPTY()
-
-	db.author.last_name.requires= IS_NOT_EMPTY()
-	db.author.first_name.requires= IS_NOT_EMPTY()
-
-	db.manage.action.requires= IS_NOT_EMPTY()
-
-	db.borrower.last_name.requires= IS_NOT_EMPTY()
-	db.borrower.first_name.requires= IS_NOT_EMPTY()
-
->>>>>>> 4af0b0db7e96edbe2c80c9340e101cfe6194c0f9
 else:
     ## connect to Google BigTable (optional 'google:datastore://namespace')
     db = DAL('google:datastore')
@@ -161,6 +85,30 @@ response.generic_patterns = ['*'] if request.is_local else []
 ## - old style crud actions
 ## (more options discussed in gluon/tools.py)
 #########################################################################
+
+from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
+auth = Auth(db)
+crud, service, plugins = Crud(db), Service(), PluginManager()
+
+## create all tables needed by auth if not custom tables
+auth.define_tables(username=False, signature=False)
+
+## configure email
+mail = auth.settings.mailer
+mail.settings.server = 'logging' or 'smtp.gmail.com:587'
+mail.settings.sender = 'you@gmail.com'
+mail.settings.login = 'username:password'
+
+## configure auth policy
+auth.settings.registration_requires_verification = False
+auth.settings.registration_requires_approval = False
+auth.settings.reset_password_requires_verification = True
+
+## if you need to use OpenID, Facebook, MySpace, Twitter, Linkedin, etc.
+## register with janrain.com, write your domain:api_key in private/janrain.key
+from gluon.contrib.login_methods.rpx_account import use_janrain
+use_janrain(auth, filename='private/janrain.key')
+
 #########################################################################
 ## Define your tables below (or better in another model file) for example
 ##
@@ -179,3 +127,4 @@ response.generic_patterns = ['*'] if request.is_local else []
 #########################################################################
 
 ## after defining tables, uncomment below to enable auditing
+# auth.enable_record_versioning(db)
