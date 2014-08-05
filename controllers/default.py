@@ -91,12 +91,12 @@ def getBooks():
 #	return response.json(book_details)
 	
 def getBookAuthors():
-    ISBN = request.args(0, cast=int,otherwise=URL('viewBooks'))
-    authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, orderby=db.author.last_name)
+    ISBN = request.args(0)
+    authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, orderby=db.author.lname)
     #authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
     return response.json(authors)
 
 def getSpecificBookInfo():
     ISBN = request.args(0)
-    bookInfo = db(db.book.ISBN == ISBN).select(db.book.ISBN, db.book.lib_name, db.book.title, db.book.publisher, db.book.no_of_copies, db.book.available_copies, db.book.description).first()
+    bookInfo = db(db.book.ISBN == ISBN).select(db.book.ALL).first()
     return response.json(bookInfo)

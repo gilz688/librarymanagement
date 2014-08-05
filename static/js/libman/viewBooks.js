@@ -15,7 +15,7 @@ function viewBooks(libraryName){
 			var output= "";
 			for(var i in books)
 			{
-				output+="<tr><td onClick='viewSpecificBook(" +books[i].ISBN+ ");'>"+ books[i].title+ "</td></tr>";
+				output+="<tr><td onClick='viewSpecificBook(" +books[i].ISBN+ ");getBookAuthors(" +books[i].ISBN+ ");'>"+ books[i].title+ "</td></tr>";
 			}
 			$("table#data-container").append(output);
 		},
