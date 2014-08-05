@@ -1,13 +1,13 @@
-var local_site= "http://localhost:8000/wlbc/default/";
+var local_site= "http://localhost:8000/librarymanagement/default/";
 
 $(document).ready(function(){
-	viewBooks("SCS");
+	viewBooks("scs_lib");
 })
 
 function viewBooks(libraryName){
 	$.ajax({
 		type: "post",
-		url: local_site+ "viewBooks/" +libraryName,
+		url: local_site+ "getBooks/" +libraryName,
 		data: {
 		},
 		dataType: "json",
@@ -15,10 +15,9 @@ function viewBooks(libraryName){
 			var output= "";
 			for(var i in books)
 			{
-				output+="<tr><td><a href='#' onClick='viewSpecificBook(" +books[i].ISBN+ ");'>"+ books[i].title+ "</a></td></tr>";
+				output+="<tr><td onClick='viewSpecificBook(" +books[i].ISBN+ ");'>"+ books[i].title+ "</td></tr>";
 			}
-			$("table#data-container").html(output);
-			$("div#header").html("<h1>List of Books</h1>");
+			$("table#data-container").append(output);
 		},
 	});
 }

@@ -79,9 +79,9 @@ def index():
 	response.view="libman/template.html"
 	return dict()
 
-def viewBooks():
-	lib_id= request.args(0,cast=int)
-	books=db(db.book.library_id==lib_id).select(db.book.title, db.book.ISBN, orderby=db.book.title)
+def getBooks():
+	lib_name= request.args(0)
+	books=db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, orderby=db.book.title)
 	return response.json(books)
 
 #def getSpecificBook():
@@ -97,6 +97,6 @@ def getBookAuthors():
     return response.json(authors)
 
 def getSpecificBookInfo():
-    ISBN = request.args(0, cast=int, otherwise=URL('viewBooks'))
-    bookInfo = db(db.book.ISBN == ISBN).select(db.book.isbn, db.book.lib_name, db.book.title, db.book.publisher, db.book.no_of_copies, db.book.available_copies, db.book.description)
+    ISBN = request.args(0)
+    bookInfo = db(db.book.ISBN == ISBN).select(db.book.ISBN, db.book.lib_name, db.book.title, db.book.publisher, db.book.no_of_copies, db.book.available_copies, db.book.description).first()
     return response.json(bookInfo)

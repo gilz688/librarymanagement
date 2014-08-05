@@ -11,7 +11,7 @@
 
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
-    db = DAL('postgres://postgres:1234asdf@127.0.0.1:5432/libman',pool_size=1,check_reserved=['all'], migrate=True) # postgres://username:password@localhost/db_name
+    db = DAL('postgres://postgres:1234asdf@localhost:5432/libman',pool_size=1,check_reserved=['all'], migrate=True)# postgres://username:password@localhost/db_name
     
     db.define_table('library',
 				Field('lib_name', unique=True, ondelete='CASCADE'),
@@ -20,7 +20,7 @@ if not request.env.web2py_runtime_gae:
     
     db.define_table('librarian',
                     Field('librarian_id', unique=True, ondelete='CASCADE'),
-					Field('lib_name', 'reference library'),
+					Field('lib_name', db.library.lib_name),
                     Field('username', length=10),
                     Field('password', 'password', length=20),
 					Field('lname', length=15),
@@ -29,29 +29,29 @@ if not request.env.web2py_runtime_gae:
     
     db.define_table('book',
 					Field('ISBN', length=20, unique=True, ondelete='CASCADE'),
-					Field('lib_name', 'reference library'),
+					Field('lib_name', db.library.lib_name),
 					Field('title', length=100),
-					Field('publisher_lname', length=50),
-					Field('publisher_fname', length=50),
+					Field('pic', 'upload'),
+					Field('publisher', length=100),
 					Field('no_of_copies', 'integer'),
 					Field('available_copies', 'integer'),
 					Field('description', length=255),
 					primarykey=['ISBN'])
 	
     db.define_table('author',
-					Field('ISBN', 'reference book'),
+					Field('ISBN', db.book.ISBN),
 					Field('lname', length=15),
 					Field('fname', length=15))
     
     db.define_table('borrower',
                     Field('borrower_id', length=15),
-					Field('lib_name', 'reference library'),
+					Field('lib_name', db.library.lib_name),
 					Field('lname', length=15),
 					Field('fname', length=15),
                     primarykey=['borrower_id'])
 	
     db.define_table('borrow_book',
-					Field('ISBN', 'reference book'),
+					Field('ISBN', db.book.ISBN),
 					Field('librarian_id', 'reference librarian'),
 					Field('borrwer_id', 'reference borrower'),
 					Field('startdate', 'date'),

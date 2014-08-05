@@ -1,8 +1,7 @@
 function viewSpecificBook(ISBN){
-	$("#bookInfo").modal("show");
 	$.ajax({
 		type: "post",
-		url: local_site+ "viewSpecificBook/" + ISBN,
+		url: local_site+ "getSpecificBookInfo/" + ISBN,
 		data: {
 			isbn: ISBN
 		},
@@ -16,4 +15,5 @@ function viewSpecificBook(ISBN){
 			$("#description").html(book.description);
 		}
 	});
+	$("#bookInfo").modal("show");
 }
