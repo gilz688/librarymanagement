@@ -1,4 +1,4 @@
-function viewSpecificBook(ISBN){
+function getSpecificBook(ISBN){
 	$("#bookInfo").modal("show");
 	$.ajax({
 		type: "post",

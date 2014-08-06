@@ -1,10 +1,10 @@
 var local_site= "http://localhost:8000/librarymanagement/default/";
 
 $(document).ready(function(){
-	viewBooks("scs_lib");
+	viewBooks("SCS");
 })
 
-function viewBooks(libraryName){
+function getBooks(libraryName){
 	$.ajax({
 		type: "post",
 		url: local_site+ "getBooks/" +libraryName,
@@ -15,7 +15,7 @@ function viewBooks(libraryName){
 			var output= "";
 			for(var i in books)
 			{
-				output+="<tr><td onClick='viewSpecificBook(" +books[i].ISBN+ ");getBookAuthors(" +books[i].ISBN+ ");'>"+ books[i].title+ "</td></tr>";
+				output+="<tr><td onClick='getSpecificBook(" +books[i].ISBN+ ");getBookAuthors(" +books[i].ISBN+ ");'>"+ books[i].title+ "</td></tr>";
 			}
 			$("table#data-container").append(output);
 		},
