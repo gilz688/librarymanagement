@@ -1,7 +1,7 @@
-var local_site= "http://localhost:8000/librarymanagement/default/";
+var local_site= "https://localhost:8000/librarymanagement/default/";
 
 $(document).ready(function(){
-	viewBooks("SCS");
+	getBooks("SCS");
 })
 
 function getBooks(libraryName){
