@@ -9,19 +9,6 @@
 ## - call exposes all registered services (none by default)
 #########################################################################
 
-
-def index():
-    """
-    example action using the internationalization operator T and flash
-    rendered by views/default/index.html or views/generic.html
-
-    if you need a simple wiki simply replace the two lines below with:
-    return auth.wiki()
-    """
-    response.flash = T("Welcome to web2py!")
-    return dict(message=T('Hello World'))
-
-
 def user():
     """
     exposes:
@@ -79,9 +66,9 @@ def index():
 	response.view="libman/template.html"
 	return dict()
 
-def viewBooks():
-	lib_id= request.args(0,cast=int)
-	books=db(db.book.library_id==lib_id).select(db.book.title, db.book.ISBN, orderby=db.book.title)
+def getBooks():
+	lib_name= request.args(0)
+	books=db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, orderby=db.book.title)
 	return response.json(books)
 
 #def getSpecificBook():
@@ -91,12 +78,12 @@ def viewBooks():
 #	return response.json(book_details)
 	
 def getBookAuthors():
-    ISBN = request.args(0, cast=int,otherwise=URL('viewBooks'))
-    authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, orderby=db.author.last_name)
+    ISBN = request.args(0)
+    authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, orderby=db.author.lname)
     #authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
     return response.json(authors)
 
 def getSpecificBookInfo():
-    ISBN = request.args(0, cast=int, otherwise=URL('viewBooks'))
-    bookInfo = db(db.book.ISBN == ISBN).select(db.book.isbn, db.book.lib_name, db.book.title, db.book.publisher, db.book.no_of_copies, db.book.available_copies, db.book.description)
+    ISBN = request.args(0)
+    bookInfo = db(db.book.ISBN == ISBN).select(db.book.ALL).first()
     return response.json(bookInfo)

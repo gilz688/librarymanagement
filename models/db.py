@@ -9,64 +9,74 @@
 ## be redirected to HTTPS, uncomment the line below:
 # request.requires_https()
 
-if not request.env.web2py_runtime_gae:
-    ## if NOT running on Google App Engine use SQLite or other DB
-    db = DAL('postgres://postgres:1234asdf@localhost/libman',pool_size=1,check_reserved=['all'], migrate=False) # postgres://username:password@localhost/db_name
-    
-    db.define_table('library',
-				Field('lib_name', unique=True, ondelete='CASCADE'),
-                Field('address', length=20),
-				primarykey=['lib_name'])
-    
-    db.define_table('librarian',
-                    Field('librarian_id', unique=True, ondelete='CASCADE'),
-					Field('lib_name', 'reference library'),
-                    Field('username', length=10),
-                    Field('password', 'password', length=20),
-					Field('lname', length=15),
-					Field('fname', length=15),
-                    primarykey=['librarian_id'])
-    
-    db.define_table('book',
-					Field('ISBN', length=20, unique=True, ondelete='CASCADE'),
-					Field('lib_name', 'reference library'),
-					Field('title', length=100),
-					Field('publisher_lname', length=50),
-					Field('publisher_fname', length=50),
-					Field('no_of_copies', 'integer'),
-					Field('available_copies', 'integer'),
-					Field('description', length=255),
-					primarykey=['ISBN'])
-	
-    db.define_table('author',
-					Field('ISBN', 'reference book'),
-					Field('lname', length=15),
-					Field('fname', length=15))
-    
-    db.define_table('borrower',
-                    Field('borrower_id', length=15),
-					Field('lib_name', 'reference library'),
-					Field('lname', length=15),
-					Field('fname', length=15),
-                    primarykey=['borrower_id'])
-	
-    db.define_table('borrow_book',
-					Field('ISBN', 'reference book'),
-					Field('librarian_id', 'reference librarian'),
-					Field('borrwer_id', 'reference borrower'),
-					Field('startdate', 'date'),
-                    Field('duedate', 'date'),
-					Field('return_date', 'date'))
+# # if NOT running on Google App Engine use SQLite or other DB
 
-else:
-    ## connect to Google BigTable (optional 'google:datastore://namespace')
-    db = DAL('google:datastore')
-    ## store sessions and tickets there
-    session.connect(request, response, db=db)
-    ## or store session in Memcache, Redis, etc.
-    ## from gluon.contrib.memdb import MEMDB
-    ## from google.appengine.api.memcache import Client
-    ## session.connect(request, response, db = MEMDB(Client()))
+db = DAL('postgres://postgres:1234asdf@localhost/libman', pool_size=1, check_reserved=['all'],
+         migrate=False)  # postgres://username:password@localhost/db_name
+
+db.define_table('library',
+                Field('lib_name', unique=True, ondelete='CASCADE'),
+                Field('address', length=20),
+                primarykey=['lib_name'])
+
+db.define_table('librarian',
+                Field('librarian_id', unique=True, ondelete='CASCADE'),
+                Field('lib_name', db.library.lib_name),
+                Field('username', length=10),
+                Field('password', 'password', length=20),
+                Field('lname', length=15),
+                Field('fname', length=15),
+                primarykey=['librarian_id'])
+
+db.define_table('book',
+                Field('ISBN', length=20, unique=True, ondelete='CASCADE'),
+                Field('lib_name', db.library.lib_name),
+                Field('title', length=100),
+                Field('pic', 'upload'),
+                Field('publisher', length=100),
+                Field('no_of_copies', 'integer'),
+                Field('available_copies', 'integer'),
+                Field('description', length=255),
+                primarykey=['ISBN'])
+
+db.define_table('author',
+                Field('ISBN', db.book.ISBN),
+                Field('lname', length=15),
+                Field('fname', length=15))
+
+db.define_table('borrower',
+                Field('borrower_id', length=15),
+                Field('lib_name', db.library.lib_name),
+                Field('lname', length=15),
+                Field('fname', length=15),
+                primarykey=['borrower_id'])
+
+db.define_table('borrow_book',
+                Field('ISBN', db.book.ISBN),
+                Field('librarian_id', db.librarian.librarian_id),
+                Field('borrwer_id', db.borrower.borrower_id),
+                Field('startdate', 'date'),
+                Field('duedate', 'date'),
+                Field('return_date', 'date'))
+
+#populate database
+#dummy values
+
+#library
+#db.library.insert(**{'lib_name': 'SCS_Lib', 'address': 'MSU-IIT SCS'})
+#db.library.insert(**{'lib_name': 'SET_Lib', 'address': 'MSU-IIT SET'})
+#db.library.insert(**{'lib_name': 'COE_Lib', 'address': 'MSU-IIT COE'})
+
+#book
+#db.book.insert(**{'ISBN': '09059366722', 'lib_name': 'SET_Lib','publisher': 'Random House Childrens Books',
+#                  'title': 'The Legend of Sleepy Hollow and Other Tales', 'no_of_copies': 20, 'available_copies': 5,
+#                  'description': 'none'})
+
+#db.book.insert(**{'ISBN': '09059366723', 'lib_name': 'SCS_Lib','publisher': 'Random House Adults Books',
+#                  'title': 'The Legend of Awake Hollow and Other Tales', 'no_of_copies': 220, 'available_copies': 10,
+#                  'description': 'none'})
+
+db.commit()
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
