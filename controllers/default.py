@@ -78,12 +78,12 @@ def getBooks():
 #	return response.json(book_details)
 	
 def getBookAuthors():
-    ISBN = request.args(0)
-    authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, orderby=db.author.lname)
+    ISBN = request.vars.isbn
+    authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
     #authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
     return response.json(authors)
 
 def getSpecificBookInfo():
-    ISBN = request.args(0)
+    ISBN = request.vars.isbn
     bookInfo = db(db.book.ISBN == ISBN).select(db.book.ALL).first()
     return response.json(bookInfo)
