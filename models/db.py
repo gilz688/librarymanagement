@@ -12,7 +12,7 @@
 # # if NOT running on Google App Engine use SQLite or other DB
 
 db = DAL('postgres://postgres:1234asdf@localhost/libman', pool_size=1, check_reserved=['all'],
-         migrate=False)  # postgres://username:password@localhost/db_name
+         migrate=True, fake_migrate=True)  # postgres://username:password@localhost/db_name
 
 db.define_table('library',
                 Field('lib_name', unique=True, ondelete='CASCADE'),
@@ -36,13 +36,14 @@ db.define_table('book',
                 Field('publisher', length=100),
                 Field('no_of_copies', 'integer'),
                 Field('available_copies', 'integer'),
-                Field('description', length=255),
+                Field('description', 'text'),
                 primarykey=['ISBN'])
 
 db.define_table('author',
                 Field('ISBN', db.book.ISBN),
                 Field('lname', length=15),
-                Field('fname', length=15))
+                Field('fname', length=15),
+				Field('middle_initial', length=1))
 
 db.define_table('borrower',
                 Field('borrower_id', length=15),
