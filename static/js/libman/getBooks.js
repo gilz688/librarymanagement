@@ -2,7 +2,6 @@ var local_site= "http://127.0.0.1:8000/librarymanagement/default/";
 
 $(document).ready(function(){
 	getBooks("SET_Lib");
-})
 
 function getBooks(libraryName){
 	$.ajax({
