@@ -7,7 +7,7 @@ $(document).ready(function(){
 function getBooks(libraryName){
 	$.ajax({
 		type: "post",
-		url: local_site+ "getBooks/" +libraryName,
+		url: local_site+ "getBooks/" + libraryName,
 		data: {
 		},
 		dataType: "json",
@@ -15,7 +15,7 @@ function getBooks(libraryName){
 			var output= "";
 			for(var i in books)
 			{
-				output+="<tr><td onClick='getSpecificBook(" +books[i].ISBN+ ");getBookAuthors(" +books[i].ISBN+ ");'>"+ books[i].title+ "</td></tr>";
+				output+="<tr><td onClick='getSpecificBookInfo(\"" +books[i].ISBN+ "\");getBookAuthors(\"" +books[i].ISBN+ "\");'>"+ books[i].title+ "</td></tr>";
 			}
 			$("table#data-container").append(output);
 		},

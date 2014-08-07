@@ -1,10 +1,10 @@
-function getSpecificBook(ISBN){
+function getSpecificBookInfo(ISBN){
 	$("#bookInfo").modal("show");
 	$.ajax({
 		type: "get",
 		url: local_site+ "getSpecificBookInfo",
 		data: {
-			isbn: "0-07-013151-1"
+			isbn : ISBN
 		},
 		dataType: "json",
 		success: function(book){

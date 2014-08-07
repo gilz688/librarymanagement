@@ -3,7 +3,7 @@ function getBookAuthors(ISBN){
 		type: "get",
 		url: local_site+ "getBookAuthors",
 		data: {
-			isbn: "0-07-013151-1"
+			isbn: ISBN
 		},
 		dataType: "json",
 		success: function(authors){
@@ -12,7 +12,7 @@ function getBookAuthors(ISBN){
 			{
 				output+= authors[i].lname+ ", " +authors[i].fname+ " " +authors[i].middle_initial +".";
 				if((authors.length-1)>i)
-					output+=", ";
+					output+="; ";
 			}
 			$("#author").html(output);
 		}
