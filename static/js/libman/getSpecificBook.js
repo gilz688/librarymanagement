@@ -1,10 +1,10 @@
 function getSpecificBook(ISBN){
 	$("#bookInfo").modal("show");
 	$.ajax({
-		type: "post",
-		url: local_site+ "getSpecificBookInfo/" + ISBN,
+		type: "get",
+		url: local_site+ "getSpecificBookInfo",
 		data: {
-			isbn: ISBN
+			isbn: "0-07-013151-1"
 		},
 		dataType: "json",
 		success: function(book){
@@ -17,6 +17,7 @@ function getSpecificBook(ISBN){
 			else
 				$("#status").html("Not Available");
 			$("#description").html(book.description);
+			$("#book_pic").attr("src", local_site+ "download/" +book.pic);
 		}
 	});
 }
