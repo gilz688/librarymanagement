@@ -11,12 +11,12 @@
 
 # # if NOT running on Google App Engine use SQLite or other DB
 
-db = DAL('postgres://postgres:1234asdf@localhost/libman', pool_size=1, check_reserved=['all'],
-         migrate=True, fake_migrate=True)  # postgres://username:password@localhost/db_name
+db = DAL('postgres://postgres:1234asdf@localhost:5432/libman', pool_size=1, check_reserved=['all'],
+         migrate=False)  # postgres://username:password@localhost/db_name
 
 db.define_table('library',
-                Field('lib_name', unique=True, ondelete='CASCADE'),
-                Field('address', length=20),
+                Field('lib_name', length=20, unique=True, ondelete='CASCADE'),
+                Field('address', length=50),
                 primarykey=['lib_name'])
 
 db.define_table('librarian',
@@ -60,24 +60,31 @@ db.define_table('borrow_book',
                 Field('duedate', 'date'),
                 Field('return_date', 'date'))
 
+"""
 #populate database
 #dummy values
 
 #library
-#db.library.insert(**{'lib_name': 'SCS_Lib', 'address': 'MSU-IIT SCS'})
-#db.library.insert(**{'lib_name': 'SET_Lib', 'address': 'MSU-IIT SET'})
-#db.library.insert(**{'lib_name': 'COE_Lib', 'address': 'MSU-IIT COE'})
+db.library.insert(**{'lib_name': 'COE-Library', 'address': 'MSU-IIT SCS'})
+db.library.insert(**{'lib_name': 'SET-Library', 'address': 'MSU-IIT SET'})
 
 #book
-#db.book.insert(**{'ISBN': '09059366722', 'lib_name': 'SET_Lib','publisher': 'Random House Childrens Books',
-#                  'title': 'The Legend of Sleepy Hollow and Other Tales', 'no_of_copies': 20, 'available_copies': 5,
-#                  'description': 'none'})
+db.book.insert(**{'ISBN': '0-07-013151-1', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'Introduction To Algorithm', 'no_of_copies': 20, 'available_copies': 5,
+				  'pic': 'book.pic.8f51fb150a423756.362d3034366a6630352e6a7067.jpg',
+				  'description': 'This book covers a broad range of algorithms in depth, yet makes their design and analysis accessible to all levels of readers. Each chapter is relatively self-contained and can be used as a unit of study. The algorithms are described in English and in a pseudocode designed to be readable by anyone who has done a little programming. '})
 
-#db.book.insert(**{'ISBN': '09059366723', 'lib_name': 'SCS_Lib','publisher': 'Random House Adults Books',
-#                  'title': 'The Legend of Awake Hollow and Other Tales', 'no_of_copies': 220, 'available_copies': 10,
-#                  'description': 'none'})
+db.book.insert(**{'ISBN': '0-07-013151-2', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'Data Structure Using in C++', 'no_of_copies': 220, 'available_copies': 10,
+				  'pic': 'book.pic.81914475beb94577.646174612d737472756374757265732d7573696e672d632d642d732d6d616c696b2d70617065726261636b2d636f7665722d6172742e6a7067.jpg',
+                  'description': 'This book takes a gentle approach to the data structures course in C++. Providing an early, self-contained review of object-oriented programming and C++, this text gives students a firm grasp of key concepts and allows those experienced in another language to adjust easily. Flexible by design, professors have the option of emphasizing object-oriented programming, covering recursion and sorting early, or accelerating the pace of the course.'})
 
-db.commit()
+db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Thomas', 'middle_initial': 'H'},
+                        {'ISBN': '0-07-013151-1', 'lname': 'Leiserson', 'fname': 'Charles', 'middle_initial': 'E'},
+                        {'ISBN': '0-07-013151-2', 'lname': 'Malik', 'fname': 'D.', 'middle_initial': 'S'}
+                    ])
+
+db.commit()"""
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
