@@ -11,8 +11,8 @@
 
 # # if NOT running on Google App Engine use SQLite or other DB
 
-db = DAL('postgres://postgres:1234asdf@localhost/libman', pool_size=1, check_reserved=['all'],
-         migrate=True, fake_migrate=True)  # postgres://username:password@localhost/db_name
+db = DAL('postgres://postgres:1234asdf@127.0.0.1:5432/libman', pool_size=1, check_reserved=['all'],
+         migrate=True)  # postgres://username:password@localhost/db_name
 
 db.define_table('library',
                 Field('lib_name', unique=True, ondelete='CASCADE'),
@@ -77,7 +77,7 @@ db.define_table('borrow_book',
 #                  'title': 'The Legend of Awake Hollow and Other Tales', 'no_of_copies': 220, 'available_copies': 10,
 #                  'description': 'none'})
 
-db.commit()
+#db.commit()
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
