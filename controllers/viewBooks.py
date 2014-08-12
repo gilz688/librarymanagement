@@ -8,7 +8,7 @@ def download():
     return response.download(request, db)
 
 def getBooks():
-	lib_name= request.args(0)
+	lib_name= request.args[0]
 	books=db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, orderby=db.book.title)
 	return response.json(books)
 
