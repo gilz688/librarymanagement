@@ -1,7 +1,7 @@
 function getSpecificBookInfo(ISBN){
 	$("#bookInfo").modal("show");
 	$.ajax({
-		type: "get",
+		type: "post",
 		url: local_site+ "getSpecificBookInfo",
 		data: {
 			isbn : ISBN
