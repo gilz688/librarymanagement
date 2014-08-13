@@ -9,13 +9,15 @@ def download():
 
 def getBooks():
 	lib_name= request.args[0]
+	library = db(db.library.lib_name == lib_name).select()
+	if len(library) == 0:
+		raise Exception('No library named ' + lib_name)
 	books=db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, orderby=db.book.title)
 	return response.json(books)
 
 def getBookAuthors():
     ISBN = request.args[0]
     authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
-    #authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
     return response.json(authors)
 
 def getSpecificBookInfo():

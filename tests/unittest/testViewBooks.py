@@ -13,11 +13,23 @@ class TestViewBook(unittest.TestCase):
 	def setUp(self):
 		request = Request("")
 
-	def testGetBooks_empty(self):
+	def testLibraryExistence(self):
 		request.args=['Unknown-Library']
-		resp = getBooks()
-		db.commit()
-		self.assertEquals('[]', resp.encode('ascii','ignore'))
+		try:
+			resp = getBooks()
+			db.commit()
+			self.assertEquals(1, 2)
+		except Exception as e:
+			self.assertEquals('No library named Unknown-Library', e.args[0])
+
+	def testGetBooks_empty(self):
+		request.args=['SET-Library']
+		try:
+			resp = getBooks()
+			db.commit()
+			self.assertEquals('[]', resp.encode('ascii','ignore'))
+		except Exception as e:
+			self.assertEquals(1, 2)
 
 	def testGetBooks_nonEmpty(self):
 		request.args=['COE-Library']
