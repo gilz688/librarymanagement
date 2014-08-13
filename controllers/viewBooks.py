@@ -13,7 +13,7 @@ def getBooks():
 	return response.json(books)
 
 def getBookAuthors():
-    ISBN = request.vars.isbn
+    ISBN = request.args[0]
     authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
     #authors=db(db.author).select(db.author.last_name, db.author.first_name, orderby=db.author.id)
     return response.json(authors)
