@@ -18,6 +18,8 @@ def getBooks():
 def getBookAuthors():
     ISBN = request.args[0]
     authors=db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
+    if len(authors) == 0:
+        raise Exception('No Book with ISBN ' + ISBN)
     return response.json(authors)
 
 def getSpecificBookInfo():
