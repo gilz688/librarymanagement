@@ -52,9 +52,12 @@ class TestViewBook(unittest.TestCase):
 
 	def testGetBookAuthors_empty(self):
 		request.args=['Unknown-Book']
-		resp = getBookAuthors()
-		db.commit()
-		self.assertEquals('[]', resp.encode('ascii','ignore'))
+		try:
+			resp = getBookAuthors()
+			db.commit()
+			self.assertEquals(1,2)
+		except Exception as e:
+			self.assertEquals('No Book with ISBN Unknown-Book', e.args[0])
 
 	def testGetBookAuthors_nonEmpty(self):
 		request.args=['0-07-013151-1']
