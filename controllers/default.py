@@ -65,3 +65,7 @@ def data():
 def index():
 	response.view="libman/template.html"
 	return dict()
+
+def librarian():
+    response.view="libman/librarian.html"
+    return dict()
