@@ -51,7 +51,7 @@ class TestViewBook(unittest.TestCase):
 		self.assertEquals('null', resp.encode('ascii', 'ignore'))
 
 	def testGetBookAuthors_empty(self):
-		request.args=['Unknown-Book']
+		request.vars.isbn = 'Unknown-Book'
 		try:
 			resp = getBookAuthors()
 			db.commit()
@@ -60,7 +60,7 @@ class TestViewBook(unittest.TestCase):
 			self.assertEquals('No Book with ISBN Unknown-Book', e.args[0])
 
 	def testGetBookAuthors_nonEmpty(self):
-		request.args=['0-07-013151-1']
+		request.vars.isbn = '0-07-013151-1'
 		resp = getBookAuthors()
 		db.commit()
 		self.assertEquals('[{"lname": "Cormen", "middle_initial": "H", "fname": "Thomas"}, {"lname": "Leiserson", "middle_initial": "E", "fname": "Charles"}]', resp.encode('ascii','ignore'))

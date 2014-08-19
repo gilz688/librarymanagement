@@ -1,10 +1,7 @@
-
-//var local_site= "http://127.0.0.1:8000/librarymanagement/viewBooks/";
-
 function getBookAuthors(ISBN){
 	$.ajax({
 		type: "post",
-		url: local_site+ "getBookAuthors/" + ISBN,
+		url: local_site+ "viewBooks/getBookAuthors",
 		data: {
 			isbn: ISBN
 		},

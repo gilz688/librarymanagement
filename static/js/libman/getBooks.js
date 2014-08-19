@@ -1,15 +1,7 @@
-
-var local_site= "http://127.0.0.1:8000/librarymanagement/viewBooks/";
-
-
-$(document).ready(function(){
-	getBooks("COE-Library");
-})
-
 function getBooks(libraryName){
 	$.ajax({
 		type: "post",
-		url: local_site+ "getBooks/" + libraryName,
+		url: local_site+ "viewBooks/getBooks/" + libraryName,
 		data: {
 		},
 		dataType: "json",
