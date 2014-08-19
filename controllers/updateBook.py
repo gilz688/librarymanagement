@@ -27,5 +27,23 @@ def addAvailableCopies():
 	else:
 		raise Exception('Maximum number of copies reached')
 
-def reduceAvailableCopies():
-	pass
+def borrowBookCopy(isbn):
+	availableCopies = getAvailableCopies(isbn)
+	if (availableCopies > 0):
+		db(db.book.ISBN == isbn).update(available_copies = availableCopies - 1)
+	else:
+		raise Exception('Book is currently unavailable.')
+
+def canBorrowBook(isbn):
+	if(getAvailableCopies(isbn) > 0):
+		return True
+	else:
+		return False
+
+## Mao man ata ni ako gbuhat sa ibabaw
+## def reduceAvailableCopies():
+##	pass
+
+## for testing purposes only
+def reduceToZeroCopies(isbn):
+	db(db.book.ISBN == isbn).update(available_copies = 0)

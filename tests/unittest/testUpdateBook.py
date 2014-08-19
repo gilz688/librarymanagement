@@ -19,7 +19,7 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testGetNumOfCopies(self):
 		isbn = '0-07-013151-2'
-		expected = 11
+		expected = 220
 		result = getNumOfCopies(isbn)
 		self.assertEquals(expected, result)
 
@@ -56,6 +56,41 @@ class TestUpdateBook(unittest.TestCase):
 			addAvailableCopies()
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
+
+		db.rollback()
+
+	def testBorrowAvailableCopy(self):
+		isbn = '0-07-013151-2'
+		expected = getAvailableCopies(isbn) - 1 
+		borrowBookCopy(isbn)
+		result = getAvailableCopies(isbn)
+		self.assertEquals(expected, result)
+
+		db.rollback()
+
+	def testBorrowUnavailableBook(self):
+		isbn = '0-07-013151-1'
+		reduceToZeroCopies(isbn)
+		expected = 'Book is currently unavailable.'
+		try:
+			borrowBookCopy(isbn)
+		except Exception as e:
+			self.assertEquals(expected, e.args[0])
+
+		db.rollback()
+
+	def testCanBorrowBook(self):
+		isbn = '0-07-013151-1'
+		expected = True
+		result = canBorrowBook(isbn)
+		self.assertEquals(expected,result)
+
+	def testCannotBorrowBook(self):
+		isbn = '0-07-013151-1'
+		reduceToZeroCopies(isbn)
+		expected = False
+		result = canBorrowBook(isbn)
+		self.assertEquals(expected,result)
 
 		db.rollback()
 
