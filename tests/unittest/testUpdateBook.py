@@ -19,7 +19,7 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testGetNumOfCopies(self):
 		isbn = '0-07-013151-2'
-		expected = 220
+		expected = 11
 		result = getNumOfCopies(isbn)
 		self.assertEquals(expected, result)
 
@@ -32,17 +32,32 @@ class TestUpdateBook(unittest.TestCase):
 		self.assertEquals(expected, result)
 
 	def testAddAvailableCopies(self):
-		db.commit()
 		isbn = '0-07-013151-2'
 		request.vars.isbn = isbn
+
+		db.commit()
+
 		expected = getAvailableCopies(isbn) + 1
 		addAvailableCopies()
 		result = getAvailableCopies(isbn)
-		db.rollback()
 		self.assertEquals(expected, result)
 
+		db.rollback()
+		
 	def testAddAvailableCopiesException(self):
-		pass	
+		isbn = '0-07-013151-2'
+		request.vars.isbn = isbn
+		expected = 'Maximum number of copies reached'
+
+		db.commit
+
+		try:
+			addAvailableCopies()
+			addAvailableCopies()
+		except Exception as e:
+			self.assertEquals(expected, e.args[0])
+
+		db.rollback()
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestUpdateBook))
