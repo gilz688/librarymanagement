@@ -17,6 +17,7 @@ function getSpecificBookInfo(ISBN){
 				$("#status").html("Available");
 			else
 				$("#status").html("Not Available");
+            $("#availcopies").html(book.available_copies);
 			$("#description").html(book.description);
 			$("#book_pic").attr("src", local_site+ "download/" +book.pic);
 		}
