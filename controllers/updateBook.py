@@ -45,13 +45,12 @@ def canReturnBook(isbn):
 	return canRemoveCopies(available_copies,num_of_copies)
 
 def canRemoveCopies(available_copies, num_of_copies):
-	if(num_of_copies > 0):
+	if(available_copies > 0):
 		return True
 	else:
 		return False
 
-def removeAvailableCopies():
-	isbn.request.vars.isbn
+def removeAvailableCopies(isbn):
 
 	available_copies = getAvailableCopies(isbn)
 	num_of_copies = getNumOfCopies(isbn)
