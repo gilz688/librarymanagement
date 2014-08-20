@@ -16,8 +16,7 @@ def canAddCopies(available_copies, num_of_copies):
 		return False
 
 #recieve ajax request with json key isbn	
-def addAvailableCopies():
-	isbn = request.vars.isbn
+def addAvailableCopies(isbn):
 	
 	available_copies = getAvailableCopies(isbn)
 	num_of_copies = getNumOfCopies(isbn)
@@ -40,9 +39,22 @@ def canBorrowBook(isbn):
 	else:
 		return False
 
-## Mao man ata ni ako gbuhat sa ibabaw
-## def reduceAvailableCopies():
-##	pass
+def canRemoveCopies(available_copies, num_of_copies):
+	if(num_of_copies > 0):
+		return True
+	else:
+		return False
+
+def reduceAvailableCopies():
+	isbn.request.vars.isbn
+
+	available_copies = getAvailableCopies(isbn)
+	num_of_copies = getNumOfCopies(isbn)
+
+	if(canReduceCopies(available_copies, num_of_copies)):
+		db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
+	else:
+		raise Exception('No available copies left')
 
 ## for testing purposes only
 def reduceToZeroCopies(isbn):

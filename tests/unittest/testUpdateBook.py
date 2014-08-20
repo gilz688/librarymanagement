@@ -19,7 +19,7 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testGetNumOfCopies(self):
 		isbn = '0-07-013151-2'
-		expected = 220
+		expected = 11
 		result = getNumOfCopies(isbn)
 		self.assertEquals(expected, result)
 
@@ -33,12 +33,8 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testAddAvailableCopies(self):
 		isbn = '0-07-013151-2'
-		request.vars.isbn = isbn
-
-		db.commit()
-
 		expected = getAvailableCopies(isbn) + 1
-		addAvailableCopies()
+		addAvailableCopies(isbn)
 		result = getAvailableCopies(isbn)
 		self.assertEquals(expected, result)
 
@@ -46,18 +42,54 @@ class TestUpdateBook(unittest.TestCase):
 		
 	def testAddAvailableCopiesException(self):
 		isbn = '0-07-013151-2'
-		request.vars.isbn = isbn
+
 		expected = 'Maximum number of copies reached'
 
-		db.commit
-
 		try:
-			addAvailableCopies()
-			addAvailableCopies()
+			addAvailableCopies(isbn)
+			addAvailableCopies(isbn)
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
 
 		db.rollback()
+
+###
+	def testCanRemoveCopies(self):
+		isbn = '0-07-013151-2'
+		available_copies = getAvailableCopies(isbn)
+		num_of_copies = getNumOfCopies(isbn)
+		expected = True
+		result = canRemoveCopies(available_copies, num_of_copies)
+		self.assertEquals(expected, result)
+
+	def testRemoveAvailableCopies(self):
+		isbn = '0-07-013151-2'
+		request.vars.isbn = isbn
+
+		db.commit()
+
+		expected = getAvailableCopies(isbn) - 1
+		removeAvailableCopies()
+		result = getAvailableCopies(isbn)
+		self.assertEquals(expected, result)
+
+		db.rollback()
+		
+	def testRemoveAvailableCopiesException(self):
+		isbn = '0-07-013151-2'
+		request.vars.isbn = isbn
+		expected = 'No available copies left'
+
+		db.begin()
+
+		reduceToZeroCopies(isbn)
+		try:
+			removeAvailableCopies()
+		except Exception as e:
+			self.assertEquals(expected, e.args[0])
+
+		db.rollback()
+###
 
 	def testBorrowAvailableCopy(self):
 		isbn = '0-07-013151-2'
