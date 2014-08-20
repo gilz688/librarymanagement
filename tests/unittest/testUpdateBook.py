@@ -75,8 +75,10 @@ class TestUpdateBook(unittest.TestCase):
 
 ###
 	def testCanReturnBook(self):
+		db.rollback()
 		isbn = '0-07-013151-1'
 		expected = True
+
 		result = canReturnBook(isbn) 
 		self.assertEquals(expected,result)
 
@@ -84,12 +86,14 @@ class TestUpdateBook(unittest.TestCase):
 		isbn = '0-07-013151-1'
 
 		# remove all available copies
-		while getAvailableCopies(isbn) > 0:
-				removeAvailableCopies(isbn)
+		while getAvailableCopies(isbn) < getNumOfCopies(isbn):
+				addAvailableCopies(isbn)
 
 		expected = False
 		result = canReturnBook(isbn)
 		self.assertEquals(expected,result)
+
+		db.rollback()
 
 	def testCanRemoveCopies(self):
 		expected = True
