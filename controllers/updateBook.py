@@ -27,9 +27,9 @@ def addAvailableCopies():
 	else:
 		raise Exception('Maximum number of copies reached')
 
-def borrowBookCopy(isbn):
-	availableCopies = getAvailableCopies(isbn)
-	if (availableCopies > 0):
+def borrowBookCopy():
+	isbn = request.vars.isbn
+	if (canBorrowBook(isbn)):
 		db(db.book.ISBN == isbn).update(available_copies = availableCopies - 1)
 	else:
 		raise Exception('Book is currently unavailable.')
