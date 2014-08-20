@@ -59,12 +59,15 @@ class TestUpdateBook(unittest.TestCase):
 		
 	def testAddAvailableCopiesException(self):
 		isbn = '0-07-013151-2'
+		available_copies = getAvailableCopies(isbn)
+		num_of_copies = getNumOfCopies(isbn)
 
 		expected = 'Maximum number of copies reached'
 
 		try:
-			addAvailableCopies(isbn)
-			addAvailableCopies(isbn)
+			while available_copies <= num_of_copies:
+				addAvailableCopies(isbn)
+
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
 
