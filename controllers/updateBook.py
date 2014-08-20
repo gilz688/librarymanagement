@@ -16,8 +16,7 @@ def canAddCopies(available_copies, num_of_copies):
 		return False
 
 #recieve ajax request with json key isbn	
-def addAvailableCopies():
-	isbn = request.vars.isbn
+def addAvailableCopies(isbn):
 	
 	available_copies = getAvailableCopies(isbn)
 	num_of_copies = getNumOfCopies(isbn)

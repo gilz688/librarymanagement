@@ -33,12 +33,8 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testAddAvailableCopies(self):
 		isbn = '0-07-013151-2'
-		request.vars.isbn = isbn
-
-		db.commit()
-
 		expected = getAvailableCopies(isbn) + 1
-		addAvailableCopies()
+		addAvailableCopies(isbn)
 		result = getAvailableCopies(isbn)
 		self.assertEquals(expected, result)
 
@@ -46,14 +42,12 @@ class TestUpdateBook(unittest.TestCase):
 		
 	def testAddAvailableCopiesException(self):
 		isbn = '0-07-013151-2'
-		request.vars.isbn = isbn
+
 		expected = 'Maximum number of copies reached'
 
-		db.commit
-
 		try:
-			addAvailableCopies()
-			addAvailableCopies()
+			addAvailableCopies(isbn)
+			addAvailableCopies(isbn)
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
 
@@ -86,7 +80,7 @@ class TestUpdateBook(unittest.TestCase):
 		request.vars.isbn = isbn
 		expected = 'No available copies left'
 
-		db.commit
+		db.begin()
 
 		reduceToZeroCopies(isbn)
 		try:
