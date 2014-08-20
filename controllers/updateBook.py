@@ -42,7 +42,7 @@ def canBorrowBook(isbn):
 def canReturnBook(isbn):
 	available_copies = getAvailableCopies(isbn)
 	num_of_copies = getNumOfCopies(isbn)
-	return canRemoveCopies(available_copies,num_of_copies)
+	return canAddCopies(available_copies,num_of_copies)
 
 def canRemoveCopies(available_copies, num_of_copies):
 	if(available_copies > 0):
