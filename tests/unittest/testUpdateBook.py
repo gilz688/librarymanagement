@@ -150,15 +150,13 @@ class TestUpdateBook(unittest.TestCase):
 
 		db.rollback()
 		
-### ka sherwin nlang kulang nga test sa bottom.
-### gi comment ko ni kay para sa mag pull makita ninyo unsa ang ni pass na function og wala
-"""		
+
 	def testBorrowAvailableCopy(self):
 		request.vars.isbn = '0-07-013151-2'
-		expected = getAvailableCopies(isbn) - 1 
-		borrowBook()
-		result = getAvailableCopies(isbn)
-		self.assertEquals(expected, result)
+		isbn = request.vars.isbn
+		expected = '{"message": "Book Borrowed"}'
+		result = borrowBook()
+		self.assertEquals(expected, result.encode('ascii', 'ignore'))
 
 		db.rollback()
 
@@ -169,7 +167,7 @@ class TestUpdateBook(unittest.TestCase):
 			removeAvailableCopies(isbn)
 		expected = 'Book is currently unavailable.'
 		try:
-			borrowBookCopy()
+			borrowBook()
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
 
@@ -190,7 +188,7 @@ class TestUpdateBook(unittest.TestCase):
 		self.assertEquals(expected,result)
 
 		db.rollback()
-"""	
+
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestUpdateBook))
 unittest.TextTestRunner(verbosity=2).run(suite)

@@ -43,6 +43,7 @@ def borrowBook():
 	availableCopies = getAvailableCopies(isbn)
 	if (canBorrowBook(isbn)):
 		db(db.book.ISBN == isbn).update(available_copies = availableCopies - 1)
+		return response.json({"message":"Book Borrowed"})
 	else:
 		raise Exception('Book is currently unavailable.')
 
