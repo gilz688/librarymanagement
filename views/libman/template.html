@@ -54,8 +54,10 @@
             </div>
             <center>
             <div class="list-group">
-                <button type="button" id="borrow-button" class="btn btn-primary">Borrow</button>
-                <button type="button" id="return-button" class="btn btn-primary">Return</button>
+                <button type="button" id="borrow-button" class="btn btn-primary" onclick=borrowBookCopy("0-07-013151-2")
+;>Borrow</button>
+                <button type="button" id="return-button" class="btn btn-primary" onclick=addAvailableCopies("0-07-013151-2"){
+;>Return</button>
             </div>
             </center>
           </div>
@@ -70,5 +72,6 @@
 	<script src="../static/js/libman/getSpecificBookInfo.js"></script>
 	<script src="../static/js/libman/getBookAuthors.js"></script>
   <script src="../static/js/libman/addAvailableCopies.js"></script>
+  <script src="../static/js/libman/borrowBookCopy.js"></script>
   </body>
 </html>
