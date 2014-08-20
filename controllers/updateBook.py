@@ -39,19 +39,24 @@ def canBorrowBook(isbn):
 	else:
 		return False
 
+def canReturnBook(isbn):
+	available_copies = getAvailableCopies(isbn)
+	num_of_copies = getNumOfCopies(isbn)
+	return canRemoveCopies(available_copies,num_of_copies)
+
 def canRemoveCopies(available_copies, num_of_copies):
 	if(num_of_copies > 0):
 		return True
 	else:
 		return False
 
-def reduceAvailableCopies():
+def removeAvailableCopies():
 	isbn.request.vars.isbn
 
 	available_copies = getAvailableCopies(isbn)
 	num_of_copies = getNumOfCopies(isbn)
 
-	if(canReduceCopies(available_copies, num_of_copies)):
+	if(canRemoveCopies(available_copies, num_of_copies)):
 		db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
 	else:
 		raise Exception('No available copies left')
