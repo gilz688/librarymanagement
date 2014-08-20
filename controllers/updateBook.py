@@ -40,6 +40,7 @@ def returnBook():
 
 def borrowBook():
 	isbn = request.vars.isbn
+	availableCopies = getAvailableCopies(isbn)
 	if (canBorrowBook(isbn)):
 		db(db.book.ISBN == isbn).update(available_copies = availableCopies - 1)
 	else:
@@ -67,6 +68,3 @@ def removeAvailableCopies(isbn):
 	else:
 		raise Exception('No available copies left')
 
-## for testing purposes only
-def reduceToZeroCopies(isbn):
-	db(db.book.ISBN == isbn).update(available_copies = 0)
