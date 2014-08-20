@@ -19,7 +19,7 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testGetNumOfCopies(self):
 		isbn = '0-07-013151-2'
-		expected = 220
+		expected = 11
 		result = getNumOfCopies(isbn)
 		self.assertEquals(expected, result)
 
