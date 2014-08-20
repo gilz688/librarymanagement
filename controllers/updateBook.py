@@ -14,8 +14,12 @@ def canAddCopies(available_copies, num_of_copies):
 		return True
 	else:
 		return False
+		
+def canReturnBook(isbn):
+	available_copies = getAvailableCopies(isbn)
+	num_of_copies = getNumOfCopies(isbn)
+	return canAddCopies(available_copies,num_of_copies)
 
-#recieve ajax request with json key isbn	
 def addAvailableCopies(isbn):
 	
 	available_copies = getAvailableCopies(isbn)
@@ -26,7 +30,15 @@ def addAvailableCopies(isbn):
 	else:
 		raise Exception('Maximum number of copies reached')
 
-def borrowBookCopy():
+def returnBook():
+	isbn = request.vars.isbn
+	if(canReturnBook(isbn)):
+		addAvailableCopies(isbn)
+		return response.json({"message":"Book Returned"})
+	else:
+		raise Exception('Cannot Return book')
+
+def borrowBook():
 	isbn = request.vars.isbn
 	if (canBorrowBook(isbn)):
 		db(db.book.ISBN == isbn).update(available_copies = availableCopies - 1)
@@ -38,11 +50,6 @@ def canBorrowBook(isbn):
 		return True
 	else:
 		return False
-
-def canReturnBook(isbn):
-	available_copies = getAvailableCopies(isbn)
-	num_of_copies = getNumOfCopies(isbn)
-	return canAddCopies(available_copies,num_of_copies)
 
 def canRemoveCopies(available_copies, num_of_copies):
 	if(available_copies > 0):
