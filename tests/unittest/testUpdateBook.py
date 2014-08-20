@@ -31,6 +31,23 @@ class TestUpdateBook(unittest.TestCase):
 		result = canAddCopies(available_copies, num_of_copies)
 		self.assertEquals(expected, result)
 
+	def testCannotAddCopies(self):
+		isbn = '0-07-013151-2'
+
+		available_copies = getAvailableCopies(isbn) #10
+		num_of_copies = getNumOfCopies(isbn) #11
+
+		expected = False
+
+		while available_copies<num_of_copies:
+			addAvailableCopies(isbn)
+			available_copies = getAvailableCopies(isbn) # +1 per iteration
+
+		result = canAddCopies(available_copies, num_of_copies)
+		self.assertEquals(expected, result)
+
+		db.rollback()
+
 	def testAddAvailableCopies(self):
 		isbn = '0-07-013151-2'
 		expected = getAvailableCopies(isbn) + 1
