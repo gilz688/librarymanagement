@@ -89,11 +89,13 @@ class TestUpdateBook(unittest.TestCase):
 		self.assertEquals(expected,result)
 
 	def testCanRemoveCopies(self):
-		isbn = '0-07-013151-2'
-		available_copies = getAvailableCopies(isbn)
-		num_of_copies = getNumOfCopies(isbn)
 		expected = True
-		result = canRemoveCopies(available_copies, num_of_copies)
+		result = canRemoveCopies(1, 5)
+		self.assertEquals(expected, result)
+
+	def testCannotRemoveCopies(self):
+		expected = False
+		result = canRemoveCopies(0, 5)
 		self.assertEquals(expected, result)
 
 	def testRemoveAvailableCopies(self):
