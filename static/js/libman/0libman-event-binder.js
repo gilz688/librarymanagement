@@ -13,7 +13,7 @@ $(document).ready(function(){
 
     function borrowBookJS() {
         if(confirm("Are you sure you want to borrow a copy of this book?")) {
-            borrowBookCopy($("span#isbn").html());
+            borrowBook($("span#isbn").html());
         }
         else {
             return false;

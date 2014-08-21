@@ -1,4 +1,4 @@
-function borrowBookCopy(ISBN){
+function borrowBook(ISBN){
 	$.ajax({
 		type: "post",
 		url: local_site+ "updateBook/borrowBook",
