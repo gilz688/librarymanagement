@@ -47,7 +47,7 @@ def borrowBook():
 	try:
 		book = removeAvailableCopies(isbn)
 		bookData = {"message":"Book Borrowed",
-					"available_copies":book['available_copies'] - 1,
+					"available_copies":book['available_copies'],
 					"num_of_copies":book['num_of_copies']
 					}
 		return response.json(bookData)
@@ -65,11 +65,10 @@ def removeAvailableCopies(isbn):
 	available_copies = getAvailableCopies(isbn)
 	num_of_copies = getNumOfCopies(isbn)
 
-	book = {'available_copies': available_copies,
-			'num_of_copies': num_of_copies}
-
 	if(canRemoveCopies(available_copies, num_of_copies)):
 		db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
+		book = {'available_copies': available_copies - 1,
+			'num_of_copies': num_of_copies}
 		return book
 	else:
 		raise Exception('No available copies left')
