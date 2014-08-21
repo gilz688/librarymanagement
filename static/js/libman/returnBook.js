@@ -13,10 +13,14 @@ function returnBook(ISBN){
 			else
 				$("button#return-button").prop("disabled", true);
 			
-			if(bookData.available_copies>0)
+			if(bookData.available_copies>0){
 				$("#status").html("Available");
-			else
+				$("button#borrow-button").prop("disabled", false);
+			}
+			else{
 				$("#status").html("Not Available");
+				$("button#borrow-button").prop("disabled", true);
+			}
 
 			/*Temporary notification*/	
 			alert(bookData.message);

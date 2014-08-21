@@ -22,10 +22,14 @@ function getSpecificBookInfo(ISBN){
 				$("button#return-button").prop("disabled", false);
 			else
 				$("button#return-button").prop("disabled", true);
-			if(book.available_copies>0)
+			if(book.available_copies>0){
 				$("#status").html("Available");
-			else
+				$("button#borrow-button").prop("disabled", false);
+			}
+			else{
 				$("#status").html("Not Available");
+				$("button#borrow-button").prop("disabled", true);
+			}
 		}
 	});
 }

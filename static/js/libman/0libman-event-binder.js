@@ -45,4 +45,5 @@ function clearModal() {
 	$("#description").html("");
 	$("#book_pic").attr("src", "#");
 	$("button#return-button").prop("disabled", true);
+	$("button#borrow-button").prop("disabled", true);
 }
