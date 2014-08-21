@@ -7,6 +7,19 @@ $(document).ready(function(){
 		addAvailableCopies($("span#isbn").html());
 	});
 
+    $("button#borrow-button").click(function() {
+        borrowBookJS();
+    });
+
+    function borrowBookJS() {
+        if(confirm("Are you sure you want to borrow a copy of this book?")) {
+            borrowBookCopy($("span#isbn").html());
+        }
+        else {
+            return false;
+        }
+    }
+
 
 	/*clears the modal data when the closes the modal*/
 	$('#bookInfo').on('hidden.bs.modal', function () {
