@@ -133,7 +133,7 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testBorrowAvailableCopy(self):
 		request.vars.isbn = '0-07-013151-2'
-		isbn = request.vars.isbn
+		
 		expected = '{"message": "Book Borrowed"}'
 		result = borrowBook()
 		self.assertEquals(expected, result.encode('ascii', 'ignore'))
@@ -150,22 +150,6 @@ class TestUpdateBook(unittest.TestCase):
 			borrowBook()
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
-
-		db.rollback()
-
-	def testCanBorrowBook(self):
-		isbn = '0-07-013151-1'
-		expected = True
-		result = canBorrowBook(isbn)
-		self.assertEquals(expected,result)
-
-	def testCannotBorrowBook(self):
-		isbn = '0-07-013151-1'
-		while getAvailableCopies(isbn) > 0:
-			removeAvailableCopies(isbn)
-		expected = False
-		result = canBorrowBook(isbn)
-		self.assertEquals(expected,result)
 
 		db.rollback()
 
