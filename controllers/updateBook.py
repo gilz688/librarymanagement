@@ -19,12 +19,11 @@ def addAvailableCopies(isbn):
 	
 	available_copies = getAvailableCopies(isbn)
 	num_of_copies = getNumOfCopies(isbn)
-	
-	book = {'available_copies': available_copies,
-			'num_of_copies': num_of_copies}
 
 	if(canAddCopies(available_copies, num_of_copies)):
 		db(db.book.ISBN == isbn).update(available_copies = available_copies + 1)
+		book = {'available_copies': available_copies + 1,
+			'num_of_copies': num_of_copies}
 		return book
 	else:
 		raise Exception('Maximum number of copies reached')
