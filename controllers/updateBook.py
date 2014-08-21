@@ -47,7 +47,7 @@ def borrowBook():
 	try:
 		book = removeAvailableCopies(isbn)
 		bookData = {"message":"Book Borrowed",
-					"available_copies":book['available_copies'],
+					"available_copies":book['available_copies'] - 1,
 					"num_of_copies":book['num_of_copies']
 					}
 		return response.json(bookData)
