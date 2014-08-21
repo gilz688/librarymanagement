@@ -76,7 +76,8 @@ class TestUpdateBook(unittest.TestCase):
 	def testSuccessReturnBook(self):
 		isbn = '0-07-013151-2'
 		request.vars.isbn = isbn
-		expected = '{"message": "Book Returned"}'
+		
+		expected = '{"message": "Book Returned", "num_of_copies": 11, "available_copies": 10}'
 
 		result = returnBook()
 		
@@ -134,7 +135,7 @@ class TestUpdateBook(unittest.TestCase):
 	def testBorrowAvailableCopy(self):
 		request.vars.isbn = '0-07-013151-2'
 		
-		expected = '{"message": "Book Borrowed"}'
+		expected = '{"message": "Book Borrowed", "num_of_copies": 11, "available_copies": 10}'
 		result = borrowBook()
 		self.assertEquals(expected, result.encode('ascii', 'ignore'))
 
