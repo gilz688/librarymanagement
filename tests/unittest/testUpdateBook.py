@@ -73,24 +73,28 @@ class TestUpdateBook(unittest.TestCase):
 
 		db.rollback()
 
-	def testCanReturnBook(self):
+	def testSuccessReturnBook(self):
+		isbn = '0-07-013151-2'
+		request.vars.isbn = isbn
+		expected = '{"message": "Book Returned"}'
+
+		result = returnBook()
 		
-		isbn = '0-07-013151-1'
-		expected = True
+		self.assertEquals(expected,result.encode('ascii', 'ignore'))
+		db.rollback()
 
-		result = canReturnBook(isbn) 
-		self.assertEquals(expected,result)
-
-	def testCannotReturnBook(self):
+	def testFailedReturnBook(self):
 		isbn = '0-07-013151-1'
 
-		# remove all available copies
 		while getAvailableCopies(isbn) < getNumOfCopies(isbn):
 				addAvailableCopies(isbn)
 
-		expected = False
-		result = canReturnBook(isbn)
-		self.assertEquals(expected,result)
+		expected = 'Cannot return book'
+
+		try:
+			returnBook()
+		except Exception as e:
+			self.assertEquals(expected, e.args[0])
 
 		db.rollback()
 
@@ -121,30 +125,6 @@ class TestUpdateBook(unittest.TestCase):
 		try:
 			while getAvailableCopies(isbn) > -1:
 				removeAvailableCopies(isbn)
-		except Exception as e:
-			self.assertEquals(expected, e.args[0])
-
-		db.rollback()
-
-	def testReturnBook(self):
-		isbn = '0-07-013151-2'
-		request.vars.isbn = isbn
-		expected = '{"message": "Book Returned"}'
-
-		result = returnBook()
-		
-		self.assertEquals(expected,result.encode('ascii', 'ignore'))
-		db.rollback()
-
-	def testFailedReturnBook(self):
-		isbn = '0-07-013151-2'
-		request.vars.isbn = isbn
-		expected = 'Cannot Return book'
-
-		addAvailableCopies(isbn)
-
-		try:
-			returnBook()
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
 

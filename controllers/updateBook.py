@@ -14,11 +14,6 @@ def canAddCopies(available_copies, num_of_copies):
 		return True
 	else:
 		return False
-		
-def canReturnBook(isbn):
-	available_copies = getAvailableCopies(isbn)
-	num_of_copies = getNumOfCopies(isbn)
-	return canAddCopies(available_copies,num_of_copies)
 
 def addAvailableCopies(isbn):
 	
@@ -32,11 +27,12 @@ def addAvailableCopies(isbn):
 
 def returnBook():
 	isbn = request.vars.isbn
-	if(canReturnBook(isbn)):
+
+	try:
 		addAvailableCopies(isbn)
 		return response.json({"message":"Book Returned"})
-	else:
-		raise Exception('Cannot Return book')
+	except:
+		raise Exception("Cannot return book")
 
 def borrowBook():
 	isbn = request.vars.isbn
@@ -45,12 +41,6 @@ def borrowBook():
 		db(db.book.ISBN == isbn).update(available_copies = availableCopies - 1)
 	else:
 		raise Exception('Book is currently unavailable.')
-
-def canBorrowBook(isbn):
-	if(getAvailableCopies(isbn) > 0):
-		return True
-	else:
-		return False
 
 def canRemoveCopies(available_copies, num_of_copies):
 	if(available_copies > 0):
