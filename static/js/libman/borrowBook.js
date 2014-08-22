@@ -8,15 +8,17 @@ function borrowBook(ISBN){
 		},
 		success: function(book){
 			$("span#availcopies").html(book.available_copies);
-			if(book.available_copies == 0)
-				$("button#borrow-button").prop("disabled", true);
-			else
-				$("button#borrow-button").prop("disabled", false);
 			
-			if(book.available_copies>0)
+			if(book.available_copies>0) {
 				$("#status").html("Available");
-			else
+				$("button#borrow-button").prop("disabled", false);
+				$("button#return-button").prop("disabled", false);
+			}
+			else {
 				$("#status").html("Not Available");
+				$("button#borrow-button").prop("disabled", true);
+				$("button#return-button").prop("disabled", false);
+			}
 
 			/*Temporary notification*/	
 			alert(book.message);
