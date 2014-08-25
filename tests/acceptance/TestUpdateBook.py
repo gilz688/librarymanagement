@@ -17,6 +17,10 @@ class TestUpdateBook(unittest.TestCase):
         time.sleep(2)
         return int(self.browser.find_by_xpath('//span[@id=\"availcopies\"]').first.value)
 
+    def getNumberOfCopies(self):
+        time.sleep(2)
+        return int(self.browser.find_by_xpath('//span[@id=\"numcopies\"]').first.value)
+
     def getStatus(self):
         time.sleep(2)
         return self.browser.find_by_xpath('//span[@id=\"status\"]').first.value
@@ -132,15 +136,18 @@ class TestUpdateBook(unittest.TestCase):
         expectedStatus = 'Available'
         expectedAvailableCopies = 20
 
-        n = self.getAvailableCopies()
+        n = self.getNumberOfCopies()
+        x = self.getAvailableCopies()
+        y = self.getAvailableCopies()
         
         #User clicks return button n times (to make the availabe copies 20)
         returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
         
-        for i in range(n):
+        while x < n:
             returnButton.click()
             self.browser.get_alert().accept()
             alert = self.browser.get_alert()
+            x = x + 1
             if alert != None:
                 alert.accept()
 
@@ -149,12 +156,12 @@ class TestUpdateBook(unittest.TestCase):
 
         self.assertEqual(expectedStatus,actualStatus)
         self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
-        assert self.browser.is_element_present_by_xpath('//button[text()=\"Borrow\" and @disabled]')
+        assert self.browser.is_element_present_by_xpath('//button[text()=\"Return\" and @disabled]')
 
         
         #Rollback
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
-        for i in range(n):
+        for i in range(n-y):
             borrowButton.click()
             self.browser.get_alert().accept()
             alert = self.browser.get_alert()
