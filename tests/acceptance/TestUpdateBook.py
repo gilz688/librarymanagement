@@ -138,16 +138,14 @@ class TestUpdateBook(unittest.TestCase):
 
         n = self.getNumberOfCopies()
         x = self.getAvailableCopies()
-        y = self.getAvailableCopies()
         
         #User clicks return button n times (to make the availabe copies 20)
         returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
         
-        while x < n:
+        for i in range(n-x):
             returnButton.click()
             self.browser.get_alert().accept()
             alert = self.browser.get_alert()
-            x = x + 1
             if alert != None:
                 alert.accept()
 
@@ -161,7 +159,7 @@ class TestUpdateBook(unittest.TestCase):
         
         #Rollback
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
-        for i in range(n-y):
+        for i in range(n-x):
             borrowButton.click()
             self.browser.get_alert().accept()
             alert = self.browser.get_alert()
