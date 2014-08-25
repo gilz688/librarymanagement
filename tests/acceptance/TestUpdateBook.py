@@ -32,7 +32,7 @@ class TestUpdateBook(unittest.TestCase):
         book = self.browser.find_by_xpath('//td[text()=\"Introduction to Algorithms\"]').first
         book.click()
 
-        expected = self.getAvailableCopies() - 1
+        expectedAvailableCopies = self.getAvailableCopies() - 1
 
         # User clicks Borrow button
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
@@ -44,9 +44,13 @@ class TestUpdateBook(unittest.TestCase):
         if alert != None:
             alert.accept()
 
-        actual = self.getAvailableCopies()
+        actualAvailableCopies = self.getAvailableCopies()
         
-        self.assertEqual(expected,actual)
+        self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+
+        #Rollback
+        returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
+        returnButton.click()
 
     def testReturnBook(self):
         self.visitBooksUrl()
@@ -56,7 +60,7 @@ class TestUpdateBook(unittest.TestCase):
         book.click()
 
         
-        expected = self.getAvailableCopies() + 1
+        expectedAvailableCopies = self.getAvailableCopies() + 1
 
         # User clicks Return button
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
@@ -67,9 +71,13 @@ class TestUpdateBook(unittest.TestCase):
         if alert != None:
             alert.accept()
 
-        actual = self.getAvailableCopies()
+        actualAvailableCopies = self.getAvailableCopies()
         
-        self.assertEqual(expected,actual)
+        self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+
+        #Rollback
+        borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
+        borrowButton.click()
 
     
     def testCannotBorrowBook(self):
