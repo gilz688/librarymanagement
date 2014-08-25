@@ -72,12 +72,12 @@ db.library.insert(**{'lib_name': 'SET-Library', 'address': 'MSU-IIT SET'})
 #book
 
 db.book.insert(**{'ISBN': '0-07-013151-1', 'lib_name': 'COE-Library','publisher': 'MIT Press',
-                  'title': 'Introduction To Algorithm', 'no_of_copies': 20, 'available_copies': 5,
+                  'title': 'Introduction to Algorithms', 'no_of_copies': 20, 'available_copies': 5,
 				  'pic': 'book.pic.8f51fb150a423756.362d3034366a6630352e6a7067.jpg',
 				  'description': 'This book covers a broad range of algorithms in depth, yet makes their design and analysis accessible to all levels of readers. Each chapter is relatively self-contained and can be used as a unit of study. The algorithms are described in English and in a pseudocode designed to be readable by anyone who has done a little programming. '})
 
 db.book.insert(**{'ISBN': '0-07-013151-2', 'lib_name': 'COE-Library','publisher': 'MIT Press',
-                  'title': 'Data Structure Using in C++', 'no_of_copies': 11, 'available_copies': 10,
+                  'title': 'Data Structures Using C++', 'no_of_copies': 11, 'available_copies': 10,
 				  'pic': 'book.pic.81914475beb94577.646174612d737472756374757265732d7573696e672d632d642d732d6d616c696b2d70617065726261636b2d636f7665722d6172742e6a7067.jpg',
                   'description': 'This book takes a gentle approach to the data structures course in C++. Providing an early, self-contained review of object-oriented programming and C++, this text gives students a firm grasp of key concepts and allows those experienced in another language to adjust easily. Flexible by design, professors have the option of emphasizing object-oriented programming, covering recursion and sorting early, or accelerating the pace of the course.'})
 
