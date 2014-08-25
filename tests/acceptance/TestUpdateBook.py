@@ -58,7 +58,7 @@ class TestUpdateBook(unittest.TestCase):
         
         expected = self.getAvailableCopies() + 1
 
-        # User clicks Borrow button
+        # User clicks Return button
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
         
         borrowButton.click()
@@ -71,6 +71,47 @@ class TestUpdateBook(unittest.TestCase):
         
         self.assertEqual(expected,actual)
 
+    
+    def testCannotBorrowBook(self):
+        self.visitBooksUrl()
+        
+        #User clicks the Introduction to Algorithm"
+        book = self.browser.find_by_xpath('//td[text()=\"Introduction to Algorithms\"]').first
+        book.click()
+
+
+        expectedStatus = 'Not Available'
+        expectedAvailableCopies = 0
+
+        n = self.getAvailableCopies()
+        
+        #User clicks Borrow button n times (to make the availabe copies 0)
+        borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
+        
+        for i in range(n):
+            borrowButton.click()
+            self.browser.get_alert().accept()
+            alert = self.browser.get_alert()
+            if alert != None:
+                alert.accept()
+
+        actualStatus = self.getStatus()
+        actualAvailableCopies = self.getAvailableCopies()
+
+        self.assertEqual(expectedStatus,actualStatus)
+        self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+        assert self.browser.is_element_present_by_xpath('//button[text()=\"Borrow\" and @disabled]')
+
+        
+        #Rollback
+        returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
+        for i in range(n):
+            returnButton.click()
+            self.browser.get_alert().accept()
+            alert = self.browser.get_alert()
+            if alert != None:
+                alert.accept()
+
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestUpdateBook))
-unittest.TextTestRunner(verbosity=2).run(suite)        
+unittest.TextTestRunner(verbosity=2).run(suite)       
