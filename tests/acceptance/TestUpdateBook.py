@@ -56,6 +56,11 @@ class TestUpdateBook(unittest.TestCase):
         returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
         returnButton.click()
 
+        self.browser.get_alert().accept()
+        alert = self.browser.get_alert()
+        if alert != None:
+            alert.accept()
+
     def testReturnBook(self):
         self.visitBooksUrl()
 
@@ -82,6 +87,11 @@ class TestUpdateBook(unittest.TestCase):
         #Rollback
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
         borrowButton.click()
+
+        self.browser.get_alert().accept()
+        alert = self.browser.get_alert()
+        if alert != None:
+            alert.accept()
 
     
     def testCannotBorrowBook(self):
