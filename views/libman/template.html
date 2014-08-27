@@ -4,7 +4,7 @@
     <meta charset="utf-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-      <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+      <link href="{{=URL('static','css/bootstrap.min.css')}}" rel="stylesheet">
       <title>Library Management</title>
   </head>
   <body>
@@ -63,13 +63,15 @@
       </div>
     </div>
 	{{import os}}
-	<script src="../static/js/jquery-2.1.1.min.js"></script>
-	<script src="../static/js/bootstrap.min.js"></script>
-  <script src="../static/js/libman/0libman-event-binder.js"></script>
-	<script src="../static/js/libman/getBooks.js"></script>
-	<script src="../static/js/libman/getSpecificBookInfo.js"></script>
-	<script src="../static/js/libman/getBookAuthors.js"></script>
-  <script src="../static/js/libman/borrowBook.js"></script>
-  <script src="../static/js/libman/returnBook.js"></script>
+  <script type="text/javascript">var local_site = 'http://{{=request.env.http_host + "/" + request.application}}/'</script>
+
+  <script src="{{=URL('static','js/jquery-2.1.1.min.js')}}"></script>
+  <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
+  <script src="{{=URL('static','js/libman/0libman-event-binder.js')}}"></script>
+  <script src="{{=URL('static','js/libman/getBooks.js')}}"></script>
+  <script src="{{=URL('static','js/libman/getSpecificBookInfo.js')}}"></script>
+  <script src="{{=URL('static','js/libman/getBookAuthors.js')}}"></script>
+  <script src="{{=URL('static','js/libman/borrowBook.js')}}"></script>
+  <script src="{{=URL('static','js/libman/returnBook.js')}}"></script>
   </body>
 </html>

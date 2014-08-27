@@ -1,4 +1,3 @@
-var local_site= "http://127.0.0.1:8000/librarymanagement/";
 $(document).ready(function(){
 	
 	getBooks("COE-Library");
