@@ -15,7 +15,7 @@ def searchByAuthor():
 		raise Exception('Book written by that author is unavailable.')
 
 def searchByTitle():
-	
+	pass
 
 def searchByISBN():
-	
+	pass
