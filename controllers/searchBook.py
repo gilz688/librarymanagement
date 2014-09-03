@@ -18,4 +18,6 @@ def searchByTitle():
 	pass
 
 def searchByISBN():
-	pass
+	isbn = request.args
+	bookData = db(db.book.ISBN==isbn[0]).select(db.book.ALL)
+	return response.json(bookData)
