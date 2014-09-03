@@ -25,7 +25,7 @@ def searchByISBN():
 		bookData = searchWithIncompleteISBN(isbn[0])
 
 	if len(bookData) == 0:
-		raise Exception("No Books Found")
+		raise Exception("No Book Found")
 	return response.json(bookData)
 
 """HELPER FUNCTIONS DOWN"""
