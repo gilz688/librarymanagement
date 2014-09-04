@@ -17,6 +17,10 @@ class TestUpdateBook(unittest.TestCase):
         time.sleep(2)
         return int(self.browser.find_by_xpath('//span[@id=\"availcopies\"]').first.value)
 
+    def getNumberOfCopies(self):
+        time.sleep(2)
+        return int(self.browser.find_by_xpath('//span[@id=\"numcopies\"]').first.value)
+
     def getStatus(self):
         time.sleep(2)
         return self.browser.find_by_xpath('//span[@id=\"status\"]').first.value
@@ -32,7 +36,7 @@ class TestUpdateBook(unittest.TestCase):
         book = self.browser.find_by_xpath('//td[text()=\"Introduction to Algorithms\"]').first
         book.click()
 
-        expected = self.getAvailableCopies() - 1
+        expectedAvailableCopies = self.getAvailableCopies() - 1
 
         # User clicks Borrow button
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
@@ -44,9 +48,18 @@ class TestUpdateBook(unittest.TestCase):
         if alert != None:
             alert.accept()
 
-        actual = self.getAvailableCopies()
+        actualAvailableCopies = self.getAvailableCopies()
         
-        self.assertEqual(expected,actual)
+        self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+
+        #Rollback
+        returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
+        returnButton.click()
+
+        self.browser.get_alert().accept()
+        alert = self.browser.get_alert()
+        if alert != None:
+            alert.accept()
 
     def testReturnBook(self):
         self.visitBooksUrl()
@@ -56,9 +69,9 @@ class TestUpdateBook(unittest.TestCase):
         book.click()
 
         
-        expected = self.getAvailableCopies() + 1
+        expectedAvailableCopies = self.getAvailableCopies() + 1
 
-        # User clicks Borrow button
+        # User clicks Return button
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
         
         borrowButton.click()
@@ -67,10 +80,102 @@ class TestUpdateBook(unittest.TestCase):
         if alert != None:
             alert.accept()
 
-        actual = self.getAvailableCopies()
+        actualAvailableCopies = self.getAvailableCopies()
         
-        self.assertEqual(expected,actual)
+        self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+
+        #Rollback
+        borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
+        borrowButton.click()
+
+        self.browser.get_alert().accept()
+        alert = self.browser.get_alert()
+        if alert != None:
+            alert.accept()
+
+    
+    def testCannotBorrowBook(self):
+        self.visitBooksUrl()
+        
+        #User clicks the Introduction to Algorithm"
+        book = self.browser.find_by_xpath('//td[text()=\"Introduction to Algorithms\"]').first
+        book.click()
+
+
+        expectedStatus = 'Not Available'
+        expectedAvailableCopies = 0
+
+        n = self.getAvailableCopies()
+        
+        #User clicks Borrow button n times (to make the availabe copies 0)
+        borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
+        
+        for i in range(n):
+            borrowButton.click()
+            self.browser.get_alert().accept()
+            alert = self.browser.get_alert()
+            if alert != None:
+                alert.accept()
+
+        actualStatus = self.getStatus()
+        actualAvailableCopies = self.getAvailableCopies()
+
+        self.assertEqual(expectedStatus,actualStatus)
+        self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+        assert self.browser.is_element_present_by_xpath('//button[text()=\"Borrow\" and @disabled]')
+
+        
+        #Rollback
+        returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
+        for i in range(n):
+            returnButton.click()
+            self.browser.get_alert().accept()
+            alert = self.browser.get_alert()
+            if alert != None:
+                alert.accept()
+
+
+    def testCannotReturnBook(self):
+        self.visitBooksUrl()
+        
+        #User clicks the Introduction to Algorithm"
+        book = self.browser.find_by_xpath('//td[text()=\"Introduction to Algorithms\"]').first
+        book.click()
+
+
+        expectedStatus = 'Available'
+        expectedAvailableCopies = 20
+
+        n = self.getNumberOfCopies()
+        x = self.getAvailableCopies()
+        
+        #User clicks return button n times (to make the availabe copies 20)
+        returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
+        
+        for i in range(n-x):
+            returnButton.click()
+            self.browser.get_alert().accept()
+            alert = self.browser.get_alert()
+            if alert != None:
+                alert.accept()
+
+        actualStatus = self.getStatus()
+        actualAvailableCopies = self.getAvailableCopies()
+
+        self.assertEqual(expectedStatus,actualStatus)
+        self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+        assert self.browser.is_element_present_by_xpath('//button[text()=\"Return\" and @disabled]')
+
+        
+        #Rollback
+        borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
+        for i in range(n-x):
+            borrowButton.click()
+            self.browser.get_alert().accept()
+            alert = self.browser.get_alert()
+            if alert != None:
+                alert.accept()
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestUpdateBook))
-unittest.TextTestRunner(verbosity=2).run(suite)        
+unittest.TextTestRunner(verbosity=2).run(suite)       
