@@ -50,5 +50,10 @@ function clearModal() {
 }
 
 function searchBook(){
-	var searchKeyword = $("#keyword").val();
+	var keyword = $("#keyword").val();
+	
+	if(/\S/.test(keyword)){
+		searchBookByTitle(keyword);
+	}else
+		alert("please enter keyword");
 }

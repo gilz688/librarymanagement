@@ -16,7 +16,7 @@ def searchByAuthor():
 		raise Exception('Book written by that author is unavailable.')
 
 def searchBookByTitle():
-	book_title = request.args[0]
+	book_title = request.vars.keyword
 
 	book_list = getBooks(book_title)
 
