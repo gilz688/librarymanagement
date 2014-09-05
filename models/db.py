@@ -55,10 +55,7 @@ db.define_table('borrower',
 
 db.define_table('borrow_book',
                 Field('ISBN', db.book.ISBN),
-                Field('librarian_id', db.librarian.librarian_id),
-                Field('borrwer_id', db.borrower.borrower_id),
-                Field('startdate', 'date'),
-                Field('duedate', 'date'),
+                Field('borrow_date', 'date'),
                 Field('return_date', 'date'))
 
 '''
