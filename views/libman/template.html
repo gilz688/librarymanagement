@@ -62,9 +62,18 @@
         </div>
       </div>
     </div>
+    <div>
+        <form class="form-inline" role="form">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon">@</div>
+              <input class="form-control" type="email" placeholder="Enter email">
+            </div>
+          </div>
+        </form>
+    </div>
 	{{import os}}
   <script type="text/javascript">var local_site = 'http://{{=request.env.http_host + "/" + request.application}}/'</script>
-
   <script src="{{=URL('static','js/jquery-2.1.1.min.js')}}"></script>
   <script src="{{=URL('static','js/bootstrap.min.js')}}"></script>
   <script src="{{=URL('static','js/libman/0libman-event-binder.js')}}"></script>
@@ -73,5 +82,6 @@
   <script src="{{=URL('static','js/libman/getBookAuthors.js')}}"></script>
   <script src="{{=URL('static','js/libman/borrowBook.js')}}"></script>
   <script src="{{=URL('static','js/libman/returnBook.js')}}"></script>
+  <script src="{{=URL('static','js/libman/searchBookByTitle.js')}}"></script>
   </body>
 </html>

@@ -10,6 +10,8 @@ $(document).ready(function(){
 	
 	/*binds the clearModal function when the user closes the modal*/
 	$("#bookInfo").on('hidden.bs.modal', clearModal);
+
+	$("#search").click(searchBook);
 });
 
 
@@ -38,11 +40,20 @@ function clearModal() {
 	$("#publisher").html("");
 	$("#author").html("");
 	$("#library").html("");
-	$("#numcopies").html("");
+	$("#numcopies").html("");searchBookByAuthor()
 	$("#status").html("");
 	$("#availcopies").html("");
 	$("#description").html("");
 	$("#book_pic").attr("src", "#");
 	$("button#return-button").prop("disabled", true);
 	$("button#borrow-button").prop("disabled", true);
+}
+
+function searchBook(){
+	var keyword = $("#keyword").val();
+	
+	if(/\S/.test(keyword)){
+		searchBookByTitle(keyword);
+	}else
+		alert("please enter keyword");
 }

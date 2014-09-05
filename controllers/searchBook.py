@@ -1,6 +1,7 @@
 
 __author__ = 'librarymanagementteam'
 
+
 def searchByAuthor():
 	author = request.vars.author
 	try:
@@ -14,8 +15,20 @@ def searchByAuthor():
 	except:
 		raise Exception('Book written by that author is unavailable.')
 
-def searchByTitle():
-	pass
+def searchBookByTitle():
+	book_title = request.vars.keyword
+
+	book_list = getBooks(book_title)
+
+	if (len(book_list) == 0):
+		raise Exception('No book found for keyword ' +'"'+book_title+'"')
+
+	return response.json(book_list)
+
+def getBooks(book_title):
+	book_list = db(db.book).select()
+	book_list = book_list.find(lambda eachRow: book_title in eachRow.title)
+	return book_list
 
 def searchByISBN():
 	isbn = request.args
