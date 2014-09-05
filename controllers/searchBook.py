@@ -26,7 +26,7 @@ def searchBookByTitle():
 	return response.json(book_list)
 
 def getBooks(book_title):
-	book_list = db(db.book).select()
+	book_list = db(db.book).select(orderby=db.book.title)
 	book_list = book_list.find(lambda eachRow: book_title in eachRow.title)
 	return book_list
 

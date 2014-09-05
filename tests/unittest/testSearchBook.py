@@ -63,7 +63,7 @@ class TestSearchBook(unittest.TestCase):
 			self.assertEquals(result, expected)
 		except Exception as e:
 			self.assertEquals(0, 1)
-
+	
 	def testSearchISBNWithNoMatch(self):
 		try:
 			request.args = ['0-07-013151-3']
