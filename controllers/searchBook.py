@@ -32,7 +32,7 @@ def getBooks(book_title):
 
 def searchByISBN():
 	isbn = request.args
-	result = db().select(db.book.ALL)
+	result = db().select(db.book.ALL, orderby=db.book.ISBN)
 
 	bookData = filterResultByISBN(result, isbn[0])
 
