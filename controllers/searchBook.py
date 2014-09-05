@@ -19,22 +19,22 @@ def searchByTitle():
 
 def searchByISBN():
 	isbn = request.args
-	if len(isbn[0]) == 13:
-		bookData = searchWithCompleteISBN(isbn[0])
-	else:
-		bookData = searchWithIncompleteISBN(isbn[0])
+	result = db().select(db.book.ALL)
+
+	bookData = filterResultByISBN(result, isbn[0])
 
 	if len(bookData) == 0:
 		raise Exception("No Book Found")
-	return response.json(bookData)
-
+	else:
+		return response.json(bookData)
+	
 """HELPER FUNCTIONS DOWN"""
 
-
-def searchWithCompleteISBN(isbn):
-	result = db(db.book.ISBN==isbn).select()
-	return result
-
-def searchWithIncompleteISBN(isbn):
-	result = db().select(db.book.ALL, having=isbn)
+def filterResultByISBN(unfilteredList, isbn):
+	result = []
+	for item in unfilteredList:
+		if isbn in item.ISBN:
+			result.append(item)
+		else:
+			continue
 	return result

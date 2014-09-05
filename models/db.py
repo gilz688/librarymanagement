@@ -38,6 +38,8 @@ db.define_table('book',
                 Field('no_of_copies', 'integer'),
                 Field('available_copies', 'integer'),
                 Field('description', 'text'),
+                #Field('borrow_count', 'integer'),
+                #Field('return_count', 'integer'),
                 primarykey=['ISBN'])
 
 db.define_table('author',
