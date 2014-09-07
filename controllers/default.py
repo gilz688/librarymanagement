@@ -63,7 +63,7 @@ def data():
     return dict(form=crud())
 
 def index():
-	response.view="libman/template.html"
+	response.view="libman/books.html"
 	return dict()
 
 def librarian():
