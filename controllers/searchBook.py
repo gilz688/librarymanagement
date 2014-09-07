@@ -3,17 +3,22 @@ __author__ = 'librarymanagementteam'
 
 
 def searchByAuthor():
-	author = request.vars.author
-	try:
+	authorLName = request.vars.author
+	booksByAuthor = getAuthor(authorLName)
+	if (len(booksByAuthor) == 0):
+		raise Exception('Book with author containing '+'"'+authorLName+'"'+' is unavailable.')
+	else:
+		return response.json(booksByAuthor)
 		
-		bookData = {"Title": book['title'],
-					"Author":book['author'],
-					"ISBN":book['isbn'],
-					"Description":book['description']
-					}
-		return response.json(bookData)
-	except:
-		raise Exception('Book written by that author is unavailable.')
+
+def getAuthor(book_author):
+	authors = db(db.author).select(orderby=db.author.lname)
+	authors = authors.find(lambda eachRow: book_author in eachRow.lname)
+	for auths in authors:
+		{}
+	booksByAuthor = db(db.book.ISBN == auths.ISBN).select(orderby=db.book.ISBN)
+	return booksByAuthor
+
 
 def searchBookByTitle():
 	book_title = request.vars.keyword
