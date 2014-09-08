@@ -63,7 +63,7 @@ db.define_table('borrow_book',
 
 #populate database
 #dummy values
-'''
+
 #library
 db.library.insert(**{'lib_name': 'COE-Library', 'address': 'MSU-IIT SCS'})
 db.library.insert(**{'lib_name': 'SET-Library', 'address': 'MSU-IIT SET'})
@@ -86,7 +86,7 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Th
                     ])
 
 db.commit()
-'''
+
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
 response.generic_patterns = ['*'] if request.is_local else []
