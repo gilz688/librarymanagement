@@ -14,9 +14,15 @@ def searchByAuthor():
 def getAuthor(book_author):
 	authors = db(db.author).select(orderby=db.author.lname)
 	authors = authors.find(lambda eachRow: book_author in eachRow.lname)
-	for auths in authors:
-		{}
-	booksByAuthor = db(db.book.ISBN == auths.ISBN).select(orderby=db.book.ISBN)
+	books = db(db.book).select(orderby=db.book.ISBN)
+	booksByAuthor = []
+	for i in books:
+		for auths in authors:
+			if (auths.ISBN == i.ISBN):
+				booksByAuthor.append(i)
+			else:
+				continue
+	#booksByAuthor = db(db.book.ISBN == auths.ISBN).select(orderby=db.book.ISBN)
 	return booksByAuthor
 
 
