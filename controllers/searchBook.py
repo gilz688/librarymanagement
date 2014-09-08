@@ -25,11 +25,6 @@ def searchBookByTitle():
 
 	return response.json(book_list)
 
-def getBooks(book_title):
-	book_list = db(db.book).select(orderby=db.book.title)
-	book_list = book_list.find(lambda eachRow: book_title in eachRow.title)
-	return book_list
-
 def searchByISBN():
 	isbn = request.args
 	result = db().select(db.book.ALL, orderby=db.book.ISBN)
@@ -51,3 +46,8 @@ def filterResultByISBN(unfilteredList, isbn):
 		else:
 			continue
 	return result
+
+def getBooks(book_title):
+	book_list = db(db.book).select(orderby=db.book.title)
+	book_list = book_list.find(lambda eachRow: book_title in eachRow.title)
+	return book_list
