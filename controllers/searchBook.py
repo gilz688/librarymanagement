@@ -37,10 +37,10 @@ def searchBookByTitle():
 	return response.json(book_list)
 
 def searchByISBN():
-	isbn = request.args
+	isbn = request.args[0]
 	result = db().select(db.book.ALL, orderby=db.book.ISBN)
 
-	bookData = filterResultByISBN(result, isbn[0])
+	bookData = filterResultByISBN(result, isbn)
 
 	if len(bookData) == 0:
 		raise Exception("No Book Found")

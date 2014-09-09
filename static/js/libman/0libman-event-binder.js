@@ -11,7 +11,7 @@ $(document).ready(function(){
 	/*binds the clearModal function when the user closes the modal*/
 	$("#bookInfo").on('hidden.bs.modal', clearModal);
 
-	$("#search").click(searchBook);
+	$("#search_book").keypress(searchBook);
 });
 
 
@@ -50,10 +50,12 @@ function clearModal() {
 }
 
 function searchBook(){
-	var keyword = $("#keyword").val();
 	
+	var keyword = $("#keyword").val();
+	//
 	if(/\S/.test(keyword)){
 		searchBookByTitle(keyword);
 	}else
 		alert("please enter keyword");
+	
 }
