@@ -13,7 +13,7 @@
 
 
 db = DAL('postgres://postgres:1234asdf@127.0.0.1:5432/libman', pool_size=1, check_reserved=['all'],
-         migrate= True, fake_migrate = True)  # postgres://username:password@localhost/db_name
+         migrate= True, fake_migrate=True)  # postgres://username:password@localhost/db_name
 
 db.define_table('library',
                 Field('lib_name', length=20, unique=True, ondelete='CASCADE'),
@@ -60,10 +60,9 @@ db.define_table('borrow_book',
                 Field('borrow_date', 'date'),
                 Field('return_date', 'date'))
 
-
 #populate database
 #dummy values
-
+'''
 #library
 db.library.insert(**{'lib_name': 'COE-Library', 'address': 'MSU-IIT SCS'})
 db.library.insert(**{'lib_name': 'SET-Library', 'address': 'MSU-IIT SET'})
@@ -86,7 +85,7 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Th
                     ])
 
 db.commit()
-
+'''
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
 response.generic_patterns = ['*'] if request.is_local else []
