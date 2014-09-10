@@ -26,9 +26,3 @@ def getSpecificBookInfo():
     ISBN = request.vars.isbn
     bookInfo = db(db.book.ISBN == ISBN).select(db.book.ALL).first()
     return response.json(bookInfo)
-
-#def getSpecificBook():
-#	ISBN=request.args(0,cast=int, otherwise=URL('viewBooks'))
-#	book_details=db(db.book.ISBN==ISBN).select().first()
-	#authors=db(db.author.ISBN==ISBN).select(orderby=db.author.last_name)
-#	return response.json(book_details)
