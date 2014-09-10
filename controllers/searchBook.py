@@ -59,6 +59,5 @@ def filterResultByISBN(unfilteredList, isbn):
 	return result
 
 def getBooks(book_title):
-	book_list = db(db.book).select(orderby=db.book.title)
-	book_list = book_list.find(lambda eachRow: book_title in eachRow.title)
+	book_list = db(db.book.title.like('%'+book_title+'%')).select(orderby=db.book.title)
 	return book_list
