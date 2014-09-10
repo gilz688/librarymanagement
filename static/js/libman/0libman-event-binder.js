@@ -12,6 +12,12 @@ $(document).ready(function(){
 	$("#bookInfo").on('hidden.bs.modal', clearModal);
 
 	$("#search_book").keypress(searchBook);
+
+	$( "#home" ).click(function() {
+		$("#header").html("<h1>Welcome to COE-Library</h1>");
+		$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th></tr></tbody>");
+  		getBooks("COE-Library");
+  	});
 });
 
 
@@ -47,19 +53,4 @@ function clearModal() {
 	$("#book_pic").attr("src", "#");
 	$("button#return-button").prop("disabled", true);
 	$("button#borrow-button").prop("disabled", true);
-}
-
-function searchBook(e){
-	e.which
-	var key = e.which;
- 	if(key == 13)  // the enter key code
-  	{
-    	var keyword = $("#search_book").val();
-		searchBookByTitle(keyword);
-		searchBookByISBN(keyword);
-		$("#header").html("<h1>Search results for '" + keyword + "'</h1>");
-		$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th></tr></tbody>");
-		$("#search_book").val("");
-		return false;
-  	}
 }
