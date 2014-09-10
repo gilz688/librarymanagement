@@ -35,7 +35,7 @@ class TestViewBook(unittest.TestCase):
 		request.args=['COE-Library']
 		resp = getBooks()
 		db.commit()
-		self.assertEquals('[{"ISBN": "0-07-013151-2", "title": "Data Structures in C++"}, {"ISBN": "0-07-013151-1", "title": "Introduction To Algorithm"}]', resp.encode('ascii','ignore'))
+		self.assertEquals('[{"ISBN": "0-07-013151-2", "title": "Data Structures Using C++"}, {"ISBN": "0-07-013151-1", "title": "Introduction to Algorithms"}]', resp.encode('ascii','ignore'))
 
 
 	def testGetSpecificBookInfo_availableBooks(self):
