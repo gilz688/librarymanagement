@@ -38,25 +38,16 @@ def searchBookByTitle():
 
 def searchByISBN():
 	isbn = request.args[0]
-	result = db().select(db.book.ALL, orderby=db.book.ISBN)
+	result = db(db.book.ISBN.like('%' + isbn + '%')).select(orderby=db.book.ISBN)
 
-	bookData = filterResultByISBN(result, isbn)
+	#bookData = filterResultByISBN(result, isbn)
 
-	if len(bookData) == 0:
+	if len(result) == 0:
 		raise Exception("No Book Found")
 	else:
-		return response.json(bookData)
+		return response.json(result)
 	
 """HELPER FUNCTIONS DOWN"""
-
-def filterResultByISBN(unfilteredList, isbn):
-	result = []
-	for item in unfilteredList:
-		if isbn in item.ISBN:
-			result.append(item)
-		else:
-			continue
-	return result
 
 def getBooks(book_title):
 	book_list = db(db.book.title.like('%'+book_title+'%')).select(orderby=db.book.title)
