@@ -1,7 +1,7 @@
 $(document).ready(function(){
-	
+
 	getBooks("COE-Library");
-	
+
 	/*binds the 'borrowBookJS' function when the user clicks the 'Borrow' button*/
 	$("button#borrow-button").click(borrowBookJS);
 
@@ -40,7 +40,7 @@ function clearModal() {
 	$("#publisher").html("");
 	$("#author").html("");
 	$("#library").html("");
-	$("#numcopies").html("");searchBookByAuthor()
+	$("#numcopies").html("");
 	$("#status").html("");
 	$("#availcopies").html("");
 	$("#description").html("");
@@ -49,13 +49,17 @@ function clearModal() {
 	$("button#borrow-button").prop("disabled", true);
 }
 
-function searchBook(){
-	
-	var keyword = $("#keyword").val();
-	//
-	if(/\S/.test(keyword)){
+function searchBook(e){
+	e.which
+	var key = e.which;
+ 	if(key == 13)  // the enter key code
+  	{
+    	var keyword = $("#search_book").val();
 		searchBookByTitle(keyword);
-	}else
-		alert("please enter keyword");
-	
+		searchBookByISBN(keyword);
+		$("#header").html("<h1>Search results for '" + keyword + "'</h1>");
+		$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th></tr></tbody>");
+		$("#search_book").val("");
+		return false;
+  	}
 }

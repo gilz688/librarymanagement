@@ -6,15 +6,16 @@ function searchBookByTitle(book_title){
 			"keyword" : book_title,
 		},
 		dataType: "json",
-		success: function(book_list_result){
-			var book_list = "";
-			for(var book in book_list_result){
-				book_list += book_list_result[book].title;
+		success: function(books){
+			var output= "";
+			for(var i in books)
+			{
+				output+="<tr><td onClick='getSpecificBookInfo(\"" +books[i].ISBN+ "\");getBookAuthors(\"" +books[i].ISBN+ "\");'>"+ books[i].title+  "</td></tr>";
 			}
-			alert(book_list);
+			$("table#data-container").append(output);
 		},
 		error: function(e){
-			alert(e);
+			
 		}
 	});
 }
