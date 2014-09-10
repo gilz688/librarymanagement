@@ -1,6 +1,6 @@
 function searchBookByISBN(isbn){
 	$.ajax({
-		url: local_site+ "searchBook/searchBookByISBN/" + isbn,
+		url: local_site+ "searchBook/searchByISBN/" + isbn,
 		dataType: "json",
 		success: function(books){
 			var output= "";
