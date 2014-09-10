@@ -15,7 +15,7 @@ function searchBookByTitle(book_title){
 			$("table#data-container").append(output);
 		},
 		error: function(e){
-			alert(e);
+			
 		}
 	});
 }

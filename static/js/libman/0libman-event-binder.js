@@ -40,7 +40,7 @@ function clearModal() {
 	$("#publisher").html("");
 	$("#author").html("");
 	$("#library").html("");
-	$("#numcopies").html("");searchBookByAuthor()
+	$("#numcopies").html("");
 	$("#status").html("");
 	$("#availcopies").html("");
 	$("#description").html("");
@@ -57,5 +57,9 @@ function searchBook(e){
     	var keyword = $("#search_book").val();
 		searchBookByTitle(keyword);
 		searchBookByISBN(keyword);
+		$("#header").html("<h1>Search results for '" + keyword + "'</h1>");
+		$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th></tr></tbody>");
+		$("#search_book").val("");
+		return false;
   	}
 }
