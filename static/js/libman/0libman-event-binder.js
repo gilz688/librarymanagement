@@ -11,15 +11,14 @@ $(document).ready(function(){
 	/*binds the clearModal function when the user closes the modal*/
 	$("#bookInfo").on('hidden.bs.modal', clearModal);
 
-	$("#search_book").keypress(searchBook);
+	$("#search_book").keypress(checkKey);
 
-	$( "#home" ).click(function() {
-		$("#header").html("<h1>Welcome to COE-Library</h1>");
-		$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th></tr></tbody>");
-  		getBooks("COE-Library");
-  	});
+	$("#search").click(searchBook);
+
+	$( "#home" ).click(function(){
+		viewHome("COE-Library");
+	});
 });
-
 
 
 function borrowBookJS() {
@@ -53,4 +52,20 @@ function clearModal() {
 	$("#book_pic").attr("src", "#");
 	$("button#return-button").prop("disabled", true);
 	$("button#borrow-button").prop("disabled", true);
+}
+
+function checkKey(e){
+	e.which
+	var key = e.which;
+ 	if(key == 13)  // the enter key code
+  	{
+    	searchBook();
+    	return false;
+  	}
+}
+
+function viewHome(libraryName){
+	$("#header").html("<h1>Welcome to "+libraryName+"</h1>");
+	$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th></tr></tbody>");
+	getBooks(libraryName);
 }

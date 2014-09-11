@@ -1,7 +1,7 @@
 function searchBookByAuthor(author){
 	$.ajax({
 		type: "post",
-		url: local_site+ "searchBook/searchBookByAuthor/",
+		url: local_site+ "searchBook/searchByAuthor/",
 		data: {
 			"author" : author,
 		},

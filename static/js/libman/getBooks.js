@@ -11,6 +11,7 @@ function getBooks(libraryName){
 			{
 				output+="<tr><td onClick='getSpecificBookInfo(\"" +books[i].ISBN+ "\");getBookAuthors(\"" +books[i].ISBN+ "\");'>"+ books[i].title+  "</td></tr>";
 			}
+			$("#library-name").html(libraryName);
 			$("table#data-container").append(output);
 		},
 	});
