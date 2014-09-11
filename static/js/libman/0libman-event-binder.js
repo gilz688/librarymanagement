@@ -18,6 +18,12 @@ $(document).ready(function(){
 	$( "#home" ).click(function(){
 		viewHome("COE-Library");
 	});
+
+	$(".mode-menu").click(function(){
+		var mode = $(this).html();
+		$("#selected").val(mode);
+		$("#searchMode").html(mode);
+	});
 });
 
 
