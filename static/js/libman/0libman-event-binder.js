@@ -66,6 +66,6 @@ function checkKey(e){
 
 function viewHome(libraryName){
 	$("#header").html("<h1>Welcome to "+libraryName+"</h1>");
-	$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th></tr></tbody>");
+	$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th><th style=\"text-align:center\">ISBN</th></tr></tbody>");
 	getBooks(libraryName);
 }
