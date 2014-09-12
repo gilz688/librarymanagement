@@ -20,7 +20,7 @@ $(document).ready(function(){
 	});
 
 	$(".mode-menu").click(function(){
-		var mode = $(this).html();
+		var mode = $(this).children().first().html();
 		$("#selected").val(mode);
 		$("#searchMode").html(mode);
 	});
