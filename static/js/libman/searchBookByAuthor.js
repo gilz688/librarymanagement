@@ -16,7 +16,9 @@ function searchBookByAuthor(author){
 			$("table#data-container").append(output);
 		},
 		error: function(e){
-			
+			if(results == 0){
+				displayErrorMessage("Not found!");
+			}
 		}
 	});
 }
