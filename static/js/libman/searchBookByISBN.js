@@ -11,9 +11,9 @@ function searchBookByISBN(isbn){
 			}
 			$("table#data-container").append(output);
 		},
-		error: function(e){
+		error: function(e, status, error){
 			if(results == 0){
-				displayErrorMessage("Not found!");
+				displayErrorMessage("No Book Found");
 			}
 		}
 	});
