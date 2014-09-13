@@ -18,7 +18,13 @@ class TestSearchBook(unittest.TestCase):
 		self.browser.visit(url)
 	
 	def testWithBlankQuery(self):
-		pass
+		self.visitBooksUrl()
+
+		searchButton = self.browser.find_by_id('search')
+		searchButton.click()
+		
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present("Please don't leave blank.")
 
 	def testSuccessSearch(self):
 		pass
