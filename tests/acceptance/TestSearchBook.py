@@ -16,13 +16,13 @@ class TestSearchBook(unittest.TestCase):
 	def visitBooksUrl(self):
 		url = "http://127.0.0.1:8000/librarymanagement/default/" 
 		self.browser.visit(url)
-
+	
 	def testWithBlankQuery(self):
 		pass
 
 	def testSuccessSearch(self):
 		pass
-
+	
 	def testISBNSearchWithCompleteKeys(self):
 		self.visitBooksUrl()
 
@@ -79,7 +79,73 @@ class TestSearchBook(unittest.TestCase):
 		assert self.browser.is_text_present('Error!')
 		assert self.browser.is_text_present('No Book Found')
 	
+	def testAuthorSearchCompleteLName(self):
+		self.visitBooksUrl()
 
+		dropDown = self.browser.find_by_tag('ul')
+		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
+		form = self.browser.find_by_tag('form').first
+		searchForm = form.find_by_tag('input').first
+		searchButton = self.browser.find_by_id('search')
+
+		dropDown.click()
+		authorMode.click()
+		searchForm.fill('Malik')
+		searchButton.click()
+
+		assert self.browser.is_text_present('0-07-013151-2')
+		assert self.browser.is_text_present('Data Structures Using C++')
+
+	def testAuthorSearchIncompleteLName(self):
+		self.visitBooksUrl()
+
+		dropDown = self.browser.find_by_tag('ul')
+		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
+		form = self.browser.find_by_tag('form').first
+		searchForm = form.find_by_tag('input').first
+		searchButton = self.browser.find_by_id('search')
+
+		dropDown.click()
+		authorMode.click()
+		searchForm.fill('cor')
+		searchButton.click()
+		assert self.browser.is_text_present('0-07-013151-1')
+		assert self.browser.is_text_present('Introduction to Algorithms')
+
+	def testAuthorSearchIncompleteLName2Results(self):
+		self.visitBooksUrl()
+
+		dropDown = self.browser.find_by_tag('ul')
+		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
+		form = self.browser.find_by_tag('form').first
+		searchForm = form.find_by_tag('input').first
+		searchButton = self.browser.find_by_id('search')
+
+		dropDown.click()
+		authorMode.click()
+		searchForm.fill('i')
+		searchButton.click()
+		assert self.browser.is_text_present('0-07-013151-1')
+		assert self.browser.is_text_present('Introduction to Algorithms')
+		assert self.browser.is_text_present('0-07-013151-2')
+		assert self.browser.is_text_present('Data Structures Using C++')
+
+	def testAuthorNotInDatabase(self):
+		self.visitBooksUrl()
+
+		dropDown = self.browser.find_by_tag('ul')
+		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
+		form = self.browser.find_by_tag('form').first
+		searchForm = form.find_by_tag('input').first
+		searchButton = self.browser.find_by_id('search')
+
+		dropDown.click()
+		authorMode.click()
+		searchForm.fill('Gwapo')
+		searchButton.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Not found!')
 
 
 suite = unittest.TestSuite()
