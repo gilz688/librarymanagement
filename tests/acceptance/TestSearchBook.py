@@ -17,13 +17,16 @@ class TestSearchBook(unittest.TestCase):
 	def visitBooksUrl(self):
 		url = "http://127.0.0.1:8000/librarymanagement/default/" 
 		self.browser.visit(url)
-	"""
+	
 	def testWithBlankQuery(self):
-		pass
+		self.visitBooksUrl()
+		searchButton = self.browser.find_by_id('search')
 
-	def testSuccessSearch(self):
-		pass
-	"""
+		searchButton.click()
+		
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present("Please don't leave blank.")
+
 	"""
 		start of ISBN searches acceptance tests
 	"""
@@ -174,7 +177,6 @@ class TestSearchBook(unittest.TestCase):
 		assert self.browser.is_text_present('Not found!')
 	
 	# end of search by AUTHOR acceptance tests
-	
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestSearchBook))
