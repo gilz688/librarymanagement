@@ -2,6 +2,7 @@ import os
 import time
 import unittest
 from splinter import Browser
+from selenium import webdriver
 
 class TestSearchBook(unittest.TestCase):
 	
@@ -26,6 +27,63 @@ class TestSearchBook(unittest.TestCase):
 		
 		assert self.browser.is_text_present('Error!')
 		assert self.browser.is_text_present("Please don't leave blank.")
+
+	"""
+		start of Title searches acceptance tests
+	"""
+
+	def testTitleSearchWithCompleteKeys(self):
+		self.visitBooksUrl()
+
+		dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
+		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Title\"]').first
+		form = self.browser.find_by_tag('form').first
+		searchForm = form.find_by_tag('input').first
+		searchButton = self.browser.find_by_id('search')
+
+		dropDown.click()
+		authorMode.click()
+		searchForm.fill('Introduction To Algorithms')
+		searchButton.click()
+		assert self.browser.is_text_present('0-07-013151-1')
+		assert self.browser.is_text_present('Introduction to Algorithms')
+
+
+	def testTitleSearchWithIncompleteKeys(self):
+		self.visitBooksUrl()
+
+		dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
+		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Title\"]').first
+		form = self.browser.find_by_tag('form').first
+		searchForm = form.find_by_tag('input').first
+		searchButton = self.browser.find_by_id('search')
+
+		dropDown.click()
+		authorMode.click()
+		searchForm.fill('tr')
+		searchButton.click()
+		assert self.browser.is_text_present('0-07-013151-1')
+		assert self.browser.is_text_present('Introduction to Algorithms')
+		assert self.browser.is_text_present('0-07-013151-2')
+		assert self.browser.is_text_present('Data Structures Using C++')
+	
+	def testTitleSearchWithKeysNotInDatabase(self):
+		self.visitBooksUrl()
+
+		dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
+		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Title\"]').first
+		form = self.browser.find_by_tag('form').first
+		searchForm = form.find_by_tag('input').first
+		searchButton = self.browser.find_by_id('search')
+
+		dropDown.click()
+		authorMode.click()
+		searchForm.fill('Fundamentals of Computing')
+		searchButton.click()
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Not found!')
+
+	#end of Title search acceptance tests
 
 	"""
 		start of ISBN searches acceptance tests
