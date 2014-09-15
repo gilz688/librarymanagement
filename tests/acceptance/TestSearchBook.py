@@ -169,7 +169,7 @@ class TestSearchBook(unittest.TestCase):
 	def testAuthorSearchCompleteLName(self):
 		self.visitBooksUrl()
 
-		dropDown = self.browser.find_by_tag('ul')
+		dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
@@ -186,7 +186,7 @@ class TestSearchBook(unittest.TestCase):
 	def testAuthorSearchIncompleteLName(self):
 		self.visitBooksUrl()
 
-		dropDown = self.browser.find_by_tag('ul')
+		dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
@@ -202,7 +202,7 @@ class TestSearchBook(unittest.TestCase):
 	def testAuthorSearchIncompleteLName2Results(self):
 		self.visitBooksUrl()
 
-		dropDown = self.browser.find_by_tag('ul')
+		dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
@@ -220,7 +220,7 @@ class TestSearchBook(unittest.TestCase):
 	def testAuthorNotInDatabase(self):
 		self.visitBooksUrl()
 
-		dropDown = self.browser.find_by_tag('ul')
+		dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
