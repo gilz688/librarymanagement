@@ -7,3 +7,9 @@ def login():
 
 def isLoggedIn():
 	pass
+
+def validate():
+	pass
+
+def logout():
+	pass
