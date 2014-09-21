@@ -24,6 +24,8 @@ $(document).ready(function(){
 		$("#selected").val(mode);
 		$("#searchMode").html(mode);
 	});
+
+	$( "#session" ).click(signInOrSignOut);
 });
 
 
@@ -74,4 +76,15 @@ function viewHome(libraryName){
 	$("#header").html("<h1>Welcome to "+libraryName+"</h1>");
 	$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th><th style=\"text-align:center\">ISBN</th></tr></tbody>");
 	getBooks(libraryName);
+}
+
+function signInOrSignOut(){
+	var session = $( "#session a" ).html();
+
+	//if value == Log In then show Log In modal, else Log Out
+	if(session == "Log In"){
+		$( "#session a" ).html("Log Out");
+	}else{
+		signOutUser();
+	}
 }
