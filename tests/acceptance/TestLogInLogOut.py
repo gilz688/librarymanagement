@@ -22,10 +22,16 @@ class TestLogInLogOut(unittest.TestCase):
 	def testLogOut(self):
 		self.visitBooksUrl()
 
-		self.browser.find_by_css('#session').click()
+		session_value = self.browser.evaluate_script('$("#session a").html()')
+		
+		if(session_value == "Log In"):
+			self.browser.find_by_css('#session').click()
+			time.sleep
+			self.browser.find_by_css('#session').click()
+		else:
+			self.browser.find_by_css('#session').click()
 
-       	self.assertTrue(self.browser.is_text_present('Log In'))
-
+		assert 'Log In' == self.browser.evaluate_script('$("#session a").html()')
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestLogInLogOut))
