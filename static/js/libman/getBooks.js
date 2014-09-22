@@ -6,13 +6,17 @@ function getBooks(libraryName){
 		},
 		dataType: "json",
 		success: function(books){
-			var output= "";
-			for(var i in books)
-			{
-				output+="<tr onClick='getSpecificBookInfo(\"" +books[i].ISBN+ "\");getBookAuthors(\"" +books[i].ISBN+ "\");'><td>"+ books[i].title+  "</td><td>" +books[i].ISBN+ "</td></tr>";
-			}
 			$("#library-name").html(libraryName);
-			$("table#data-container").append(output);
+			displayBooks(books);
+			
 		},
 	});
+}
+
+function displayBooks(books){
+	var output= "";
+	for(var i in books){
+		output+="<tr><td><a href=\"#\" onClick='getSpecificBookInfo(\"" +books[i].ISBN+ "\");getBookAuthors(\"" +books[i].ISBN+ "\");'>"+ books[i].title+  "</a></td><td>" +books[i].ISBN+ "</td></tr>";
+	}
+	$("table#data-container").append(output);
 }
