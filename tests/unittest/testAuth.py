@@ -11,31 +11,34 @@ class TestAuth(unittest.TestCase):
 	def setUp(self):
 		request = Request("")
 
-	def testValidate:
+	def testValidate(self):
 		pass
 
-	def testValidateWithWrongCredentials:
+	def testValidateWithWrongCredentials(self):
 		pass
 
-	def testLogin:
+	def testLogin(self):
+		request.post_vars['username'] = 'librarian1'
+		request.post_vars['password'] = 'password1'
+		
+		self.assertEquals(1, 1)
+
+	def testLoginWithWrongUsername(self):
 		pass
 
-	def testLoginWithWrongUsername:
+	def testLoginWithWrongPassword(self):
 		pass
 
-	def testLoginWithWrongPassword:
+	def testIsLoggedIn(self):
 		pass
 
-	def testIsLoggedIn:
+	def testIsLoggedInWithUserNotLoggedIn(self):
 		pass
 
-	def testIsLoggedInWithUserNotLoggedIn:
+	def testLogout(self):
 		pass
 
-	def testLogout:
-		pass
-
-	def testLogoutWithUserNotLoggedIn:
+	def testLogoutWithUserNotLoggedIn(self):
 		pass
 
 suite = unittest.TestSuite()
