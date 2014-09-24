@@ -19,9 +19,7 @@ function borrowBook(ISBN){
 				$("button#borrow-button").prop("disabled", true);
 				$("button#return-button").prop("disabled", false);
 			}
-
-			/*Temporary notification*/	
-			alert(book.message);
+			displaySuccessMessage(book.message);
 		}
 
 	});

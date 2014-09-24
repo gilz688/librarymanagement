@@ -2,49 +2,33 @@ $(document).ready(function(){
 
 	getBooks("COE-Library");
 
-	/*binds the 'borrowBookJS' function when the user clicks the 'Borrow' button*/
 	$("button#borrow-button").click(borrowBookJS);
-
-	/*binds the 'returnBookJS' function when the user clicks the 'Return' button*/
 	$("button#return-button").click(returnBookJS);
-	
-	/*binds the clearModal function when the user closes the modal*/
 	$("#bookInfo").on('hidden.bs.modal', clearModal);
-
 	$("#search_book").keypress(checkKey);
-
 	$("#search").click(searchBook);
-
 	$( "#home" ).click(function(){
 		viewHome("COE-Library");
 	});
-
 	$(".mode-menu").click(function(){
 		var mode = $(this).children().first().html();
 		$("#selected").val(mode);
 		$("#searchMode").html(mode);
 	});
-
 	$( "#session" ).click(signInOrSignOut);
 });
 
 
 function borrowBookJS() {
-    if(confirm("Are you sure you want to borrow a copy of this book?")) {
-        borrowBook($("span#isbn").html());
-    }
-    else {
-        return false;
-    }
+    showConfirm("Borrow Book", "Are you sure you want to borrow a copy of this book?", function(){
+    	borrowBook($("span#isbn").html());
+    });
 }
 
 function returnBookJS() {
-    if(confirm("Are you sure you want to return a copy of this book?")) {
-        returnBook($("span#isbn").html());
-    }
-    else {
-        return false;
-    }
+	showConfirm("Return Book", "Are you sure you want to return a copy of this book?", function(){
+		returnBook($("span#isbn").html());
+	});
 }
 
 function clearModal() {
