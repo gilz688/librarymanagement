@@ -3,18 +3,25 @@ __author__ = 'librarymanagementteam'
 
 
 def login():
-	username = request.post_vars['username']
-	password = request.post_vars['password']
+	username = 'librarian1' #request.post_vars['username']
+	password = 'password1' #request.post_vars['password']
 
-	list = []
-	list.append(username)
-	list.append(password)
+	librarian = validate(username, password)
 
-	return response.json(list)
+	if len(librarian) == 0:
+		raise Exception("Wrong username or password")
+
+	session.username = username
+	session.status = 'logged in'
+	return response.json(librarian)
 
 def isLoggedIn():
-	pass
+	if (session.username is not None) and (session.status is not None):
+		return True
+	else:
+		return False
 
+#gil, gamit atong verify na method sa password :D
 def validate():
 	pass
 

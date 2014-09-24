@@ -54,10 +54,16 @@ class TestAuth(unittest.TestCase):
 
 
 	def testIsLoggedIn(self):
-		pass
+		request.post_vars['username'] = 'librarian1'
+		request.post_vars['password'] = 'password1'
+
+		login()
+		self.assertTrue(isLoggedIn())
+
 
 	def testIsLoggedInWithUserNotLoggedIn(self):
-		pass
+		logout()
+		self.assertFalse(isLoggedIn())
 
 	def testLogout(self):
 		pass
