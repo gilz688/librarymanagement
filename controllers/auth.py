@@ -1,6 +1,6 @@
-
 __author__ = 'librarymanagementteam'
 
+from passlib.hash import pbkdf2_sha256
 
 def login():
 	username = 'librarian1' #request.post_vars['username']
@@ -21,9 +21,23 @@ def isLoggedIn():
 	else:
 		return False
 
-#gil, gamit atong verify na method sa password :D
-def validate():
-	pass
+def validate(username,password):
+	try:
+		librarian=db(db.librarian.username==username).select(db.librarian.password).first()
+		if(pbkdf2_sha256.verify(password, librarian.password)):
+			return True
+		else:
+			return False
+	except Exception as e:
+		return False
 
 def logout():
-	pass
+	session.username = None
+	session.status = None
+
+def getLibrarian():
+	if(isLoggedIn()):
+		librarian=db(db.librarian.username==session.username).select(db.librarian.ALL).first()
+		return librarian
+	else:
+		return None

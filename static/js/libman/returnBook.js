@@ -21,9 +21,7 @@ function returnBook(ISBN){
 				$("#status").html("Not Available");
 				$("button#borrow-button").prop("disabled", true);
 			}
-
-			/*Temporary notification*/	
-			alert(bookData.message);
+			displaySuccessMessage(bookData.message);
 		}
 	});
 }
