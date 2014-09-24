@@ -23,7 +23,7 @@ def isLoggedIn():
 
 def validate(username,password):
 	try:
-		librarian=db(db.librarian.username==session.username).select(db.librarian.password).first()
+		librarian=db(db.librarian.username==username).select(db.librarian.password).first()
 		if(pbkdf2_sha256.verify(password, librarian.password)):
 			return True
 		else:
