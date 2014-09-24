@@ -40,26 +40,24 @@ class TestUpdateBook(unittest.TestCase):
 
         # User clicks Borrow button
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
-        
         borrowButton.click()
 
-        self.browser.get_alert().accept()
-        alert = self.browser.get_alert()
-        if alert != None:
-            alert.accept()
+        confirmButton = self.browser.find_by_xpath('//button[text()=\"OK\"]').first
+        confirmButton.click()
+        
 
         actualAvailableCopies = self.getAvailableCopies()
         
         self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+        assert self.browser.is_text_present('Success!')
+        assert self.browser.is_text_present('Book Borrowed')
 
         #Rollback
         returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
         returnButton.click()
 
-        self.browser.get_alert().accept()
-        alert = self.browser.get_alert()
-        if alert != None:
-            alert.accept()
+        confirmButton = self.browser.find_by_xpath('//button[text()=\"OK\"]').first
+        confirmButton.click()
 
     def testReturnBook(self):
         self.visitBooksUrl()
@@ -73,25 +71,23 @@ class TestUpdateBook(unittest.TestCase):
 
         # User clicks Return button
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
-        
         borrowButton.click()
-        self.browser.get_alert().accept()
-        alert = self.browser.get_alert()
-        if alert != None:
-            alert.accept()
+
+        confirmButton = self.browser.find_by_xpath('//button[text()=\"OK\"]').first
+        confirmButton.click()
 
         actualAvailableCopies = self.getAvailableCopies()
         
         self.assertEqual(expectedAvailableCopies,actualAvailableCopies)
+        assert self.browser.is_text_present('Success!')
+        assert self.browser.is_text_present('Book Returned')
 
         #Rollback
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
         borrowButton.click()
 
-        self.browser.get_alert().accept()
-        alert = self.browser.get_alert()
-        if alert != None:
-            alert.accept()
+        confirmButton = self.browser.find_by_xpath('//button[text()=\"OK\"]').first
+        confirmButton.click()
 
     
     def testCannotBorrowBook(self):
@@ -109,13 +105,11 @@ class TestUpdateBook(unittest.TestCase):
         
         #User clicks Borrow button n times (to make the availabe copies 0)
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
+        confirmButton = self.browser.find_by_xpath('//button[text()=\"OK\"]').first
         
         for i in range(n):
             borrowButton.click()
-            self.browser.get_alert().accept()
-            alert = self.browser.get_alert()
-            if alert != None:
-                alert.accept()
+            confirmButton.click()
 
         actualStatus = self.getStatus()
         actualAvailableCopies = self.getAvailableCopies()
@@ -129,10 +123,7 @@ class TestUpdateBook(unittest.TestCase):
         returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
         for i in range(n):
             returnButton.click()
-            self.browser.get_alert().accept()
-            alert = self.browser.get_alert()
-            if alert != None:
-                alert.accept()
+            confirmButton.click()
 
 
     def testCannotReturnBook(self):
@@ -151,13 +142,11 @@ class TestUpdateBook(unittest.TestCase):
         
         #User clicks return button n times (to make the availabe copies 20)
         returnButton = self.browser.find_by_xpath('//button[text()=\"Return\"]').first
+        confirmButton = self.browser.find_by_xpath('//button[text()=\"OK\"]').first
         
         for i in range(n-x):
             returnButton.click()
-            self.browser.get_alert().accept()
-            alert = self.browser.get_alert()
-            if alert != None:
-                alert.accept()
+            confirmButton.click()
 
         actualStatus = self.getStatus()
         actualAvailableCopies = self.getAvailableCopies()
@@ -171,10 +160,7 @@ class TestUpdateBook(unittest.TestCase):
         borrowButton = self.browser.find_by_xpath('//button[text()=\"Borrow\"]').first
         for i in range(n-x):
             borrowButton.click()
-            self.browser.get_alert().accept()
-            alert = self.browser.get_alert()
-            if alert != None:
-                alert.accept()
+            confirmButton.click()
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestUpdateBook))
