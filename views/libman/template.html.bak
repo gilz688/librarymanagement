@@ -53,6 +53,7 @@
         </div>
       </div>
     </div>
+
   {{import os}}
   <script src={{=os.path.join(request.folder, "static/js/jquery-2.1.1.min.js")}}></script>
   <script src="../static/js/bootstrap.min.js"></script>

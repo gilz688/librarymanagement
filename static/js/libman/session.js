@@ -3,7 +3,7 @@ function signInUser(){
 }
 
 function signOutUser(){
-	$( "#session a" ).html("Log In");
+	$( "#session a" ).html("Log In"); // after mka log out i.change ang UI to Log In
 }
 
 

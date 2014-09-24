@@ -83,7 +83,7 @@ function signInOrSignOut(){
 
 	//if value == Log In then show Log In modal, else Log Out
 	if(session == "Log In"){
-		$( "#session a" ).html("Log Out");
+		$("#logIn").modal('show');
 	}else{
 		signOutUser();
 	}
