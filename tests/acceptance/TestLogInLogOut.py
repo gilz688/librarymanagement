@@ -19,6 +19,18 @@ class TestLogInLogOut(unittest.TestCase):
 		url = "http://127.0.0.1:8000/librarymanagement/default/" 
 		self.browser.visit(url)
 
+	def testCorrectCredentials:
+		pass
+
+	def testIncorrectCredentials:
+		pass
+
+	def testBlankUsername:
+		pass
+
+	def testBlankPassword:
+		pass
+
 	def testLogOut(self):
 		self.visitBooksUrl()
 
