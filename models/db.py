@@ -24,7 +24,7 @@ db.define_table('librarian',
                 Field('librarian_id', unique=True, ondelete='CASCADE'),
                 Field('lib_name', db.library.lib_name),
                 Field('username', length=10),
-                Field('password', 'password', length=64),
+                Field('password', 'password', length=88),
                 Field('lname', length=15),
                 Field('fname', length=15),
                 primarykey=['librarian_id'],
@@ -85,7 +85,7 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Th
                         {'ISBN': '0-07-013151-2', 'lname': 'Malik', 'fname': 'D.', 'middle_initial': 'S'}
                     ])
 
-db.librarian.insert(**{'librarian_id': '1999-0001', 'username': 'librarian1', 'password': 'password1', 'lname': 'Wiggins', 'fname': 'Adrew'})
+db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$BwCgdM75X6u19p4TAiDkXA$JKHzME6MeIzbUP270RhyIle8L83Q7VNgIMMj3QGxQE', 'lname': 'Wiggins', 'fname': 'Adrew'})
 
 db.commit()
 '''
