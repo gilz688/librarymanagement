@@ -23,7 +23,7 @@ class TestAuth(unittest.TestCase):
 			request.post_vars['password'] = 'password1'
 
 			result = login()
-			expected = {'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$BwCgdM75X6u19p4TAiDkXA$JKHzME6MeIzbUP270RhyIle8L83Q7VNgIMMj3QGxQE', 'lname': 'Wiggins', 'fname': 'Adrew'}
+			expected = {'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo', 'lname': 'Wiggins', 'fname': 'Adrew'}
 			self.assertEquals(result, expected)
 			#self.assertEquals(1, 1)
 		except Exception as e:
