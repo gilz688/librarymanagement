@@ -85,7 +85,7 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Th
                         {'ISBN': '0-07-013151-2', 'lname': 'Malik', 'fname': 'D.', 'middle_initial': 'S'}
                     ])
 
-db.librarian.insert(**{'librarian_id': '1999-0001', 'username': 'als123', 'password': '123'})
+db.librarian.insert(**{'librarian_id': '1999-0001', 'username': 'librarian1', 'password': 'password1', 'lname': 'Wiggins', 'fname': 'Adrew'})
 
 db.commit()
 '''

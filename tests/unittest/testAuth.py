@@ -18,10 +18,16 @@ class TestAuth(unittest.TestCase):
 		pass
 
 	def testLogin(self):
-		request.post_vars['username'] = 'librarian1'
-		request.post_vars['password'] = 'password1'
-		
-		self.assertEquals(1, 1)
+		try:
+			request.post_vars['username'] = 'librarian1'
+			request.post_vars['password'] = 'password1'
+
+			result = login()
+			expected = {'librarian_id': '1999-0001', 'username': 'librarian1', 'password': 'password1', 'lname': 'Wiggins', 'fname': 'Adrew'}
+			self.assertEquals(result, expected)
+			#self.assertEquals(1, 1)
+		except Exception as e:
+			self.fail()
 
 	def testLoginWithWrongUsername(self):
 		pass
