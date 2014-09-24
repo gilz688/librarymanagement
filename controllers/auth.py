@@ -24,12 +24,11 @@ def isLoggedIn():
 def validate(username,password):
 	try:
 		librarian=db(db.librarian.username==session.username).select(db.librarian.password).first()
+		if(pbkdf2_sha256.verify(password, librarian.password)):
+			return True
+		else:
+			return False
 	except Exception as e:
-		return False
-
-	if(pbkdf2_sha256.verify(password, librarian.password)):
-		return True
-	else:
 		return False
 
 def logout():
