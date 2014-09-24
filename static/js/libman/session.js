@@ -1,8 +1,8 @@
-function signInUser(){
+function logInUser(){
 
 }
 
-function signOutUser(){
+function logOutUser(){
 	$( "#session a" ).html("Log In"); // after mka log out i.change ang UI to Log In
 }
 

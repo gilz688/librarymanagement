@@ -29,7 +29,7 @@ class TestLogInLogOut(unittest.TestCase):
 			time.sleep(1)
 			self.browser.find_by_css("#username").fill("username 1234")
 			self.browser.find_by_css("#password").fill("password")
-			self.browser.find_by_css("#signIn").click()
+			self.browser.find_by_css("#logIn").click()
 			time.sleep(2)
 			self.browser.find_by_css('#session').click()
 		else:
