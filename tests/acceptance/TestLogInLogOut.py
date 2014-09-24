@@ -27,8 +27,8 @@ class TestLogInLogOut(unittest.TestCase):
 		if(session_value == "Log In"):
 			self.browser.find_by_css('#session').click()
 			time.sleep(1)
-			self.browser.find_by_css("#username").fill("username 1234")
-			self.browser.find_by_css("#password").fill("password")
+			self.browser.find_by_css("#username").fill("librarian1")
+			self.browser.find_by_css("#password").fill("password1")
 			self.browser.find_by_css("#logIn").click()
 			time.sleep(2)
 			self.browser.find_by_css('#session').click()
