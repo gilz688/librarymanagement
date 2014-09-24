@@ -17,7 +17,7 @@ class TestViewBook(unittest.TestCase):
         self.browser.visit(url) 
 
         # User clicks the "Introduction to Algorithm"
-        book = self.browser.find_by_xpath('//td[text()=\"Introduction to Algorithms\"]').first
+        book = self.browser.find_by_xpath('//a[text()=\"Introduction to Algorithms\"]').first
         book.click()
 
         # View is checked if data expected is displayed

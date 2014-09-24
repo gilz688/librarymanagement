@@ -13,7 +13,7 @@
 
 
 db = DAL('postgres://postgres:1234asdf@127.0.0.1:5432/libman', pool_size=1, check_reserved=['all'],
-         migrate= True, fake_migrate=True)  # postgres://username:password@localhost/db_name
+         migrate= True)  # postgres://username:password@localhost/db_name
 
 db.define_table('library',
                 Field('lib_name', length=20, unique=True, ondelete='CASCADE'),
@@ -24,10 +24,11 @@ db.define_table('librarian',
                 Field('librarian_id', unique=True, ondelete='CASCADE'),
                 Field('lib_name', db.library.lib_name),
                 Field('username', length=10),
-                Field('password', 'password', length=20),
+                Field('password', 'password', length=88),
                 Field('lname', length=15),
                 Field('fname', length=15),
-                primarykey=['librarian_id'])
+                primarykey=['librarian_id'],
+                redefine=True)
 
 db.define_table('book',
                 Field('ISBN', length=20, unique=True, ondelete='CASCADE'),
@@ -84,8 +85,11 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Th
                         {'ISBN': '0-07-013151-2', 'lname': 'Malik', 'fname': 'D.', 'middle_initial': 'S'}
                     ])
 
+db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$BwCgdM75X6u19p4TAiDkXA$JKHzME6MeIzbUP270RhyIle8L83Q7VNgIMMj3QGxQE', 'lname': 'Wiggins', 'fname': 'Adrew'})
+
 db.commit()
 '''
+
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
 response.generic_patterns = ['*'] if request.is_local else []
@@ -109,7 +113,7 @@ auth = Auth(db)
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
 ## create all tables needed by auth if not custom tables
-auth.define_tables(username=False, signature=False)
+auth.define_tables(username=True, signature=False)
 
 ## configure email
 mail = auth.settings.mailer

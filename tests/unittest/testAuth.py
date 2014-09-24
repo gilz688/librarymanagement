@@ -11,31 +11,64 @@ class TestAuth(unittest.TestCase):
 	def setUp(self):
 		request = Request("")
 
-	def testValidate:
+	def testValidate(self):
 		pass
 
-	def testValidateWithWrongCredentials:
+	def testValidateWithWrongCredentials(self):
 		pass
 
-	def testLogin:
+	def testLogin(self):
+		try:
+			request.post_vars['username'] = 'librarian1'
+			request.post_vars['password'] = 'password1'
+
+			result = login()
+			expected = {'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$BwCgdM75X6u19p4TAiDkXA$JKHzME6MeIzbUP270RhyIle8L83Q7VNgIMMj3QGxQE', 'lname': 'Wiggins', 'fname': 'Adrew'}
+			self.assertEquals(result, expected)
+			#self.assertEquals(1, 1)
+		except Exception as e:
+			self.fail()
+
+	def testLoginWithWrongUsername(self):
+		try:
+			request.post_vars['username'] = 'wrong_username'
+			request.post_vars['password'] = 'password1'
+
+			result = login()
+			self.fail()
+		except Exception as e:
+			expected = 'Wrong username or password'
+			self.assertEquals(expected, e.args[0])
+
+
+	def testLoginWithWrongPassword(self):
+		try:
+			request.post_vars['username'] = 'librarian1'
+			request.post_vars['password'] = 'wrong_password'
+
+			result = login()
+			self.fail()
+		except Exception as e:
+			expected = 'Wrong username or password'
+			self.assertEquals(expected, e.args[0])
+
+
+	def testIsLoggedIn(self):
+		request.post_vars['username'] = 'librarian1'
+		request.post_vars['password'] = 'password1'
+
+		login()
+		self.assertTrue(isLoggedIn())
+
+
+	def testIsLoggedInWithUserNotLoggedIn(self):
+		logout()
+		self.assertFalse(isLoggedIn())
+
+	def testLogout(self):
 		pass
 
-	def testLoginWithWrongUsername:
-		pass
-
-	def testLoginWithWrongPassword:
-		pass
-
-	def testIsLoggedIn:
-		pass
-
-	def testIsLoggedInWithUserNotLoggedIn:
-		pass
-
-	def testLogout:
-		pass
-
-	def testLogoutWithUserNotLoggedIn:
+	def testLogoutWithUserNotLoggedIn(self):
 		pass
 
 suite = unittest.TestSuite()
