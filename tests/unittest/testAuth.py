@@ -93,7 +93,7 @@ class TestAuth(unittest.TestCase):
 		request.post_vars['password'] = 'password1'
 		login()
 		result = getLibrarian()
-		expected = <Row {'username': 'librarian1', 'librarian_id': '1999-0001', 'lname': 'Wiggins', 'fname': 'Adrew', 'lib_name': 'COE-Library', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo'}>
+		expected = {'username': 'librarian1', 'librarian_id': '1999-0001', 'lname': 'Wiggins', 'fname': 'Adrew', 'lib_name': 'COE-Library', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo'}
 		self.assertEquals(result, expected)
 	
 	def testGetLibrarianWithNoUserLoggedIn(self):

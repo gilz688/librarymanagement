@@ -40,7 +40,7 @@ def validate(username,password):
 
 def getLibrarian():
 	if(isLoggedIn()):
-		librarian=db(db.librarian.username==session.username).select(db.librarian.ALL).first()
-		return librarian
+		librarian=db(db.librarian.username==session.username).select().first()
+		return dict(librarian)
 	else:
 		return None
