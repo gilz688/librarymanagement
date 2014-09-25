@@ -4,6 +4,7 @@ import unittest
 import json
 
 from gluon.globals import Request
+from gluon.dal import Rows
 
 execfile("applications/librarymanagement/controllers/auth.py", globals())
 
@@ -29,11 +30,10 @@ class TestAuth(unittest.TestCase):
 			request.post_vars['password'] = 'password1'
 
 			result = login()
-			expected = {'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo', 'lname': 'Wiggins', 'fname': 'Adrew'}
+			expected = '{"username": "librarian1", "librarian_id": "1999-0001", "lname": "Wiggins", "fname": "Adrew", "lib_name": "COE-Library", "password": "$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo"}'
 			self.assertEquals(result, expected)
-			#self.assertEquals(1, 1)
 		except Exception as e:
-			self.fail()
+			self.assertEquals(0,1)
 
 	def testLoginWithWrongUsername(self):
 		try:
@@ -87,15 +87,15 @@ class TestAuth(unittest.TestCase):
 
 		logout()
 		self.assertFalse(isLoggedIn())
-
+	
 	def testGetLibrarian(self):
 		request.post_vars['username'] = 'librarian1'
 		request.post_vars['password'] = 'password1'
 		login()
 		result = getLibrarian()
-		expected = {'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$BwCgdM75X6u19p4TAiDkXA$JKHzME6MeIzbUP270RhyIle8L83Q7VNgIMMj3QGxQE', 'lname': 'Wiggins', 'fname': 'Adrew'}
+		expected = <Row {'username': 'librarian1', 'librarian_id': '1999-0001', 'lname': 'Wiggins', 'fname': 'Adrew', 'lib_name': 'COE-Library', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo'}>
 		self.assertEquals(result, expected)
-
+	
 	def testGetLibrarianWithNoUserLoggedIn(self):
 		logout()
 		result = getLibrarian()

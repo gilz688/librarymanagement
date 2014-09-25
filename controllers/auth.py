@@ -3,17 +3,24 @@ __author__ = 'librarymanagementteam'
 from passlib.hash import pbkdf2_sha256
 
 def login():
-	username = 'librarian1' #request.post_vars['username']
-	password = 'password1' #request.post_vars['password']
+	username = request.post_vars['username']
+	password = request.post_vars['password']
 
-	librarian = validate(username, password)
-
-	if len(librarian) == 0:
+	if validate(username, password):
+		session.username = username
+		session.status = 'logged in'
+		librarian = getLibrarian()
+		return response.json(librarian)
+	else:
 		raise Exception("Wrong username or password")
 
-	session.username = username
-	session.status = 'logged in'
-	return response.json(librarian)
+def logout():
+	session.username = None
+	session.status = None
+
+'''
+	Helper Functions
+'''
 
 def isLoggedIn():
 	if (session.username is not None) and (session.status is not None):
@@ -30,10 +37,6 @@ def validate(username,password):
 			return False
 	except Exception as e:
 		return False
-
-def logout():
-	session.username = None
-	session.status = None
 
 def getLibrarian():
 	if(isLoggedIn()):
