@@ -19,6 +19,7 @@ class TestLogInLogOut(unittest.TestCase):
 		self.browser.visit(url)
 
 	def testCorrectCredentials(self):
+		self.visitBooksUrl()
 		self.browser.find_by_css('#session').click()
 		time.sleep(1)
 		self.browser.find_by_css("#username").fill("librarian1")
@@ -32,6 +33,7 @@ class TestLogInLogOut(unittest.TestCase):
 
 
 	def testIncorrectCredentials(self):
+		self.visitBooksUrl()
 		self.browser.find_by_css('#session').click()
 		time.sleep(1)
 		self.browser.find_by_css("#username").fill("librarian1")
