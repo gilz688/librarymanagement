@@ -1,8 +1,20 @@
 function logInUser(){
-
+	$("#logInModal").modal('hide');
+	$( "#session a" ).html("Log Out");
 }
 
 function logOutUser(){
+	$.ajax({
+			type: "post",
+			url: local_site+ "auth/logout",
+			data: {
+				
+			},
+			dataType: "json",
+			success: function(result){
+				
+			},
+		});
 	$( "#session a" ).html("Log In"); // after mka log out i.change ang UI to Log In
 }
 

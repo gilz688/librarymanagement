@@ -16,6 +16,7 @@ $(document).ready(function(){
 		$("#searchMode").html(mode);
 	});
 	$( "#session" ).click(signInOrSignOut);
+	$("#logIn").click(logInUser);
 });
 
 
