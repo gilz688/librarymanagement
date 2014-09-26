@@ -1,4 +1,5 @@
 function logInUser(){
+	//for testing purposes only
 	$("#logInModal").modal('hide');
 	$( "#session a" ).html("Log Out");
 }
@@ -12,10 +13,9 @@ function logOutUser(){
 			},
 			dataType: "json",
 			success: function(result){
-				
+				$( "#session a" ).html("Log In");
 			},
 		});
-	$( "#session a" ).html("Log In"); // after mka log out i.change ang UI to Log In
 }
 
 
@@ -38,11 +38,12 @@ function validate(username,password){
 		//displays error in modal
 		$("#sign-in-error").html("Username and Password field is required.");
 	}
+	
 }
 
 function checIfnotBlank(username,password){
-	var username = username.trim(),
-		password = password.trim();
+	var username = username.trim();
+	var	password = password.trim();
 
 	if((username != "")&&(password != ""))
 		return true;
