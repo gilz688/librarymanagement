@@ -22,7 +22,7 @@ def searchBookByTitle():
 
 def searchByISBN():
 	isbn = request.args[0]
-	result = db(db.book.ISBN.like('%' + isbn + '%')).select(orderby=db.book.ISBN)
+	result = findBookByISBN(isbn)
 
 	#bookData = filterResultByISBN(result, isbn)
 
@@ -34,12 +34,12 @@ def searchByISBN():
 """HELPER FUNCTIONS DOWN"""
 
 def getBooks(book_title):
-	book_list = db(db.book.title.like('%'+book_title+'%')).select(orderby=db.book.title)
+	book_list = findBookByTitle(book_title)
 	return book_list
 
 def getAuthor(book_author):
-	authors = db(db.author.lname.like('%'+book_author+'%')).select(orderby=db.author.lname)
-	books = db(db.book).select(orderby=db.book.ISBN)
+	authors = findBookByAuthor(book_author)
+	books = getBooksOrderedByISBN()
 	booksByAuthor = []
 	for i in books:
 		for auths in authors:

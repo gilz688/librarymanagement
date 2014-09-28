@@ -102,11 +102,23 @@ def getBookByISBN(ISBN):
 def getBookByLibrary(lib_name):
     return db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, orderby=db.book.title)
 
+def getBooksOrderedByISBN():
+    return db(db.book).select(orderby=db.book.ISBN)
+
 def addBookAvailableBookCopies(isbn, available_copies):
     db(db.book.ISBN == isbn).update(available_copies = available_copies + 1)
 
 def reduceAvailableBookCopies(isbn, available_copies):
     db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
+
+def findBookByISBN(isbn):
+    return db(db.book.ISBN.like('%' + isbn + '%')).select(orderby=db.book.ISBN)
+
+def findBookByTitle(book_title):
+    return db(db.book.title.like('%'+book_title+'%')).select(orderby=db.book.title)
+
+def findBookByAuthor(book_author):
+    return db(db.author.lname.like('%'+book_author+'%')).select(orderby=db.author.lname)
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
