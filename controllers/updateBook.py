@@ -2,11 +2,11 @@
 __author__ = 'librarymanagementteam'
 
 def getAvailableCopies(isbn):
-	book_copies = db(db.book.ISBN == isbn).select(db.book.available_copies).first()
+	book_copies = getBookByISBN(isbn)
 	return book_copies.available_copies	
 
 def getNumOfCopies(isbn):
-	book_copies = db(db.book.ISBN == isbn).select(db.book.no_of_copies).first()
+	book_copies = getBookByISBN(isbn)
 	return book_copies.no_of_copies
 
 def canAddCopies(available_copies, num_of_copies):
@@ -21,7 +21,7 @@ def addAvailableCopies(isbn):
 	num_of_copies = getNumOfCopies(isbn)
 
 	if(canAddCopies(available_copies, num_of_copies)):
-		db(db.book.ISBN == isbn).update(available_copies = available_copies + 1)
+		addBookAvailableBookCopies(isbn, available_copies)
 		book = {'available_copies': available_copies + 1,
 			'num_of_copies': num_of_copies}
 		return book
@@ -65,7 +65,7 @@ def removeAvailableCopies(isbn):
 	num_of_copies = getNumOfCopies(isbn)
 
 	if(canRemoveCopies(available_copies, num_of_copies)):
-		db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
+		reduceAvailableBookCopies(isbn, available_copies)
 		book = {'available_copies': available_copies - 1,
 			'num_of_copies': num_of_copies}
 		return book

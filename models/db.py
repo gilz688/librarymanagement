@@ -90,6 +90,24 @@ db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', '
 db.commit()
 '''
 
+def getLibrary(lib_name):
+    return db(db.library.lib_name == lib_name).select()
+
+def getBookAuthor(ISBN):
+    return db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
+
+def getBookByISBN(ISBN):
+    return db(db.book.ISBN == ISBN).select(db.book.ALL).first()
+
+def getBookByLibrary(lib_name):
+    return db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, orderby=db.book.title)
+
+def addBookAvailableBookCopies(isbn, available_copies):
+    db(db.book.ISBN == isbn).update(available_copies = available_copies + 1)
+
+def reduceAvailableBookCopies(isbn, available_copies):
+    db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
+
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
 response.generic_patterns = ['*'] if request.is_local else []
