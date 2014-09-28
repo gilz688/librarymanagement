@@ -90,6 +90,11 @@ db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', '
 db.commit()
 '''
 
+def getLibrarianUsingUsername(username):
+    return db(db.librarian.username==username).select().first()
+def getLibrarianPassword(username):
+    return db(db.librarian.username==username).select(db.librarian.password).first()
+
 def getLibrary(lib_name):
     return db(db.library.lib_name == lib_name).select()
 
