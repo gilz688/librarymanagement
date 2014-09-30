@@ -44,10 +44,26 @@ class TestLogInLogOut(unittest.TestCase):
 		assert 'Log In' == self.browser.find_by_css('#session').value
 
 	def testBlankUsername(self):
-		pass
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#logIn").click()
+		time.sleep(2)
+		assert self.browser.is_text_present('Invalid username and/or password')
+		assert 'Log In' == self.browser.find_by_css('#session').value
 
 	def testBlankPassword(self):
-		pass
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("")
+		self.browser.find_by_css("#logIn").click()
+		time.sleep(2)
+		assert self.browser.is_text_present('Invalid username and/or password')
+		assert 'Log In' == self.browser.find_by_css('#session').value
 
 	def testLogOut(self):
 		self.visitBooksUrl()
