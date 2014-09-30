@@ -1,13 +1,13 @@
 $(document).ready(function(){
 
+	$("#session").click(signInOrSignOut);
+	$("#submitLogIn").click(logInUser);
+	
 	getBooks("COE-Library");
-
-	$("button#borrow-button").click(borrowBookJS);
-	$("button#return-button").click(returnBookJS);
-	$("#bookInfo").on('hidden.bs.modal', clearModal);
+	$("#borrow-button").click(borrowBookJS);
 	$("#search_book").keypress(checkKey);
 	$("#search").click(searchBook);
-	$( "#home" ).click(function(){
+	$("#home").click(function(){
 		viewHome("COE-Library");
 	});
 	$(".mode-menu").click(function(){
@@ -15,8 +15,9 @@ $(document).ready(function(){
 		$("#selected").val(mode);
 		$("#searchMode").html(mode);
 	});
-	$( "#session" ).click(signInOrSignOut);
-	$("#logIn").click(logInUser);
+
+	$("#logInModal").on('hidden.bs.modal', clearLoginModal);
+	$("#bookInfo").on('hidden.bs.modal', clearBookModal);
 });
 
 
@@ -30,21 +31,6 @@ function returnBookJS() {
 	showConfirm("Return Book", "Are you sure you want to return a copy of this book?", function(){
 		returnBook($("span#isbn").html());
 	});
-}
-
-function clearModal() {
-	$("#isbn").html("");
-	$("#myModalLabel").html("");
-	$("#publisher").html("");
-	$("#author").html("");
-	$("#library").html("");
-	$("#numcopies").html("");
-	$("#status").html("");
-	$("#availcopies").html("");
-	$("#description").html("");
-	$("#book_pic").attr("src", "#");
-	$("button#return-button").prop("disabled", true);
-	$("button#borrow-button").prop("disabled", true);
 }
 
 function checkKey(e){
@@ -72,4 +58,26 @@ function signInOrSignOut(){
 	}else{
 		logOutUser();
 	}
+}
+
+
+function clearLoginModal(){
+	$("#username").val("");
+	$("#password").val("");
+	$("#sign-in-error").html("");
+}
+
+function clearBookModal() {
+	$("#isbn").html("");
+	$("#myModalLabel").html("");
+	$("#publisher").html("");
+	$("#author").html("");
+	$("#library").html("");
+	$("#numcopies").html("");
+	$("#status").html("");
+	$("#availcopies").html("");
+	$("#description").html("");
+	$("#book_pic").attr("src", "#");
+	$("button#return-button").prop("disabled", true);
+	$("button#borrow-button").prop("disabled", true);
 }
