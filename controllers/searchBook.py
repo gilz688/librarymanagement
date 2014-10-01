@@ -18,6 +18,7 @@ def searchBookByTitle():
 	if (len(book_list) == 0):
 		raise Exception('No book found for keyword ' +'"'+book_title+'"')
 
+	#filteredBooks = filterResult(book_list)
 	return response.json(book_list)
 
 def searchByISBN():
@@ -48,3 +49,22 @@ def getAuthor(book_author):
 			else:
 				continue
 	return booksByAuthor
+
+'''
+#UNFINISHED FUNCTION(DONT ERASE)
+
+def filterResult(books):
+	filteredBooks = dict()
+	currLibrary = books[0]['lib_name']
+	libraryBooks = []
+	for i in books:
+		if(currLibrary == i.lib_name):
+			libraryBooks.append(i)
+		else:
+			filteredBooks.update({currLibrary : libraryBooks})
+			currLibrary = i['lib_name']
+			libraryBooks = [i]
+	filteredBooks.update({currLibrary : libraryBooks})
+	
+	return dict(filteredBooks)
+'''

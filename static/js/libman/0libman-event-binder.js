@@ -1,14 +1,14 @@
 $(document).ready(function(){
-
+	viewHome();
 	$("#session").click(signInOrSignOut);
 	$("#submitLogIn").click(logInUser);
 	
-	getBooks("COE-Library");
 	$("#borrow-button").click(borrowBookJS);
+	$("#return-button").click(borrowBookJS);
 	$("#search_book").keypress(checkKey);
 	$("#search").click(searchBook);
 	$("#home").click(function(){
-		viewHome("COE-Library");
+		viewHome();
 	});
 	$(".mode-menu").click(function(){
 		var mode = $(this).children().first().html();
@@ -20,6 +20,45 @@ $(document).ready(function(){
 	$("#bookInfo").on('hidden.bs.modal', clearBookModal);
 });
 
+
+function signInOrSignOut(){
+	var session = $( "#session a" ).html();
+
+	//if value == Log In then show Log In modal, else Log Out
+	if(session == "Log In"){
+		$("#logInModal").modal('show');
+	}else{
+		logOutUser();
+	}
+}
+
+
+function viewHome(){
+	$.ajax({
+		type: "post",
+		url: local_site+ "auth/getSession",
+		dataType: "json",
+		success: function(result){
+			if(result != null){
+				viewLibrarianHome(result.lib_name);
+			}
+			else{
+				viewUserHome();
+			}
+		}
+	});
+}
+
+function viewLibrarianHome(libraryName){
+	getBooks(libraryName);
+	$("#session a").html("Log Out");
+}
+
+function viewUserHome(){
+	$("#session a").html("Log In");
+	$("#header").html("<h1>Welcome to LIBMAN</h1><h2>This is a temporary Home Page for not Logged in users.</h2>");
+	$("#data-container").html("");
+}
 
 function borrowBookJS() {
     showConfirm("Borrow Book", "Are you sure you want to borrow a copy of this book?", function(){
@@ -41,23 +80,6 @@ function checkKey(e){
     	searchBook();
     	return false;
   	}
-}
-
-function viewHome(libraryName){
-	$("#header").html("<h1>Welcome to "+libraryName+"</h1>");
-	$("table#data-container").html("<tbody><tr><th style=\"text-align:center\">Book Title</th><th style=\"text-align:center\">ISBN</th></tr></tbody>");
-	getBooks(libraryName);
-}
-
-function signInOrSignOut(){
-	var session = $( "#session a" ).html();
-
-	//if value == Log In then show Log In modal, else Log Out
-	if(session == "Log In"){
-		$("#logInModal").modal('show');
-	}else{
-		logOutUser();
-	}
 }
 
 

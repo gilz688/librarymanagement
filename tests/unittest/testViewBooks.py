@@ -23,7 +23,7 @@ class TestViewBook(unittest.TestCase):
 			self.assertEquals('No library named Unknown-Library', e.args[0])
 
 	def testGetBooks_empty(self):
-		request.args=['SET-Library']
+		request.args=['CED-Library']
 		try:
 			resp = getBooks()
 			db.commit()

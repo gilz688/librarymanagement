@@ -24,7 +24,7 @@ class TestAuth(unittest.TestCase):
 		result = validate(username, password)
 		self.assertFalse(result)
 
-	def testLogin(self):
+	def testLogin1(self):
 		try:
 			request.post_vars['username'] = 'librarian1'
 			request.post_vars['password'] = 'password1'
@@ -85,21 +85,13 @@ class TestAuth(unittest.TestCase):
 		logout()
 		self.assertFalse(isLoggedIn())
 
-		logout()
-		self.assertFalse(isLoggedIn())
-	
+
 	def testGetLibrarian(self):
 		request.post_vars['username'] = 'librarian1'
 		request.post_vars['password'] = 'password1'
 		login()
-		result = getLibrarian()
+		result = getLibrarian('librarian1')
 		expected = {'username': 'librarian1', 'librarian_id': '1999-0001', 'lname': 'Wiggins', 'fname': 'Adrew', 'lib_name': 'COE-Library', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo'}
-		self.assertEquals(result, expected)
-	
-	def testGetLibrarianWithNoUserLoggedIn(self):
-		logout()
-		result = getLibrarian()
-		expected = None
 		self.assertEquals(result, expected)
 
 

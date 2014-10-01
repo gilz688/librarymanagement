@@ -1,18 +1,13 @@
-    {{extend 'libman/template.html'}}
-    <center>
-      <div id="header">
-        <h1>Welcome to <span id="library-name"></span></h1>
-      </div>
-      <div style="min-width:300px;max-width:600px">
-        <table id="data-container" class="table table-bordered">
-          <tr>
-            <th style="text-align:center">Book Title</th>
-            <th style="text-align:center">ISBN</th>
-          </tr>
-          
-        </table>
-      </div>
-    </center>
+{{extend 'libman/template.html'}}
+<center>
+  <div id="header">
+  </div>
+  
+  <div style="min-width:300px;max-width:600px">
+    <div id="data-container">
+    </div>
+  </div>
+</center>
 
 {{ include 'libman/modals/bookInfo.html'}}
 {{ include 'libman/modals/login.html'}}

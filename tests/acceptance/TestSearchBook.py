@@ -155,7 +155,7 @@ class TestSearchBook(unittest.TestCase):
 
 		dropDown.click()
 		category.click()
-		searchForm.fill('0-07-013151-3')
+		searchForm.fill('0-07-013151-20')
 		searchButton.click()
 
 		assert self.browser.is_text_present('Error!')

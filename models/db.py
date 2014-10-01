@@ -67,6 +67,7 @@ db.define_table('borrow_book',
 #library
 db.library.insert(**{'lib_name': 'COE-Library', 'address': 'MSU-IIT SCS'})
 db.library.insert(**{'lib_name': 'SET-Library', 'address': 'MSU-IIT SET'})
+db.library.insert(**{'lib_name': 'CED-Library', 'address': 'MSU-IIT CED'})
 
 #book
 
@@ -80,12 +81,32 @@ db.book.insert(**{'ISBN': '0-07-013151-2', 'lib_name': 'COE-Library','publisher'
 				  'pic': 'book.pic.81914475beb94577.646174612d737472756374757265732d7573696e672d632d642d732d6d616c696b2d70617065726261636b2d636f7665722d6172742e6a7067.jpg',
                   'description': 'This book takes a gentle approach to the data structures course in C++. Providing an early, self-contained review of object-oriented programming and C++, this text gives students a firm grasp of key concepts and allows those experienced in another language to adjust easily. Flexible by design, professors have the option of emphasizing object-oriented programming, covering recursion and sorting early, or accelerating the pace of the course.'})
 
+
+db.book.insert(**{'ISBN': '0-07-013151-3', 'lib_name': 'SET-Library','publisher': 'MIT Press',
+                  'title': 'Introduction to Electricity', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.9dcd44ba64bbba08.303133353034303837362e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-4', 'lib_name': 'SET-Library','publisher': 'MIT Press',
+                  'title': 'Modern Physics for Science and Engineering', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.af6a3137da8c88a0.4d6f6465726e50687973696373436f7665722e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-5', 'lib_name': 'SET-Library','publisher': 'MIT Press',
+                  'title': 'Introduction to Electricity(2nd Edition)', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
 db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Thomas', 'middle_initial': 'H'},
                         {'ISBN': '0-07-013151-1', 'lname': 'Leiserson', 'fname': 'Charles', 'middle_initial': 'E'},
-                        {'ISBN': '0-07-013151-2', 'lname': 'Malik', 'fname': 'D.', 'middle_initial': 'S'}
-                    ])
+                        {'ISBN': '0-07-013151-2', 'lname': 'Malik', 'fname': 'D.', 'middle_initial': 'S'},
+                        {'ISBN': '0-07-013151-3', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-013151-3', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-013151-4', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
+                        {'ISBN': '0-07-013151-5', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'}])
 
-db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$BwCgdM75X6u19p4TAiDkXA$JKHzME6MeIzbUP270RhyIle8L83Q7VNgIMMj3QGxQE', 'lname': 'Wiggins', 'fname': 'Adrew'})
+db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo', 'lname': 'Wiggins', 'fname': 'Adrew'})
+db.librarian.insert(**{'librarian_id': '1999-0002', 'lib_name': 'SET-Library', 'username': 'librarian2', 'password': '$pbkdf2-sha256$20000$c671PkeI8b5Xytm7FyKkdA$jEPtNjoJCOnYGWBUIrpuy5bcrL4/XETiOtKJluu2Uhw', 'lname': 'Wiggins Jr.', 'fname': 'Adrew'})
 
 db.commit()
 '''

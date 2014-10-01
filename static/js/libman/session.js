@@ -9,13 +9,13 @@ function logOutUser(){
 			type: "post",
 			url: local_site+ "auth/logout",
 			success: function(result){
-				$("#session a").html("Log In");
+				viewUserHome();
 			},
 		});
 }
 
 function validate(username,password){
-	if(checIfnotBlank(username,password)){
+	if(checkIfNotBlank(username,password)){
 		$.ajax({
 			type: "post",
 			url: local_site+ "auth/login",
@@ -26,22 +26,22 @@ function validate(username,password){
 			dataType: "json",
 			success: function(result){
 				$("#logInModal").modal('hide');
-				$("#session a").html("Log Out");
+				viewLibrarianHome(result.lib_name);
 			},
 			error: function(jqXHR, textStatus, errorThrown){
 				if(jqXHR.status == 500){
-					$("#sign-in-error").html("Invalid Username or Password.");
+					$("#sign-in-error").html("Invalid username and/or password");
 					$("#password").val("");
 				}
 			}
 		});
 	}
 	else{
-		$("#sign-in-error").html("Username and Password field is required.");
+		$("#sign-in-error").html("Username and Password field is required");
 	}
 }
 
-function checIfnotBlank(username,password){
+function checkIfNotBlank(username,password){
 	var username = username.trim();
 	var	password = password.trim();
 

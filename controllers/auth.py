@@ -7,26 +7,18 @@ def login():
 	password = request.post_vars['password']
 
 	if validate(username, password):
-		session.username = username
-		session.status = 'logged in'
-		librarian = getLibrarian()
+		librarian = getLibrarian(username)
+		createSession(username, librarian['lib_name'])
 		return response.json(librarian)
 	else:
 		raise Exception("Wrong username or password")
 
 def logout():
-	session.username = None
-	session.status = None
+	session.clear()
 
 '''
 	Helper Functions
 '''
-
-def isLoggedIn():
-	if (session.username is not None) and (session.status is not None):
-		return True
-	else:
-		return False
 
 def validate(username,password):
 	try:
@@ -38,9 +30,26 @@ def validate(username,password):
 	except Exception as e:
 		return False
 
-def getLibrarian():
-	if(isLoggedIn()):
-		librarian=getLibrarianUsingUsername(session.username)
-		return dict(librarian)
+def isLoggedIn():
+	if (session.username is not None) and (session.status is not None) and (session.lib_name is not None):
+		return True
 	else:
-		return None
+		return False
+
+def createSession(username, lib_name):
+	session.username = username
+	session.lib_name = lib_name
+	session.status = 'logged in'
+
+def getSession():
+	if(isLoggedIn()):
+		mySession = {'username': session.username,
+			'lib_name': session.lib_name,
+			'status': session.status}
+		return response.json(mySession)
+	else:
+		return response.json(None)
+
+def getLibrarian(username):
+	librarian=getLibrarianUsingUsername(username)
+	return dict(librarian)
