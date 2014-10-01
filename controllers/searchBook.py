@@ -23,7 +23,7 @@ def searchBookByTitle():
 
 def searchByISBN():
 	isbn = request.args[0]
-	result = findBookByISBN(isbn)
+	result = matchBookByISBN(isbn)
 
 	#bookData = filterResultByISBN(result, isbn)
 
@@ -35,11 +35,11 @@ def searchByISBN():
 """HELPER FUNCTIONS DOWN"""
 
 def getBooks(book_title):
-	book_list = findBookByTitle(book_title)
+	book_list = matchBookByTitle(book_title)
 	return book_list
 
 def getAuthor(book_author):
-	authors = findBookByAuthor(book_author)
+	authors = matchBookByAuthor(book_author)
 	books = getBooksOrderedByISBN()
 	booksByAuthor = []
 	for i in books:

@@ -137,13 +137,13 @@ def addBookAvailableBookCopies(isbn, available_copies):
 def reduceAvailableBookCopies(isbn, available_copies):
     db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
 
-def findBookByISBN(isbn):
+def matchBookByISBN(isbn):
     return db(db.book.ISBN.like('%' + isbn + '%')).select(orderby=db.book.ISBN)
 
-def findBookByTitle(book_title):
+def matchBookByTitle(book_title):
     return db(db.book.title.like('%'+book_title+'%')).select(orderby=db.book.title)
 
-def findBookByAuthor(book_author):
+def matchBookByAuthor(book_author):
     return db(db.author.lname.like('%'+book_author+'%')).select(orderby=db.author.lname)
 
 ## by default give a view/generic.extension to all actions from localhost
