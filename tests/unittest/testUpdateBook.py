@@ -139,7 +139,8 @@ class TestUpdateBook(unittest.TestCase):
 		expected = '{"message": "Book Borrowed", "num_of_copies": 11, "available_copies": 9}'
 		result = borrowBook()
 		self.assertEquals(expected, result.encode('ascii', 'ignore'))
-
+		session.status = None
+		session.lib_name = None
 		db.rollback()
 
 	def testBorrowUnavailableBook(self):
@@ -155,6 +156,8 @@ class TestUpdateBook(unittest.TestCase):
 		except Exception as e:
 			self.assertEquals(expected, e.args[0])
 
+		session.status = None
+		session.lib_name = None
 		db.rollback()
 
 suite = unittest.TestSuite()
