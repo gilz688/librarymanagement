@@ -25,7 +25,7 @@ class TestLogInLogOut(unittest.TestCase):
 		self.browser.find_by_css("#username").fill("librarian1")
 		self.browser.find_by_css("#password").fill("password1")
 		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(3)
+		time.sleep(15)
 		assert 'Log Out' == self.browser.find_by_css('#session a').value
 		assert 'Home Library: COE-Library' ==  self.browser.find_by_css('#header').value
 
@@ -52,10 +52,10 @@ class TestLogInLogOut(unittest.TestCase):
 		self.visitBooksUrl()
 		self.browser.find_by_css('#session').click()
 		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#username").fill("librarian2")
 		self.browser.find_by_css("#password").fill("wrongpass")
 		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(2)
+		time.sleep(3)
 		assert self.browser.is_text_present('Invalid username and/or password')
 		assert 'Log In' == self.browser.find_by_css('#session a').value
 
