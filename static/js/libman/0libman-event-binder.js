@@ -4,7 +4,7 @@ $(document).ready(function(){
 	$("#submitLogIn").click(logInUser);
 	
 	$("#borrow-button").click(borrowBookJS);
-	$("#return-button").click(borrowBookJS);
+	$("#return-button").click(returnBookJS);
 	$("#search_book").keypress(checkKey);
 	$("#search").click(searchBook);
 	$("#home").click(function(){
