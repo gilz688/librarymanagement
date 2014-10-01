@@ -43,14 +43,19 @@ def returnBook():
 
 def borrowBook():
 	isbn = request.vars.isbn
+	bookData = getBookByISBN(isbn)
 	try:
-		book = removeAvailableCopies(isbn)
-		bookData = {"message":"Book Borrowed",
-					"available_copies":book['available_copies'],
-					"num_of_copies":book['num_of_copies']
-					}
-		return response.json(bookData)
-	except:
+		if (session.status == 'logged in' and session.lib_name == bookData.lib_name):
+			book = removeAvailableCopies(isbn)
+			bookData = {"message":"Book Borrowed",
+						"available_copies":book['available_copies'],
+						"num_of_copies":book['num_of_copies']
+						}
+			return response.json(bookData)
+	except: 
+			raise Exception("Permission Denied")
+
+	else:
 		raise Exception('Book is currently unavailable.')
 
 def canRemoveCopies(available_copies, num_of_copies):
