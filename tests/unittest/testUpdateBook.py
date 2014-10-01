@@ -77,15 +77,24 @@ class TestUpdateBook(unittest.TestCase):
 		isbn = '0-07-013151-2'
 		request.vars.isbn = isbn
 		
+		session.status = 'logged in'
+		session.lib_name = 'COE-Library'
+
 		expected = '{"message": "Book Returned", "num_of_copies": 11, "available_copies": 11}'
 
 		result = returnBook()
 		
+		session.status = None
+		session.lib_name = None
+
 		self.assertEquals(expected,result.encode('ascii', 'ignore'))
 		db.rollback()
 
 	def testFailedReturnBook(self):
 		isbn = '0-07-013151-1'
+
+		session.status = 'logged in'
+		session.lib_name = 'COE-Library'
 
 		while getAvailableCopies(isbn) < getNumOfCopies(isbn):
 				addAvailableCopies(isbn)
@@ -95,6 +104,8 @@ class TestUpdateBook(unittest.TestCase):
 		try:
 			returnBook()
 		except Exception as e:
+			session.status = None
+			session.lib_name = None
 			self.assertEquals(expected, e.args[0])
 
 		db.rollback()

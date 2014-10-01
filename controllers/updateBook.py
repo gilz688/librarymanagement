@@ -30,16 +30,20 @@ def addAvailableCopies(isbn):
 
 def returnBook():
 	isbn = request.vars.isbn
+	library = getBookByISBN(isbn)
 
-	try:
-		book = addAvailableCopies(isbn)
-		bookData = {"message":"Book Returned",
-					"available_copies":book['available_copies'],
-					"num_of_copies":book['num_of_copies']
-					}
-		return response.json(bookData)
-	except:
-		raise Exception("Cannot return book")
+	if (session.status == 'logged in' and session.lib_name == library.lib_name):
+		try:
+			book = addAvailableCopies(isbn)
+			bookData = {"message":"Book Returned",
+						"available_copies":book['available_copies'],
+						"num_of_copies":book['num_of_copies']
+						}
+			return response.json(bookData)
+		except:
+			raise Exception("Cannot return book")
+	else:
+		raise Exception("Insufficient Privileges")
 
 def borrowBook():
 	isbn = request.vars.isbn
