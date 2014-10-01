@@ -134,7 +134,8 @@ class TestUpdateBook(unittest.TestCase):
 
 	def testBorrowAvailableCopy(self):
 		request.vars.isbn = '0-07-013151-2'
-		
+		session.status = 'logged in'
+		session.lib_name = 'COE-Library'
 		expected = '{"message": "Book Borrowed", "num_of_copies": 11, "available_copies": 9}'
 		result = borrowBook()
 		self.assertEquals(expected, result.encode('ascii', 'ignore'))
@@ -144,6 +145,8 @@ class TestUpdateBook(unittest.TestCase):
 	def testBorrowUnavailableBook(self):
 		request.vars.isbn = '0-07-013151-1'
 		isbn = request.vars.isbn
+		session.status = 'logged in'
+		session.lib_name = 'COE-Library'
 		while getAvailableCopies(isbn) > 0:
 			removeAvailableCopies(isbn)
 		expected = 'Book is currently unavailable.'
