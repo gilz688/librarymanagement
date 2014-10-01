@@ -30,6 +30,33 @@ function getSpecificBookInfo(ISBN){
 				$("#status").html("Not Available");
 				$("button#borrow-button").prop("disabled", true);
 			}
+			checkIfLibrarian(book.lib_name);
 		}
 	});
+}
+
+
+function checkIfLibrarian(libraryName){
+	$.ajax({
+		type: "post",
+		url: local_site+ "auth/getSession",
+		dataType: "json",
+		success: function(result){
+			if(result != null){
+				if(result.lib_name == libraryName){
+					displayBorrowReturnButton();
+				}
+				else
+					$("#borrow-return-button").html("");
+			}
+			else
+				$("#borrow-return-button").html("");
+		}
+	});
+}
+
+function displayBorrowReturnButton(){
+	var buttons = "<button id=\"borrow-button\" onclick='borrowBookJS();' class=\"btn btn-primary\" style=\"margin: 0 5px;\">Borrow</button>";
+	buttons += "<button id=\"return-button\" onclick='returnBookJS();' class=\"btn btn-primary\" style=\"margin: 0 5px;\">Return</button>";
+	$("#borrow-return-button").html(buttons);
 }
