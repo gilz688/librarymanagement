@@ -11,7 +11,7 @@ class TestLogInLogOut(unittest.TestCase):
 
 	@classmethod
 	def tearDownClass(cls):
-		time.sleep(3)
+		time.sleep(2)
 		cls.browser.quit()
 
 	def visitBooksUrl(self):
@@ -25,7 +25,7 @@ class TestLogInLogOut(unittest.TestCase):
 		self.browser.find_by_css("#username").fill("librarian1")
 		self.browser.find_by_css("#password").fill("password1")
 		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(15)
+		time.sleep(5)
 		assert 'Log Out' == self.browser.find_by_css('#session a').value
 		assert 'Home Library: COE-Library' ==  self.browser.find_by_css('#header').value
 

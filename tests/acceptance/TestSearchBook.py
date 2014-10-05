@@ -21,7 +21,7 @@ class TestSearchBook(unittest.TestCase):
 	
 	def testWithBlankQuery(self):
 		self.visitBooksUrl()
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		searchButton.click()
 		
@@ -39,7 +39,7 @@ class TestSearchBook(unittest.TestCase):
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Title\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		authorMode.click()
@@ -56,7 +56,7 @@ class TestSearchBook(unittest.TestCase):
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Title\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		authorMode.click()
@@ -74,7 +74,7 @@ class TestSearchBook(unittest.TestCase):
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Title\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		authorMode.click()
@@ -96,7 +96,7 @@ class TestSearchBook(unittest.TestCase):
 		category = self.browser.find_by_xpath('//li[@class="mode-menu"]')[1]
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		category.click()
@@ -115,7 +115,7 @@ class TestSearchBook(unittest.TestCase):
 		category = self.browser.find_by_xpath('//li[@class="mode-menu"]')[1]
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		category.click()
@@ -134,7 +134,7 @@ class TestSearchBook(unittest.TestCase):
 		category = self.browser.find_by_xpath('//li[@class="mode-menu"]')[1]
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		category.click()
@@ -151,7 +151,7 @@ class TestSearchBook(unittest.TestCase):
 		category = self.browser.find_by_xpath('//li[@class="mode-menu"]')[1]
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		category.click()
@@ -173,7 +173,7 @@ class TestSearchBook(unittest.TestCase):
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		authorMode.click()
@@ -190,7 +190,7 @@ class TestSearchBook(unittest.TestCase):
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		authorMode.click()
@@ -206,7 +206,7 @@ class TestSearchBook(unittest.TestCase):
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		authorMode.click()
@@ -224,7 +224,7 @@ class TestSearchBook(unittest.TestCase):
 		authorMode = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Author\"]').first
 		form = self.browser.find_by_tag('form').first
 		searchForm = form.find_by_tag('input').first
-		searchButton = self.browser.find_by_id('search')
+		searchButton = self.browser.find_by_id('search-button')
 
 		dropDown.click()
 		authorMode.click()

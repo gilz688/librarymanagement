@@ -1,3 +1,9 @@
+function confirmBorrowBook() {
+    showConfirm("Borrow Book", "Are you sure you want to borrow a copy of this book?", function(){
+    	borrowBook($("span#isbn").html());
+    });
+}
+
 function borrowBook(ISBN){
 	$.ajax({
 		type: "post",

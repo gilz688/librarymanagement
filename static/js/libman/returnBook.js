@@ -1,3 +1,9 @@
+function confirmReturnBook() {
+	showConfirm("Return Book", "Are you sure you want to return a copy of this book?", function(){
+		returnBook($("span#isbn").html());
+	});
+}
+
 function returnBook(ISBN){
 	$.ajax({
 		type: "post",

@@ -10,18 +10,22 @@
   <div class="collapse navbar-collapse collapse navbar-responsive-collapse">
     <ul class="nav navbar-nav">
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle" id="selected" value="Title" data-toggle="dropdown"><i>Search By:</i> <b id="searchMode">Title</b><span class="caret"></span></a>
+        <a href="#" id="mode-selected" class="dropdown-toggle" value="Title" data-toggle="dropdown"><i>Search By:</i> <b>Title</b><span class="caret"></span></a>
         <ul class="dropdown-menu" role="menu">
           <li class="mode-menu"><a href="#">Title</a></li>
           <li class="mode-menu"><a href="#">ISBN</a></li>
           <li class="mode-menu"><a href="#">Author</a></li>
         </ul>
       </li>
+      <form class="navbar-form navbar-left">
+        <div class="form-group">
+          <div class="input-group">
+            <input type="text" id="search-input" class="form-control" placeholder="Search Book" autocomplete="off">
+            <span id="search-button" class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+          </div>
+        </div>
+      </form>
     </ul>
-    <form class="navbar-form navbar-left">
-      <input type="text" class="form-control col-lg-8" placeholder="Search" id="search_book">
-      <button type="submit" id="search" class="btn"><span class="glyphicon glyphicon-search"></span></button>
-    </form>
     <ul class="nav navbar-nav navbar-right">
       <li id="session"><a href="#" >Log In</a></li>
     </ul>

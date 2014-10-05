@@ -51,7 +51,6 @@ def getAuthor(book_author):
 	return booksByAuthor
 
 '''
-#UNFINISHED FUNCTION(DONT ERASE)
 
 def filterResult(books):
 	filteredBooks = dict()

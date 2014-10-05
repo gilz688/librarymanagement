@@ -1,4 +1,5 @@
 import os
+import time
 import unittest
 from splinter import Browser           
 
@@ -15,6 +16,12 @@ class TestViewBook(unittest.TestCase):
         # Visit URL 
         url = "http://127.0.0.1:8000/librarymanagement/default/" 
         self.browser.visit(url) 
+
+        #user search for a book
+        self.browser.find_by_css("#search-input").fill("introduction")
+        self.browser.find_by_css("#search-button").click()
+        time.sleep(1)
+
 
         # User clicks the "Introduction to Algorithm"
         book = self.browser.find_by_xpath('//a[text()=\"Introduction to Algorithms\"]').first
