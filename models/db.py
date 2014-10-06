@@ -126,7 +126,7 @@ def getBookByISBN(ISBN):
     return db(db.book.ISBN == ISBN).select(db.book.ALL).first()
 
 def getBookByLibrary(lib_name):
-    return db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, orderby=db.book.title)
+    return db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, db.book.pic, orderby=db.book.title)
 
 def getBooksOrderedByISBN():
     return db(db.book).select(orderby=db.book.ISBN)
