@@ -1,7 +1,7 @@
 var results;
 
 function searchBook(){
-	var keyword = $("#search_book").val();
+	var keyword = $("#search-input").val();
 	keyword = keyword.trim();
 	results = 0;
 	if(keyword==""){
@@ -10,7 +10,7 @@ function searchBook(){
 	else{
 		$("#data-container").html("<b>No book Found.</b>");
 
-		var mode=$("#selected").val();
+		var mode = $("#mode-selected").val();
 		switch(mode){
 			case "Title":
 				searchBookByTitle(keyword);
@@ -26,6 +26,6 @@ function searchBook(){
 		}
 		$("#header").html("<h1>Search results for '" + keyword + "'</h1>");
 	}
-	$("#search_book").val("");
+	$("#search-input").val("");
 	return false;
 }

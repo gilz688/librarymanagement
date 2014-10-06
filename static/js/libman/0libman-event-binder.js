@@ -1,36 +1,20 @@
 $(document).ready(function(){
 	viewHome();
+
+	$("#home").click(viewHome);
+
 	$("#session").click(signInOrSignOut);
 	$("#submitLogIn").click(logInUser);
 	
-	$("#borrow-button").click(borrowBookJS);
-	$("#return-button").click(returnBookJS);
-	$("#search_book").keypress(checkKey);
-	$("#search").click(searchBook);
-	$("#home").click(function(){
-		viewHome();
-	});
-	$(".mode-menu").click(function(){
-		var mode = $(this).children().first().html();
-		$("#selected").val(mode);
-		$("#searchMode").html(mode);
-	});
+	$("#search-input").keypress(checkKey);
+	$("#search-button").click(searchBook);
+
+	$(".mode-menu").click(setSearchMode);
 
 	$("#logInModal").on('hidden.bs.modal', clearLoginModal);
 	$("#bookInfo").on('hidden.bs.modal', clearBookModal);
 });
 
-
-function signInOrSignOut(){
-	var session = $( "#session a" ).html();
-
-	//if value == Log In then show Log In modal, else Log Out
-	if(session == "Log In"){
-		$("#logInModal").modal('show');
-	}else{
-		logOutUser();
-	}
-}
 
 
 function viewHome(){
@@ -60,17 +44,18 @@ function viewUserHome(){
 	$("#data-container").html("");
 }
 
-function borrowBookJS() {
-    showConfirm("Borrow Book", "Are you sure you want to borrow a copy of this book?", function(){
-    	borrowBook($("span#isbn").html());
-    });
+
+function signInOrSignOut(){
+	var session = $( "#session a" ).html();
+
+	if(session == "Log In"){
+		$("#logInModal").modal('show');
+	}
+	else{
+		logOutUser();
+	}
 }
 
-function returnBookJS() {
-	showConfirm("Return Book", "Are you sure you want to return a copy of this book?", function(){
-		returnBook($("span#isbn").html());
-	});
-}
 
 function checkKey(e){
 	e.which
@@ -80,6 +65,12 @@ function checkKey(e){
     	searchBook();
     	return false;
   	}
+}
+
+function setSearchMode(){
+	var mode = $(this).children().first().html();
+	$("#mode-selected").val(mode);
+	$("#mode-selected b").html(mode);
 }
 
 
@@ -100,6 +91,5 @@ function clearBookModal() {
 	$("#availcopies").html("");
 	$("#description").html("");
 	$("#book_pic").attr("src", "#");
-	$("button#return-button").prop("disabled", true);
-	$("button#borrow-button").prop("disabled", true);
+	$("#borrow-return-button").html("");
 }

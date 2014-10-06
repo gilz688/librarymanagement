@@ -18,25 +18,19 @@ function getSpecificBookInfo(ISBN){
 			$("#description").html(book.description);
 			$("#book_pic").attr("src", local_site+ "viewBooks/download/" +book.pic);
 
-			if(book.no_of_copies>book.available_copies)
-				$("button#return-button").prop("disabled", false);
-			else
-				$("button#return-button").prop("disabled", true);
-			if(book.available_copies>0){
+			if(book.available_copies>0)
 				$("#status").html("Available");
-				$("button#borrow-button").prop("disabled", false);
-			}
-			else{
+			else
 				$("#status").html("Not Available");
-				$("button#borrow-button").prop("disabled", true);
-			}
-			checkIfLibrarian(book.lib_name);
+
+			checkIfLibrarian(book.lib_name,book.no_of_copies,book.available_copies);
 		}
 	});
 }
 
 
-function checkIfLibrarian(libraryName){
+
+function checkIfLibrarian(libraryName,numCopies,availCopies){
 	$.ajax({
 		type: "post",
 		url: local_site+ "auth/getSession",
@@ -44,19 +38,30 @@ function checkIfLibrarian(libraryName){
 		success: function(result){
 			if(result != null){
 				if(result.lib_name == libraryName){
-					displayBorrowReturnButton();
+					displayBorrowReturnButton(numCopies,availCopies);
 				}
-				else
-					$("#borrow-return-button").html("");
 			}
-			else
-				$("#borrow-return-button").html("");
 		}
 	});
 }
 
-function displayBorrowReturnButton(){
-	var buttons = "<button id=\"borrow-button\" onclick='borrowBookJS();' class=\"btn btn-primary\" style=\"margin: 0 5px;\">Borrow</button>";
-	buttons += "<button id=\"return-button\" onclick='returnBookJS();' class=\"btn btn-primary\" style=\"margin: 0 5px;\">Return</button>";
+function displayBorrowReturnButton(numOfCopies,availableCopes){
+	var buttons = "<button id=\"borrow-button\" onclick='confirmBorrowBook();' class=\"btn btn-primary\" >Borrow</button>";
+	buttons += "<button id=\"return-button\" onclick='confirmReturnBook();' class=\"btn btn-primary\" >Return</button>";
 	$("#borrow-return-button").html(buttons);
+
+	if(numOfCopies>availableCopes){
+		$("#return-button").prop("disabled", false);
+	}
+	else{
+		$("#return-button").prop("disabled", true);
+	}
+
+	if(availableCopes>0){
+		$("#borrow-button").prop("disabled", false);
+	}
+	else{
+		$("#borrow-button").prop("disabled", true);
+	}
+	
 }

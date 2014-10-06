@@ -1,4 +1,5 @@
-function logInUser(){
+function logInUser(event){
+	event.preventDefault();
 	var username = $("#username").val(),
 		password = $("#password").val();
 	validate(username, password);

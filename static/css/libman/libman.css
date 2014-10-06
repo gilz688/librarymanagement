@@ -1,0 +1,30 @@
+.modal{
+	overflow-y: auto;
+}
+
+#data-container{
+	min-width:300px;
+	max-width:600px
+}
+
+#search-button:hover{
+	cursor:pointer
+}
+
+#mode-selected{
+	min-width: 155px;
+}
+
+#search-input{
+	min-width: 500px;
+}
+
+#borrow-button, #return-button{
+	margin: 0 3px
+}
+
+#loading-indicator {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}

@@ -27,10 +27,20 @@ class TestUpdateBook(unittest.TestCase):
 
     def visitBooksUrl(self):
         url = "http://127.0.0.1:8000/librarymanagement/default/" 
-        self.browser.visit(url) 
+        self.browser.visit(url)
+
+    def login(self):
+        self.visitBooksUrl()
+        self.browser.find_by_css('#session').click()
+        time.sleep(1)
+        self.browser.find_by_css("#username").fill("librarian1")
+        self.browser.find_by_css("#password").fill("password1")
+        self.browser.find_by_css("#submitLogIn").click()
+        time.sleep(3)
 
     def testBorrowBook(self):
-        self.visitBooksUrl()
+        #User logs in
+        self.login()
 
         # User clicks the "Introduction to Algorithm"
         book = self.browser.find_by_xpath('//a[text()=\"Introduction to Algorithms\"]').first
