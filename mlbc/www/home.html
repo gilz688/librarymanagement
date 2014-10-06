@@ -1,0 +1,30 @@
+<ons-navigator var="mainnav">
+    <ons-page>
+        <ons-toolbar>
+            <div class="center">MLBC</div>
+            <div class="right"></div>
+        </ons-toolbar>
+
+        <div class="navigation-bar">
+          <div class="navigation-bar__center">
+            <input type="search" class="search-input" style="width: 96%; margin: 6px auto 6px auto;" placeholder="Search">
+          </div>
+        </div>
+
+        <ons-list style="border-top: none;">
+            <ons-list-item modifier="chevron" class="item" ng-repeat="book in books" ng-click="viewSpecificBookInfo(book.ISBN)" page="settings.html">
+                <ons-row>
+                    <ons-col>
+                        <div class="item-thum">
+                            <img ng-src="{{ baseUrl }}viewBooks/download/{{ book.pic }}" alt="book_cover">
+                        </div>
+                    </ons-col>
+                    <ons-col>
+                        <span class="item-title">{{ book.title }}</span>
+                        <span class="item-isbn"></span>
+                    </ons-col>
+                </ons-row>
+            </ons-list-item>
+        </ons-list>
+    </ons-page>
+</ons-navigator>
