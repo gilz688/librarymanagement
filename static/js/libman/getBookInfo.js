@@ -1,8 +1,8 @@
-function getSpecificBookInfo(ISBN){
+function getBookInfo(ISBN){
 	$("#bookInfo").modal("show");
 	$.ajax({
 		type: "post",
-		url: local_site+ "viewBooks/getSpecificBookInfo",
+		url: local_site+ "viewBooks/getBookInfo",
 		data: {
 			isbn : ISBN
 		},
@@ -13,6 +13,7 @@ function getSpecificBookInfo(ISBN){
 			$("#publisher").html(book.publisher);
 			$("#author").html(book.author);
 			$("#library").html(book.lib_name);
+			$("#location").html(book.library.address);
 			$("#numcopies").html(book.no_of_copies);
             $("#availcopies").html(book.available_copies);
 			$("#description").html(book.description);
@@ -23,12 +24,18 @@ function getSpecificBookInfo(ISBN){
 			else
 				$("#status").html("Not Available");
 
+			var output = "";
+			for(var i in book.authors){
+				output+= book.authors[i].lname+ ", " +book.authors[i].fname+ " " +book.authors[i].middle_initial +".";
+				if((book.authors.length-1)>i)
+					output+="; ";
+			}
+			$("#author").html(output);
+
 			checkIfLibrarian(book.lib_name,book.no_of_copies,book.available_copies);
 		}
 	});
 }
-
-
 
 function checkIfLibrarian(libraryName,numCopies,availCopies){
 	$.ajax({
