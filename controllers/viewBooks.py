@@ -15,20 +15,22 @@ def getBooks():
         raise Exception('No library named ' + lib_name)
     books=getBookByLibrary(lib_name)
     return response.json(books)
-    
-def getBookAuthors():
-    enableCORS()
-    ISBN = request.vars.isbn
-    authors=getBookAuthor(ISBN)
-    if len(authors) == 0:
-        raise Exception('No Book with ISBN ' + ISBN)
-    return response.json(authors)
 
-def getSpecificBookInfo():
+
+def getBookInfo():
     enableCORS()
     ISBN = request.vars.isbn
-    bookInfo = getBookByISBN(ISBN)
-    return response.json(bookInfo)
+    
+    book = getBookByISBN(ISBN)
+    authors = getBookAuthor(ISBN)
+    library = getLibraryByBook(ISBN)
+    
+    if(book):
+        book = dict(book)
+        book['authors'] = authors
+        book['library'] = library
+        
+    return response.json(book)
 
 def enableCORS():
     response.headers['Access-Control-Allow-Origin'] = '*'
