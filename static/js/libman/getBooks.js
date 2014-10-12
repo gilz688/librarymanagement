@@ -18,7 +18,7 @@ function displayBooks(books){
 	output += "<tr><th style=\"text-align:center\">Book Title</th><th style=\"text-align:center\">ISBN</th></tr>";
 	output += "</thead><tbody>"; 
 	for(var i in books){
-		output +="<tr><td><a href=\"#\" onClick='getSpecificBookInfo(\"" +books[i].ISBN+ "\");getBookAuthors(\"" +books[i].ISBN+ "\");'>"+ books[i].title+  "</a></td><td>" +books[i].ISBN+ "</td></tr>";
+		output +="<tr><td><a href=\"#\" onClick='getBookInfo(\"" +books[i].ISBN+ "\");'>"+ books[i].title+  "</a></td><td>" +books[i].ISBN+ "</td></tr>";
 	}
 	output += "</tbody></table></div></div>";
 	$("#data-container").html(output);

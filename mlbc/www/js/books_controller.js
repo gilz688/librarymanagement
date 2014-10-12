@@ -6,11 +6,6 @@ function booksController($scope, $q, booksService) {
     $scope.viewBooks = function(){
         $scope.books = [];
         viewBooks("COE-Library");
-        var options = {
-            animation: 'none', // What animation to use
-            onTransitionEnd: function() {} // Called when finishing transition animation
-        };
-        tabbar.pushPage("home.html", options);
     };
 
     // bind function to html element with ng-click="viewSpecificBookInfo"

@@ -111,25 +111,29 @@ db.librarian.insert(**{'librarian_id': '1999-0002', 'lib_name': 'SET-Library', '
 db.commit()
 '''
 
-def getLibrarianUsingUsername(username):
-    return db(db.librarian.username==username).select().first()
-def getLibrarianPassword(username):
-    return db(db.librarian.username==username).select(db.librarian.password).first()
-
 def getLibrary(lib_name):
-    return db(db.library.lib_name == lib_name).select()
+  return db(db.library.lib_name == lib_name).select()
 
-def getBookAuthor(ISBN):
-    return db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
-
-def getBookByISBN(ISBN):
-    return db(db.book.ISBN == ISBN).select(db.book.ALL).first()
+def getLibraryByBook(isbn):
+  return db(db.book.ISBN == isbn).select(db.library.lib_name,db.library.address, left = db.library.on(db.library.lib_name == db.book.lib_name)).first()
 
 def getBookByLibrary(lib_name):
-    return db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, db.book.pic, orderby=db.book.title)
+  return db(db.book.lib_name==lib_name).select(db.book.title, db.book.ISBN, db.book.pic, orderby=db.book.title)
+
+def getLibrarianUsingUsername(username):
+  return db(db.librarian.username==username).select().first()
+
+def getLibrarianPassword(username):
+  return db(db.librarian.username==username).select(db.librarian.password).first()
+
+def getBookByISBN(ISBN):
+  return db(db.book.ISBN == ISBN).select(db.book.ALL).first()
 
 def getBooksOrderedByISBN():
     return db(db.book).select(orderby=db.book.ISBN)
+
+def getBookAuthor(ISBN):
+    return db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
 
 def addBookAvailableBookCopies(isbn, available_copies):
     db(db.book.ISBN == isbn).update(available_copies = available_copies + 1)
