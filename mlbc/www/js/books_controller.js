@@ -5,14 +5,14 @@ function booksController($scope, $q, booksService) {
     
     $scope.viewBooks = function(){
         $scope.books = [];
-        viewBooks("COE-Library");
+        viewBooks();
     };
 
     // bind function to html element with ng-click="viewSpecificBookInfo"
     $scope.viewSpecificBookInfo = viewSpecificBookDetails;
 
-    function viewBooks(library) {
-        booksService.getBooks(library).then(
+    function viewBooks() {
+        booksService.getAllBooks().then(
             function(books) {
                 setBooks(books);
             }

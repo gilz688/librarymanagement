@@ -4,7 +4,7 @@ function booksService($http, $q) {
     return ({
         getSpecificBookInfo: getSpecificBookInfo,
         getBookAuthors: getBookAuthors,
-        getBooks: getBooks
+        getAllBooks: getAllBooks
     });
 
     // ---
@@ -24,10 +24,10 @@ function booksService($http, $q) {
         return (request.then(handleSuccess, handleError));
     }
 
-    function getBooks(library) {
+    function getAllBooks() {
         var request = $http({
             method: "get",
-            url: remote_site + "viewBooks/getBooks/" + library,
+            url: remote_site + "viewBooks/getAllBooks/",
         });
         return (request.then(handleSuccess, handleError));
     }

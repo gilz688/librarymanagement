@@ -5,7 +5,7 @@ app.controller("booksController", booksController);
 app.controller("settingsController", settingsController);
 app.service("booksService", booksService);
 
-document.addEventListener("deviceready", onDeviceReady, false);
+document.addEventListener("deviceready", onDeviceReady(), false);
 
 // Cordova is ready
 function onDeviceReady() {
