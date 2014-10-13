@@ -24,6 +24,16 @@
         </ons-list-item>
 
         <ons-list-item>
+            <div class="left">Status:</div>
+            <div ng-if="currentBook.available_copies>0">
+                <div class="right">Available</div>
+            </div>
+            <div ng-if="currentBook.available_copies<=0">
+                <div class="right">Not Available</div>
+            </div>
+        </ons-list-item>
+
+        <ons-list-item>
             <div class="left">Number of Copies:</div>
             <div class="right">{{ currentBook.no_of_copies}}</div>
         </ons-list-item>
