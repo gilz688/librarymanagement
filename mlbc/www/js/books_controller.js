@@ -1,5 +1,5 @@
 function booksController($scope, $q, booksService) {
-    viewBooks("COE-Library");
+    viewBooks();
 
     $scope.baseUrl = remote_site;
     
