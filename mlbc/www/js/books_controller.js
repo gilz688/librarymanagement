@@ -27,7 +27,6 @@ function booksController($scope, $q, booksService) {
     	booksService.getSpecificBookInfo(isbn).then(
             function(book) {
             	$scope.currentBook = book;
-            	getCurrentBookAuthors();
                 var options = {
                     animation: 'slide', // What animation to use
                     onTransitionEnd: function() {} // Called when finishing transition animation
@@ -37,13 +36,4 @@ function booksController($scope, $q, booksService) {
         );
     }
 
-    function getCurrentBookAuthors() {
-        booksService.getBookAuthors($scope.currentBook.isbn).then(
-            function(authors) {
-                for(var i in authors){
-            		$scope.currentBook.authorsTxt += (authors[i].lname + ", " + authors[i].fname + " " + authors[i].middle_initial + "; "); 
-            	}
-            }
-        );
-    }
 }
