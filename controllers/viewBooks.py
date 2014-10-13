@@ -33,6 +33,7 @@ def getBookInfo():
     return response.json(book)
 
 def getAllBooks():
+    enableCORS()
     books = getBooksOrderedByISBN()
     return response.json(books)
 

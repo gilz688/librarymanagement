@@ -14,8 +14,28 @@
         </ons-list-item>
 
         <ons-list-item>
+            <div class="left">Library:</div>
+            <div class="right">{{ currentBook.lib_name}}</div>
+        </ons-list-item>
+
+        <ons-list-item>
+            <div class="left">Location:</div>
+            <div class="right">{{ currentBook.library.address}}</div>
+        </ons-list-item>
+
+        <ons-list-item>
+            <div class="left">Number of Copies:</div>
+            <div class="right">{{ currentBook.no_of_copies}}</div>
+        </ons-list-item>
+
+        <ons-list-item>
+            <div class="left">Available Copies:</div>
+            <div class="right">{{ currentBook.available_copies}}</div>
+        </ons-list-item>
+
+         <ons-list-item>
             <div class="left">Authors:</div>
-            <div class="right">{{ currentBook.authorsTxt }}</div>
+            <div data-ng-repeat="author in currentBook.authors" class="right">{{ author.lname}}, {{author.fname}} {{author.middle_initial}}.</div>
             </div>
         </ons-list-item>
 
