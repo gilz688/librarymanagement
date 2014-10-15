@@ -53,9 +53,12 @@
 
         <ons-list-item>
             <ons-row>
-                <ons-col>
+                <ons-col width="30%" ons-if-orientation="landscape">
                     <strong>Number of Copies:</strong>
                 </ons-col>
+                <ons-col ons-if-orientation="portrait">
+                    <strong>Number of Copies:</strong>
+                </ons-col>      
                 <ons-col>
                     <span>{{ currentBook.no_of_copies}}</span>
                 </ons-col>
@@ -64,7 +67,10 @@
 
         <ons-list-item>
             <ons-row>
-                <ons-col>        
+                <ons-col width="30%" ons-if-orientation="landscape">        
+                    <strong>Available Copies:</strong>
+                </ons-col>
+                <ons-col ons-if-orientation="portrait">        
                     <strong>Available Copies:</strong>
                 </ons-col>
                 <ons-col>
