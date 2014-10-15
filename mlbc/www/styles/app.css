@@ -77,3 +77,7 @@
       color: #999;
       float: right;
   }
+
+  .description{
+    text-indent:10%;
+  }

@@ -7,56 +7,108 @@
     </ons-toolbar>
 
     <ons-list modifier="inset" class="details-list">
-        <ons-list-item>
-            <div class="center">
+        <ons-list-item class="center">
+            <center>
                 <img ng-src="{{ baseUrl }}viewBooks/download/{{ currentBook.pic }}" alt="book_cover" height="240" width="180">
-            </div>
+            </center>
         </ons-list-item>
 
         <ons-list-item>
-            <div class="left">Library:</div>
-            <div class="right">{{ currentBook.lib_name}}</div>
+            <ons-row>
+                <ons-col width="30%">
+                    <strong>Library:</strong>
+                </ons-col>
+                <ons-col>
+                    <span>{{ currentBook.lib_name}}</span>
+                </ons-col>
+            </ons-row>
         </ons-list-item>
 
         <ons-list-item>
-            <div class="left">Location:</div>
-            <div class="right">{{ currentBook.library.address}}</div>
+            <ons-row>
+                <ons-col width="30%">
+                    <strong>Location:</strong>
+                </ons-col>
+                <ons-col>
+                    <span>{{ currentBook.library.address}}</span>
+                </ons-col>
+            </ons-row>
         </ons-list-item>
 
         <ons-list-item>
-            <div class="left">Status:</div>
-            <div ng-if="currentBook.available_copies>0">
-                <div class="right">Available</div>
-            </div>
-            <div ng-if="currentBook.available_copies<=0">
-                <div class="right">Not Available</div>
-            </div>
+            <ons-row>
+                <ons-col width="30%">
+                    <strong>Status:</strong>
+                </ons-col>
+                <ons-col>
+                    <div ng-if="currentBook.available_copies>0">
+                        <span>Available</span>
+                    </div>
+                    <div ng-if="currentBook.available_copies<=0">
+                        <span>Not Available</span>
+                    </div>
+                </ons-col>
+            </ons-row>
         </ons-list-item>
 
         <ons-list-item>
-            <div class="left">Number of Copies:</div>
-            <div class="right">{{ currentBook.no_of_copies}}</div>
+            <ons-row>
+                <ons-col>
+                    <strong>Number of Copies:</strong>
+                </ons-col>
+                <ons-col>
+                    <span>{{ currentBook.no_of_copies}}</span>
+                </ons-col>
+            </ons-row>
         </ons-list-item>
 
         <ons-list-item>
-            <div class="left">Available Copies:</div>
-            <div class="right">{{ currentBook.available_copies}}</div>
-        </ons-list-item>
-
-         <ons-list-item>
-            <div class="left">Authors:</div>
-            <div data-ng-repeat="author in currentBook.authors" class="right">{{ author.lname}}, {{author.fname}} {{author.middle_initial}}.</div>
-            </div>
-        </ons-list-item>
-
-        <ons-list-item>
-            <div class="left">Publisher:</div>
-            <div class="right">{{ currentBook.publisher }}</div>
+            <ons-row>
+                <ons-col>        
+                    <strong>Available Copies:</strong>
+                </ons-col>
+                <ons-col>
+                    <span>{{ currentBook.available_copies}}</span>
+                </ons-col>
+            </ons-row>
         </ons-list-item>
 
         <ons-list-item>
-            <div class="left">Description:</div>
-            <div class="right">{{ currentBook.description }}</div>
+            <ons-row>
+                <ons-col width="30%">
+                    <strong>ISBN:</strong>
+                </ons-col>
+                <ons-col>
+                    <span>{{ currentBook.ISBN}}</span>
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+
+        <ons-list-item>
+            <ons-row>
+                <ons-col width="30%">         
+                    <strong>Publisher:</strong>
+                </ons-col>
+                <ons-col>
+                    <span>{{ currentBook.publisher }}</span>
+                </ons-col>
+            </ons-row>
+        </ons-list-item>        
+
+        <ons-list-item>
+            <ons-row>
+                <ons-col width="30%">     
+                    <strong>Authors:</strong>
+                </ons-col>
+                <ons-col>   
+                    <div data-ng-repeat="author in currentBook.authors">{{ author.lname}}, {{author.fname}} {{author.middle_initial}}.</div>
+                </ons-col>
+            </ons-row>
+        </ons-list-item>
+        
+        <ons-list-item>
+            <strong>Description:</strong>
+            <p class="description" align="justify">{{ currentBook.description }}</p>
         </ons-list-item>
     </ons-list>
 
