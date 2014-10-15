@@ -3,7 +3,8 @@ var app = angular.module('mlbcApp', ['onsen']);
 
 app.controller("booksController", booksController);
 app.controller("settingsController", settingsController);
-app.service("booksService", booksService);
+app.service("booksService", ['$http', '$q', booksService]);
+
 
 document.addEventListener("deviceready", onDeviceReady(), false);
 

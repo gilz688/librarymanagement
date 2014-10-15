@@ -3,4 +3,5 @@ mlbc/merges
 databases/
 sessions/
 errors/
+mlbc/node_modules
 

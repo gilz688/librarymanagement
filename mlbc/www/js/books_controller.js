@@ -35,5 +35,9 @@ function booksController($scope, $q, booksService) {
             }
         );
     }
+	
+	$scope.twoPlusThree = function() {
+		return 2 + 3;
+	}
 
 }

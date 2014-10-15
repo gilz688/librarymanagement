@@ -1,6 +1,7 @@
 __author__ = 'librarymanagementteam'
 
 def download():
+    enableCORS()
     """
     allows downloading of uploaded files
     http://..../[app]/default/download/[filename]
