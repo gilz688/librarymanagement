@@ -3,7 +3,7 @@ var mod, injector, scope, bookController, http, q, service;
 
 module("Book Controller Test", {
   setup: function() {
-    mod = angular.module('mlbcApp', ['onsen']);
+    mod = angular.module('mlbcApp', ['onsen', 'mlbcApp.controller', 'mlbcApp.service']);
 	mod.config(function ($provide) {
         $provide.decorator('$httpBackend', angular.mock.e2e.$httpBackendDecorator);
     });
@@ -15,7 +15,7 @@ module("Book Controller Test", {
 	scope = injector.get('$rootScope').$new();
 	
 	//mock book service from app.js to books_service.js
-	service = injector.get('booksService');
+	service = injector.get('booksService').inject(http, q);
 	
 	//mock book controller from app.js to books_controller.js
 	//bookController = injector.get('$controller')(booksController, { $scope: scope, $q: q, booksService: service }); 
