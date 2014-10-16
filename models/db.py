@@ -13,7 +13,7 @@
 
 
 db = DAL('postgres://postgres:1234asdf@127.0.0.1:5432/libman', pool_size=1, check_reserved=['all'],
-         migrate= True)  # postgres://username:password@localhost/db_name
+         migrate= False)  # postgres://username:password@localhost/db_name
 
 db.define_table('library',
                 Field('lib_name', length=20, unique=True, ondelete='CASCADE'),
