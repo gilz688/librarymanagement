@@ -77,3 +77,11 @@
       color: #999;
       float: right;
   }
+
+  .description{
+    text-indent:10%;
+  }
+
+  .search_container{
+    padding: 10px 5px;
+  }
