@@ -1,5 +1,7 @@
 
 __author__ = 'librarymanagementteam'
+from datetime import date
+import time
 
 def getAvailableCopies(isbn):
 	book_copies = getBookByISBN(isbn)
@@ -39,6 +41,8 @@ def returnBook():
 						"available_copies":book['available_copies'],
 						"num_of_copies":book['num_of_copies']
 						}
+			# add the transaction to the book management here
+			addToBookManagement(session.lib_id, isbn, "return")
 			return response.json(bookData)
 		except:
 			raise Exception("Cannot return book")
@@ -55,6 +59,8 @@ def borrowBook():
 							"available_copies":book['available_copies'],
 							"num_of_copies":book['num_of_copies']
 							}
+				# add the trasaction to the book management here
+				addToBookManagement(session.lib_id, isbn, "borrow")
 				return response.json(bookData)
 			except:
 				raise Exception('Book is currently unavailable.')
@@ -81,3 +87,11 @@ def removeAvailableCopies(isbn):
 	else:
 		raise Exception('No available copies left')
 
+def addToBookManagement(librarian_id, ISBN, transact_type):
+	today = date.today()
+	timeNow = time.strftime("%X")
+
+	if(transact_type == 'return'):
+		addReturnTransaction(librarian_id, ISBN, today, timeNow)
+	elif(transact_type == 'borrow'):
+		addBorrowTransaction(librarian_id, ISBN, today, timeNow)

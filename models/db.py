@@ -168,6 +168,12 @@ def matchBookByTitle(book_title):
 def matchBookByAuthor(book_author):
     return db(db.author.lname.like('%'+book_author+'%')).select(orderby=db.author.lname)
 
+def addReturnTransaction(librarian_id, ISBN, dateNow, timeNow):
+    db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'return'})
+
+def addBorrowTransaction(librarian_id, ISBN, dateNow, timeNow):
+    db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'borrow'})
+
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
 response.generic_patterns = ['*'] if request.is_local else []

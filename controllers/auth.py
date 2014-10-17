@@ -8,7 +8,7 @@ def login():
 
 	if validate(username, password):
 		librarian = getLibrarian(username)
-		createSession(username, librarian['lib_name'])
+		createSession(username, librarian['lib_name'], librarian['librarian_id'])
 		return response.json(librarian)
 	else:
 		raise Exception("Wrong username or password")
@@ -36,10 +36,11 @@ def isLoggedIn():
 	else:
 		return False
 
-def createSession(username, lib_name):
+def createSession(username, lib_name, lib_id):
 	session.username = username
 	session.lib_name = lib_name
 	session.status = 'logged in'
+	session.lib_id = lib_id
 
 def getSession():
 	if(isLoggedIn()):
