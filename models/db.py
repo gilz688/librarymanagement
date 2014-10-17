@@ -13,7 +13,7 @@
 
 
 db = DAL('postgres://postgres:1234asdf@127.0.0.1:5432/libman', pool_size=1, check_reserved=['all'],
-         migrate= False)  # postgres://username:password@localhost/db_name
+         migrate=True)  # postgres://username:password@localhost/db_name
 
 db.define_table('library',
                 Field('lib_name', length=20, unique=True, ondelete='CASCADE'),
@@ -39,15 +39,13 @@ db.define_table('book',
                 Field('no_of_copies', 'integer'),
                 Field('available_copies', 'integer'),
                 Field('description', 'text'),
-                #Field('borrow_count', 'integer'),
-                #Field('return_count', 'integer'),
                 primarykey=['ISBN'])
 
 db.define_table('author',
                 Field('ISBN', db.book.ISBN),
                 Field('lname', length=15),
                 Field('fname', length=15),
-				Field('middle_initial', length=1))
+				        Field('middle_initial', length=1))
 
 db.define_table('borrower',
                 Field('borrower_id', length=15),
@@ -60,6 +58,23 @@ db.define_table('borrow_book',
                 Field('ISBN', db.book.ISBN),
                 Field('borrow_date', 'date'),
                 Field('return_date', 'date'))
+
+
+db.define_table('transact_type',
+                Field('transact_type', length = 6),
+                primarykey=['transact_type'])
+
+db.define_table('book_manager',
+                Field('ISBN', db.book.ISBN),
+                Field('librarian_id', db.librarian.librarian_id),
+                Field('transact_date', 'date'),
+                Field('transact_time', 'time'),
+                Field('transact_type', db.transact_type.transact_type),
+                primarykey = ['ISBN', 'librarian_id', 'transact_date', 'transact_time'])
+
+db.borrower.drop()
+db.borrow_book.drop()
+
 
 #populate database
 #dummy values
@@ -108,6 +123,9 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Th
 db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo', 'lname': 'Wiggins', 'fname': 'Adrew'})
 db.librarian.insert(**{'librarian_id': '1999-0002', 'lib_name': 'SET-Library', 'username': 'librarian2', 'password': '$pbkdf2-sha256$20000$c671PkeI8b5Xytm7FyKkdA$jEPtNjoJCOnYGWBUIrpuy5bcrL4/XETiOtKJluu2Uhw', 'lname': 'Wiggins Jr.', 'fname': 'Adrew'})
 
+
+db.transact_type.insert(**{'transact_type': 'return'})
+db.transact_type.insert(**{'transact_type': 'borrow'})
 db.commit()
 '''
 
