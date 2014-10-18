@@ -173,6 +173,11 @@ def getBookByISBN(ISBN):
 def getBooksOrderedByISBN():
     return db(db.book).select(orderby=db.book.ISBN)
 
+def getPaginatedBooksOrderedByISBN(items,page):
+    start = (page-1)*items
+    end = page*items
+    return db(db.book).select(orderby=db.book.ISBN,limitby=(start,end))
+
 def getBookAuthor(ISBN):
     return db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
 
