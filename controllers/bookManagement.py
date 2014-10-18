@@ -1,5 +1,14 @@
 
+import pygal
+from pygal.style import CleanStyle
 __author__ = 'librarymanagementteam'
+
+def plot_pygal():
+    response.headers['Content-Type']='image/svg+xml'
+    bar_chart = pygal.Bar(style=CleanStyle)                                            
+    # Then create a bar graph object
+    bar_chart.add('Fibonacci', [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55])  # Add some values    
+    return bar_chart.render()
 
 '''
 	Generate monthly report in a year

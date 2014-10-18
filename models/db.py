@@ -46,7 +46,7 @@ db.define_table('author',
                 Field('lname', length=15),
                 Field('fname', length=15),
 				        Field('middle_initial', length=1))
-
+'''
 db.define_table('borrower',
                 Field('borrower_id', length=15),
                 Field('lib_name', db.library.lib_name),
@@ -58,7 +58,7 @@ db.define_table('borrow_book',
                 Field('ISBN', db.book.ISBN),
                 Field('borrow_date', 'date'),
                 Field('return_date', 'date'))
-
+'''
 
 db.define_table('transact_type',
                 Field('transact_type', length = 6),
@@ -72,8 +72,8 @@ db.define_table('book_manager',
                 Field('transact_type', db.transact_type.transact_type),
                 primarykey = ['ISBN', 'librarian_id', 'transact_date', 'transact_time'])
 
-db.borrower.drop()
-db.borrow_book.drop()
+#db.borrower.drop()
+#db.borrow_book.drop()
 
 
 #populate database
