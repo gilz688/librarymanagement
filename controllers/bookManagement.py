@@ -40,8 +40,10 @@ def getWeekReport(week, month, year):
 '''
 	Get a report for a day in a given month and year
 '''
-def getDayReport(day, month, year):
-	pass
+def getDayReport():
+	day = request.vars.date
+	booksBorrowed = getRecordsInADay(day)
+	return response.json(booksBorrowed)
 
 '''
 	Get the most borrowed book of a year
@@ -64,5 +66,8 @@ def getMostBorrowedBookPerWeek(year, month, week):
 '''
 	Get the most borrowed book of a day in a month of a week
 '''
-def getMostBorrowedBookPerDay(year, month, day):
-	pass
+def getMostBorrowedBookPerDay():
+	day = '2014-06-17'#request.vars.date
+	book = getMostBorrowedBookInADay(day)
+	bookRecord = {'ISBN': book['book_manager']['ISBN'], 'max_occur': book['_extra']['COUNT(book_manager.ISBN)']}
+	return response.json(bookRecord)

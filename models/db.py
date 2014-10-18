@@ -126,6 +126,29 @@ db.librarian.insert(**{'librarian_id': '1999-0002', 'lib_name': 'SET-Library', '
 
 db.transact_type.insert(**{'transact_type': 'return'})
 db.transact_type.insert(**{'transact_type': 'borrow'})
+
+db.book_manager.insert(**{'ISBN': '0-07-013151-1', 'librarian_id': '1999-0001', 'transact_date': '2014-06-14', 'transact_time': '09:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-1', 'librarian_id': '1999-0001', 'transact_date': '2014-06-17', 'transact_time': '14:31:11', 'transact_type': 'return'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-1', 'librarian_id': '1999-0001', 'transact_date': '2014-06-17', 'transact_time': '08:43:12', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-1', 'librarian_id': '1999-0001', 'transact_date': '2014-06-17', 'transact_time': '11:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-2', 'librarian_id': '1999-0001', 'transact_date': '2014-06-17', 'transact_time': '09:54:55', 'transact_type': 'borrow'})
+
+db.book_manager.insert(**{'ISBN': '0-07-013151-2', 'librarian_id': '1999-0001', 'transact_date': '2014-06-15', 'transact_time': '19:32:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-2', 'librarian_id': '1999-0001', 'transact_date': '2014-06-16', 'transact_time': '09:43:55', 'transact_type': 'return'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-1', 'librarian_id': '1999-0001', 'transact_date': '2014-06-17', 'transact_time': '09:43:55', 'transact_type': 'borrow'})
+
+db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 'transact_date': '2014-06-15', 'transact_time': '09:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-4', 'librarian_id': '1999-0002', 'transact_date': '2014-06-15', 'transact_time': '10:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 'transact_date': '2014-06-15', 'transact_time': '11:43:55', 'transact_type': 'return'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 'transact_date': '2014-06-15', 'transact_time': '12:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 'transact_date': '2014-06-17', 'transact_time': '13:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-4', 'librarian_id': '1999-0002', 'transact_date': '2014-06-17', 'transact_time': '14:43:55', 'transact_type': 'return'})
+
+db.book_manager.insert(**{'ISBN': '0-07-013151-4', 'librarian_id': '1999-0002', 'transact_date': '2014-07-17', 'transact_time': '14:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 'transact_date': '2014-07-17', 'transact_time': '16:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-5', 'librarian_id': '1999-0002', 'transact_date': '2014-07-18', 'transact_time': '17:43:55', 'transact_type': 'borrow'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 'transact_date': '2014-07-18', 'transact_time': '18:43:55', 'transact_type': 'return'})
+db.book_manager.insert(**{'ISBN': '0-07-013151-4', 'librarian_id': '1999-0002', 'transact_date': '2014-07-19', 'transact_time': '19:43:55', 'transact_type': 'return'})
 db.commit()
 '''
 
@@ -173,6 +196,12 @@ def addReturnTransaction(librarian_id, ISBN, dateNow, timeNow):
 
 def addBorrowTransaction(librarian_id, ISBN, dateNow, timeNow):
     db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'borrow'})
+
+def getRecordsInADay(day):
+    return db(db.book_manager.transact_date == day).select(db.book_manager.ALL)
+
+def getMostBorrowedBookInADay(day):
+    return db(db.book_manager.transact_date == day).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
