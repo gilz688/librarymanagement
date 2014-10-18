@@ -197,11 +197,17 @@ def addReturnTransaction(librarian_id, ISBN, dateNow, timeNow):
 def addBorrowTransaction(librarian_id, ISBN, dateNow, timeNow):
     db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'borrow'})
 
-def getRecordsInADay(day):
-    return db(db.book_manager.transact_date == day).select(db.book_manager.ALL)
+def getRecordsInADay(day, month, year):
+    return db((db.book_manager.transact_date.day() == day) & (db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select(db.book_manager.ALL)
 
-def getMostBorrowedBookInADay(day):
-    return db(db.book_manager.transact_date == day).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
+def getMostBorrowedBookInADay(day, month, year):
+    return db((db.book_manager.transact_date.day() == day) & (db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
+
+def getMostBorrowedBookInAMonth(month, year):
+    return db((db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
+
+def getMostBorrowedBookInAYear(year):
+    return db(db.book_manager.transact_date.year() == year).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
