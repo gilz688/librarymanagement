@@ -1,6 +1,13 @@
 $(document).ready(function(){
 	viewHome();
 
+	$("#borrowListData").hide();
+	$("#historyListData").hide();
+
+	$("#borrowList").click(viewBorrowOption);
+	$("#historyList").click(viewHistoryOption);
+
+
 	$("#home").click(viewHome);
 
 	$("#session").click(signInOrSignOut);
@@ -15,7 +22,23 @@ $(document).ready(function(){
 	$("#bookInfo").on('hidden.bs.modal', clearBookModal);
 });
 
+function viewBorrowOption(){
+	if($("#borrowListData").is(':visible'))
+		$("#borrowListData").hide('slow');
+	else
+		$("#borrowListData").show('slow');
 
+	$("#historyListData").hide('slow');
+}
+
+function viewHistoryOption(){
+	if($("#historyListData").is(':visible'))
+		$("#historyListData").hide('slow');
+	else
+		$("#historyListData").show('slow');
+
+	$("#borrowListData").hide('slow');
+}
 
 function viewHome(){
 	$.ajax({
@@ -46,6 +69,7 @@ function viewUserHome(){
 	viewGenerateReportOptionsNotLoggedIn();
 }
 
+/*
 function viewGenerateReportOptionsNotLoggedIn() {
 	var yearOption = "<li><a href=\"#\" onclick= 'testAlert(\"Year\");'> Year <a></li>";
 	var monthOption = "<li><a href=\"#\" onclick= 'testAlert(\"Month\");'> Month </a></li>";
@@ -59,7 +83,7 @@ function viewGenerateReportOptionsLoggedIn() {
 	var dayOption = "<li><a href=\"#\" onclick= 'testAlert(\"Day\");'> Day </a></li>";
 	$("#report_options").html('Get most borrowed book by: <div class="most_borrowed_book_options">	<ul>' + yearOption + monthOption + dayOption + '</ul> </div>Get library report by: <div class="most_borrowed_book_options"> <ul>' + yearOption + monthOption + dayOption + '</ul> </div>');
 }
-
+*/
 function testAlert(option) {
 	alert(option);
 }

@@ -1,11 +1,95 @@
 {{extend 'libman/template.html'}}
-<center>
-  <div id="header">
-  </div >
-  <div id="data-container">
-  </div>
-</center>
+<div class="row">
+  <div id="header" class="col-md-12"></div >
+  <div class="col-md-12">
+    <div id="report_options" class="col-md-3">
 
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-info" id="borrowList">
+          <span>View most borrowed books</span>
+          <span class="badge-info pull-right"><span class="glyphicon glyphicon-chevron-down"></span></span>
+        </li>
+        <form id="borrowForm">
+          <li class="list-group-item" id="borrowListData">
+              <ul class="nav nav-pills" role="tablist">
+                <li ><a style="padding:5px" href="#bdate" role="tab" data-toggle="tab">Day</a></li>
+                <li ><a style="padding:5px" href="#bmonth" role="tab" data-toggle="tab">Month</a></li>
+                <li ><a style="padding:5px" href="#byear" role="tab" data-toggle="tab">Year</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade" id="bdate">
+                  <input class="transaction" type="date" name="bdate">
+                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
+                    <option value="COE-library">From : COE-Library</option>
+                    <option value="Set-library">From : Set-Library</option>
+                  </select>
+                  <button id="borrowButton" type="button" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="tab-pane fade" id="bmonth">
+                  <input class="transaction" type="month" name="bmonth">
+                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
+                    <option value="COE-library">From : COE-Library</option>
+                    <option value="Set-library">From : Set-Library</option>
+                  </select>
+                  <button id="borrowButton" type="button" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="tab-pane fade" id="byear">
+                  <input style="padding:0px 5px;height:25px;margin-top:5px" class="form-control" type="number" name="byear" min="1990" max="2030" step="1" value="2014">
+                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
+                    <option value="COE-library">From : COE-Library</option>
+                    <option value="Set-library">From : Set-Library</option>
+                  </select>
+                  <button id="borrowButton" type="button" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+          </li>
+        </form>
+
+        <li class="list-group-item list-group-item-info" id="historyList">
+          <span>View library transaction history</span>
+          <span class="badge-info  pull-right"><span class="glyphicon glyphicon-chevron-down"></span></span>
+        </li>
+        <form id="historyForm">
+          <li class="list-group-item" id="historyListData">
+              <ul class="nav nav-pills" role="tablist">
+                <li ><a style="padding:5px" href="#hdate" role="tab" data-toggle="tab">Day</a></li>
+                <li ><a style="padding:5px" href="#hmonth" role="tab" data-toggle="tab">Month</a></li>
+                <li ><a style="padding:5px" href="#hyear" role="tab" data-toggle="tab">Year</a></li>
+              </ul>
+              <div class="tab-content">
+                <div class="tab-pane fade" id="hdate">
+                  <input class="transaction" type="date" name="hdate">
+                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
+                    <option value="COE-library">From : COE-Library</option>
+                    <option value="Set-library">From : Set-Library</option>
+                  </select>
+                  <button id="historyButton" type="button" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="tab-pane fade" id="hmonth">
+                  <input class="transaction" type="month" name="hmonth">
+                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
+                    <option value="COE-library">From : COE-Library</option>
+                    <option value="Set-library">From : Set-Library</option>
+                  </select>
+                  <button id="historyButton" type="button" class="btn btn-primary">Submit</button>
+                </div>
+                <div class="tab-pane fade" id="hyear">
+                  <input style="padding:0px 5px;height:25px;margin-top:5px" class="form-control" type="number" name="hyear" min="1990" max="2030" step="1000" value="2014">
+                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
+                    <option value="COE-library">From : COE-Library</option>
+                    <option value="Set-library">From : Set-Library</option>
+                  </select>
+                  <button id="historyButton" type="button" class="btn btn-primary">Submit</button>
+                </div>
+              </div>
+          </li>
+        </form>
+      </ul>
+
+    </div>
+    <div id="data-container" class="col-md-9"></div>
+  </div>
+</div>
 {{ include 'libman/modals/bookInfo.html'}}
 {{ include 'libman/modals/login.html'}}
 {{ include 'libman/modals/confirmation.html'}}
