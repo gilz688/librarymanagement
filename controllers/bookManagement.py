@@ -1,5 +1,5 @@
-
 __author__ = 'librarymanagementteam'
+
 
 '''
 	Generate monthly report in a year
@@ -42,7 +42,8 @@ def getDayReport():
 	day = request.vars.day
 	month = request.vars.month
 	year = request.vars.year
-	booksBorrowed = getRecordsInADay(day, month, year)
+	library = request.vars.library
+	booksBorrowed = getRecordsInADay(day, month, year, library)
 	return response.json(booksBorrowed)
 
 '''

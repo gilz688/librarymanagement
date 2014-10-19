@@ -52,15 +52,23 @@ class TestBookManagement(unittest.TestCase):
 		expected = '{"ISBN": "0-07-013151-3", "library": "SET-Library", "max_occur": 6, "title": "Introduction to Electricity"}'
 		self.assertEquals(result.encode('ascii', 'ignore'), expected)
 
-	def testMostBorrowedBookInAWeek(self):
-		pass
-
-	def testGetDayReport(self):
+	def testGetDayReportCOELib(self):
 		request.vars.day = '17'
 		request.vars.month = '06'
 		request.vars.year = '2014'
+		request.vars.library = 'COE-Library'
 		result = getDayReport()
-		expected = '[{"transact_date": "2014-06-17", "transact_type": "return", "ISBN": "0-07-013151-1", "transact_time": "14:31:11", "librarian_id": "1999-0001"}, {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-1", "transact_time": "08:43:12", "librarian_id": "1999-0001"}, {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-1", "transact_time": "11:43:55", "librarian_id": "1999-0001"}, {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-2", "transact_time": "09:54:55", "librarian_id": "1999-0001"}, {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-1", "transact_time": "09:43:55", "librarian_id": "1999-0001"}, {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-3", "transact_time": "13:43:55", "librarian_id": "1999-0002"}, {"transact_date": "2014-06-17", "transact_type": "return", "ISBN": "0-07-013151-4", "transact_time": "14:43:55", "librarian_id": "1999-0002"}]'
+		expected = '[{"book_manager": {"transact_date": "2014-06-17", "transact_type": "return", "ISBN": "0-07-013151-1", "transact_time": "14:31:11", "librarian_id": "1999-0001"}, "book": {"lib_name": "COE-Library", "title": "Introduction to Algorithms"}}, {"book_manager": {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-1", "transact_time": "08:43:12", "librarian_id": "1999-0001"}, "book": {"lib_name": "COE-Library", "title": "Introduction to Algorithms"}}, {"book_manager": {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-1", "transact_time": "11:43:55", "librarian_id": "1999-0001"}, "book": {"lib_name": "COE-Library", "title": "Introduction to Algorithms"}}, {"book_manager": {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-2", "transact_time": "09:54:55", "librarian_id": "1999-0001"}, "book": {"lib_name": "COE-Library", "title": "Data Structures Using C++"}}, {"book_manager": {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-1", "transact_time": "09:43:55", "librarian_id": "1999-0001"}, "book": {"lib_name": "COE-Library", "title": "Introduction to Algorithms"}}]'
+		self.assertEquals(result.encode('ascii', 'ignore'), expected)
+
+
+	def testGetDayReportSETLib(self):
+		request.vars.day = '17'
+		request.vars.month = '06'
+		request.vars.year = '2014'
+		request.vars.library = 'SET-Library'
+		result = getDayReport()
+		expected = '[{"book_manager": {"transact_date": "2014-06-17", "transact_type": "return", "ISBN": "0-07-013151-4", "transact_time": "14:43:55", "librarian_id": "1999-0002"}, "book": {"lib_name": "SET-Library", "title": "Modern Physics for Science and Engineering"}}, {"book_manager": {"transact_date": "2014-06-17", "transact_type": "borrow", "ISBN": "0-07-013151-3", "transact_time": "13:43:55", "librarian_id": "1999-0002"}, "book": {"lib_name": "SET-Library", "title": "Introduction to Electricity"}}]'
 		self.assertEquals(result.encode('ascii', 'ignore'), expected)
 
 
