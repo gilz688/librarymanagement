@@ -1,43 +1,37 @@
 
-import pygal
-from pygal.style import CleanStyle
 __author__ = 'librarymanagementteam'
 
 '''
 	Generate monthly report in a year
 '''
-def generateMonthlyReport(year):
-	pass
-
-'''
-	Generate weekly report in a month of a year
-'''
-def generateWeeklyReport(year, month):
-	pass
+def generateMonthlyReport():
+	month = request.vars.month
+	year = request.vars.year
+	monthlyReport = getMonthReport(month,year)
+	return response.json(monthlyReport)
 
 '''
 	Generate yearly report
 '''
 def generateYearlyReport():
-	pass
+	year = request.vars.year
+	yearlyReport = getYearReport(year)
+	return response.json(yearlyReport)
 
 '''
 	Get a report of a given year
 '''
 def getYearReport(year):
-	pass
+	transactionHistory = getYearTransactions(year)
+	return transactionHistory
 
 '''
 	Get a report of a given month in a year
 '''
 def getMonthReport(month, year):
-	pass
+	transactionHistory = getMonthTransactions(month, year)
+	return transactionHistory
 
-'''
-	Get a report in a given week of a month and year
-'''
-def getWeekReport(week, month, year):
-	pass
 
 '''
 	Get a report for a day in a given month and year

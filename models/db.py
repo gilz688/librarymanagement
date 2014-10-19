@@ -209,6 +209,11 @@ def getMostBorrowedBookInAMonth(month, year):
 def getMostBorrowedBookInAYear(year):
     return db(db.book_manager.transact_date.year() == year).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
 
+def getMonthTransactions(month,year):
+    return db((db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select()
+def getYearTransactions(year):
+    return db(db.book_manager.transact_date.year() == year).select()
+
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
 response.generic_patterns = ['*'] if request.is_local else []
