@@ -194,7 +194,7 @@ def matchBookByTitle(book_title):
     return db(db.book.title.like('%'+book_title+'%')).select(orderby=db.book.title)
 
 def matchBookByAuthor(book_author):
-    return db(db.author.lname.like('%'+book_author+'%')).select(orderby=db.author.lname)
+    return db(db.author.lname.like('%'+book_author+'%')).select(db.author.ISBN, orderby=db.author.ISBN, distinct=True)
 
 def addReturnTransaction(librarian_id, ISBN, dateNow, timeNow):
     db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'return'})

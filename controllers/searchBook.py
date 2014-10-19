@@ -49,6 +49,32 @@ def getAuthor(book_author):
 			else:
 				continue
 	return booksByAuthor
+""""""
+
+def searchAllBook():
+	enableCORS()
+	keyword = request.vars.keyword
+	if keyword:
+		result = searchBookByTitleAuthorISBN(keyword)
+	else:
+		result = None
+	return response.json(result)
+
+
+def searchBookByTitleAuthorISBN(key):
+	booksByTitle = matchBookByTitle(key)
+	booksByISBN = matchBookByISBN(key)
+	new_book = booksByTitle | booksByISBN
+	ISBNs = matchBookByAuthor(key)  #this query returns ISBN only, so looping is needed
+	for i in ISBNs:
+		new_book = new_book | db(db.book.ISBN == i.ISBN).select(orderby=db.book.title)
+	return new_book
+
+def enableCORS():
+    response.headers['Access-Control-Allow-Origin'] = '*'
+    response.headers['Access-Control-Allow-Headers'] = 'Origin, X-Requested-With, Content-Type, Accept'
+
+
 
 '''
 
