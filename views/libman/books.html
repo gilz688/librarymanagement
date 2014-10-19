@@ -9,7 +9,7 @@
           <span>View most borrowed books</span>
           <span class="badge-info pull-right"><span class="glyphicon glyphicon-chevron-down"></span></span>
         </li>
-        <form id="borrowForm">
+        
           <li class="list-group-item" id="borrowListData">
               <ul class="nav nav-pills" role="tablist">
                 <li class="active"><a style="padding:5px" href="#bdate" role="tab" data-toggle="tab">Day</a></li>
@@ -18,28 +18,34 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="bdate">
-                  <input class="transaction" type="date" name="bdate">
-                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
-                    <option value="COE-library">COE-Library</option>
-                    <option value="Set-library">Set-Library</option>
-                  </select>
-                  <button id="borrowButton" type="button" class="btn btn-primary">Submit</button>
+                  <form>
+                    <input class="transaction" type="date" name="bdate">
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
+                      <option value="COE-library">COE-Library</option>
+                      <option value="Set-library">Set-Library</option>
+                    </select>
+                    <button id="borrowButtonD" type="button" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
                 <div class="tab-pane fade" id="bmonth">
-                  <input class="transaction" type="month" name="bmonth">
-                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
-                    <option value="COE-library">COE-Library</option>
-                    <option value="Set-library">Set-Library</option>
-                  </select>
-                  <button id="borrowButton" type="button" class="btn btn-primary">Submit</button>
+                  <form>
+                    <input class="transaction" type="month" name="bmonth">
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
+                      <option value="COE-library">COE-Library</option>
+                      <option value="Set-library">Set-Library</option>
+                    </select>
+                    <button id="borrowButtonM" type="button" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
                 <div class="tab-pane fade" id="byear">
-                  <input style="padding:0px 5px;height:25px;margin-top:5px" class="form-control" type="number" name="byear" min="1990" max="2030" step="1" value="2014">
-                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
-                    <option value="COE-library">COE-Library</option>
-                    <option value="Set-library">Set-Library</option>
-                  </select>
-                  <button id="borrowButton" type="button" class="btn btn-primary">Submit</button>
+                  <form>
+                    <input type="number" name="byear" style="padding:0px 5px;height:25px;margin-top:5px" class="form-control"   min="1990" max="2030" step="1" value="2014">
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="blib">
+                      <option value="COE-library">COE-Library</option>
+                      <option value="Set-library">Set-Library</option>
+                    </select>
+                    <button id="borrowButtonY" type="button" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
               </div>
           </li>
@@ -49,7 +55,6 @@
           <span>View library transaction history</span>
           <span class="badge-info  pull-right"><span class="glyphicon glyphicon-chevron-down"></span></span>
         </li>
-        <form id="historyForm">
           <li class="list-group-item" id="historyListData">
               <ul class="nav nav-pills" role="tablist">
                 <li class="active"><a style="padding:5px" href="#hdate" role="tab" data-toggle="tab">Day</a></li>
@@ -58,32 +63,37 @@
               </ul>
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="hdate">
-                  <input class="transaction" type="date" name="hdate">
-                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
-                    <option value="COE-library">COE-Library</option>
-                    <option value="Set-library">Set-Library</option>
-                  </select>
-                  <button id="historyButton" type="button" class="btn btn-primary">Submit</button>
+                  <form>
+                    <input class="transaction" type="date" name="hdate">
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
+                      <option value="COE-library">COE-Library</option>
+                      <option value="Set-library">Set-Library</option>
+                    </select>
+                    <button id="historyButtonD" type="button" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
                 <div class="tab-pane fade" id="hmonth">
-                  <input class="transaction" type="month" name="hmonth">
-                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
-                    <option value="COE-library">COE-Library</option>
-                    <option value="Set-library">Set-Library</option>
-                  </select>
-                  <button id="historyButton" type="button" class="btn btn-primary">Submit</button>
+                  <form>
+                    <input class="transaction" type="month" name="hmonth">
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
+                      <option value="COE-library">COE-Library</option>
+                      <option value="Set-library">Set-Library</option>
+                    </select>
+                    <button id="historyButtonM" type="button" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
                 <div class="tab-pane fade" id="hyear">
-                  <input style="padding:0px 5px;height:25px;margin-top:5px" class="form-control" type="number" name="hyear" min="1990" max="2030" step="1000" value="2014">
-                  <select style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
-                    <option value="COE-library">COE-Library</option>
-                    <option value="Set-library">Set-Library</option>
-                  </select>
-                  <button id="historyButton" type="button" class="btn btn-primary">Submit</button>
+                  <form>
+                    <input style="padding:0px 5px;height:25px;margin-top:5px" class="form-control" type="number" name="hyear" min="1990" max="2030" step="1" value="2014">
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
+                      <option value="COE-library">COE-Library</option>
+                      <option value="Set-library">Set-Library</option>
+                    </select>
+                    <button id="historyButtonY" type="button" class="btn btn-primary">Submit</button>
+                  </form>
                 </div>
               </div>
           </li>
-        </form>
       </ul>
 
     </div>

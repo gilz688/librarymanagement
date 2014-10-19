@@ -3,6 +3,7 @@ $(document).ready(function(){
 
 	$("#borrowListData").hide();
 	$("#historyListData").hide();
+	$('#historyList').hide();
 
 	$("#borrowList").click(viewBorrowOption);
 	$("#historyList").click(viewHistoryOption);
@@ -20,7 +21,49 @@ $(document).ready(function(){
 
 	$("#logInModal").on('hidden.bs.modal', clearLoginModal);
 	$("#bookInfo").on('hidden.bs.modal', clearBookModal);
+
+	$('#borrowButtonD').click(viewMostBorrowedBooks);
+	$('#borrowButtonM').click(viewMostBorrowedBooks);
+	$('#borrowButtonY').click(viewMostBorrowedBooks);
+
+	$('#historyButtonD').click(viewTransactionHistory);
+	$('#historyButtonM').click(viewTransactionHistory);
+	$('#historyButtonY').click(viewTransactionHistory);
 });
+
+function viewMostBorrowedBooks(){
+	var data = $(this).parent().serializeArray();
+
+	if(data[0].value=='')
+		alert('need to fill data');
+	else if(data[0].name=='bdate')
+        alert('Top list by date');
+    else if(data[0].name=='bmonth')
+        alert('Top list by month');
+    else if(data[0].name=='byear')
+        alert('Top list by year');
+    //data[0].name
+    //data[0].value
+    //data[1].name
+    //data[1].value
+}
+
+function viewTransactionHistory(){
+	var data = $(this).parent().serializeArray();
+
+	if(data[0].value=='')
+		alert('need to fill data');
+	else if(data[0].name=='hdate')
+        alert('History list by date');
+    else if(data[0].name=='hmonth')
+        alert('History list by month');
+    else if(data[0].name=='hyear')
+        alert('History list by year');
+    //data[0].name
+    //data[0].value
+    //data[1].name
+    //data[1].value
+}
 
 function viewBorrowOption(){
 	if($("#borrowListData").is(':visible'))
@@ -64,26 +107,20 @@ function viewLibrarianHome(libraryName){
 
 function viewUserHome(){
 	$("#session a").html("Log In");
-	$("#header").html("<h1>Welcome to LIBMAN</h1><h2>This is a temporary Home Page for not Logged in users.</h2>");
+	$("#header").html("<h1>Welcome to LIBMAN</h1>");
 	$("#data-container").html("");
 	viewGenerateReportOptionsNotLoggedIn();
 }
 
-/*
+
 function viewGenerateReportOptionsNotLoggedIn() {
-	var yearOption = "<li><a href=\"#\" onclick= 'testAlert(\"Year\");'> Year <a></li>";
-	var monthOption = "<li><a href=\"#\" onclick= 'testAlert(\"Month\");'> Month </a></li>";
-	var dayOption = "<li><a href=\"#\" onclick= 'testAlert(\"Day\");'> Day </a></li>";
-	$("#report_options").html('Get most borrowed book by: <div class="most_borrowed_book_options">	<ul> '+ yearOption + monthOption + dayOption + '</ul></div>');
+	$('#historyList').hide();
 }
 
 function viewGenerateReportOptionsLoggedIn() {
-	var yearOption = "<li><a href=\"#\" onclick= 'testAlert(\"Year\");'> Year <a></li>";
-	var monthOption = "<li><a href=\"#\" onclick= 'testAlert(\"Month\");'> Month </a></li>";
-	var dayOption = "<li><a href=\"#\" onclick= 'testAlert(\"Day\");'> Day </a></li>";
-	$("#report_options").html('Get most borrowed book by: <div class="most_borrowed_book_options">	<ul>' + yearOption + monthOption + dayOption + '</ul> </div>Get library report by: <div class="most_borrowed_book_options"> <ul>' + yearOption + monthOption + dayOption + '</ul> </div>');
+	$('#historyList').slideDown('slow');
 }
-*/
+
 function testAlert(option) {
 	alert(option);
 }

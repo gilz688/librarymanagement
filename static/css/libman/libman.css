@@ -46,7 +46,7 @@
 	border-top: 1px solid white;
 }
 
-#historyButton, #borrowButton{
+#historyButtonD, #borrowButtonD, #historyButtonM, #borrowButtonM,#historyButtonY,#borrowButtonY{
 	width: 100%;
 	margin-top: 5px;
 }
