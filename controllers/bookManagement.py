@@ -5,31 +5,33 @@ __author__ = 'librarymanagementteam'
 	Generate monthly report in a year
 '''
 def generateMonthlyReport():
+	lib_name = request.vars.lib_name
 	month = request.vars.month
 	year = request.vars.year
-	monthlyReport = getMonthReport(month,year)
+	monthlyReport = getMonthReport(month,year,lib_name)
 	return response.json(monthlyReport)
 
 '''
 	Generate yearly report
 '''
 def generateYearlyReport():
+	lib_name = request.vars.lib_name
 	year = request.vars.year
-	yearlyReport = getYearReport(year)
+	yearlyReport = getYearReport(year,lib_name)
 	return response.json(yearlyReport)
 
 '''
 	Get a report of a given year
 '''
-def getYearReport(year):
-	transactionHistory = getYearTransactions(year)
+def getYearReport(year,lib_name):
+	transactionHistory = getYearTransactions(year,lib_name)
 	return transactionHistory
 
 '''
 	Get a report of a given month in a year
 '''
-def getMonthReport(month, year):
-	transactionHistory = getMonthTransactions(month, year)
+def getMonthReport(month, year, lib_name):
+	transactionHistory = getMonthTransactions(month, year, lib_name)
 	return transactionHistory
 
 
