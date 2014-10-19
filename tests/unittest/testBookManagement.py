@@ -19,7 +19,7 @@ class TestBookManagement(unittest.TestCase):
 		request.vars.month = '06'
 		request.vars.year = '2014'
 		result = getMostBorrowedBookPerDay()
-		expected = '{"ISBN": "0-07-013151-1", "max_occur": 4}'
+		expected = '{"ISBN": "0-07-013151-1", "max_occur": 4, "title": "Introduction to Algorithms" , "library": "COE-Library"}'
 		self.assertEquals(result.encode('ascii', 'ignore'), expected)
 		
 
@@ -27,13 +27,13 @@ class TestBookManagement(unittest.TestCase):
 		request.vars.year = '2014'
 		request.vars.month = '06'
 		result = getMostBorrowedBookPerMonth()
-		expected = '{"ISBN": "0-07-013151-1", "max_occur": 5}'
+		expected = '{"ISBN": "0-07-013151-1", "max_occur": 5, "title": "Introduction to Algorithms" , "library": "COE-Library"}'
 		self.assertEquals(result.encode('ascii', 'ignore'), expected)
 
 	def testMostBorrowedBookInAYear(self):
 		request.vars.year = '2014'
 		result = getMostBorrowedBookPerYear()
-		expected = '{"ISBN": "0-07-013151-3", "max_occur": 6}'
+		expected = '{"ISBN": "0-07-013151-3", "max_occur": 6, "title": "Introduction to Electricity" , "library": "SET-Library"}'
 		self.assertEquals(result.encode('ascii', 'ignore'), expected)
 
 	def testMostBorrowedBookInAWeek(self):
