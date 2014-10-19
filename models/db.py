@@ -46,7 +46,7 @@ db.define_table('author',
                 Field('lname', length=15),
                 Field('fname', length=15),
 				        Field('middle_initial', length=1))
-
+'''
 db.define_table('borrower',
                 Field('borrower_id', length=15),
                 Field('lib_name', db.library.lib_name),
@@ -58,7 +58,7 @@ db.define_table('borrow_book',
                 Field('ISBN', db.book.ISBN),
                 Field('borrow_date', 'date'),
                 Field('return_date', 'date'))
-
+'''
 
 db.define_table('transact_type',
                 Field('transact_type', length = 6),
@@ -72,8 +72,8 @@ db.define_table('book_manager',
                 Field('transact_type', db.transact_type.transact_type),
                 primarykey = ['ISBN', 'librarian_id', 'transact_date', 'transact_time'])
 
-db.borrower.drop()
-db.borrow_book.drop()
+#db.borrower.drop()
+#db.borrow_book.drop()
 
 
 #populate database
@@ -173,6 +173,11 @@ def getBookByISBN(ISBN):
 def getBooksOrderedByISBN():
     return db(db.book).select(orderby=db.book.ISBN)
 
+def getPaginatedBooksOrderedByISBN(items,page):
+    start = (page-1)*items
+    end = page*items
+    return db(db.book).select(orderby=db.book.ISBN,limitby=(start,end))
+
 def getBookAuthor(ISBN):
     return db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
 
@@ -208,6 +213,11 @@ def getMostBorrowedBookInAMonth(month, year):
 
 def getMostBorrowedBookInAYear(year):
     return db(db.book_manager.transact_date.year() == year).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
+
+def getMonthTransactions(month,year):
+    return db((db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select()
+def getYearTransactions(year):
+    return db(db.book_manager.transact_date.year() == year).select()
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
