@@ -214,10 +214,11 @@ def getMostBorrowedBookInAMonth(month, year):
 def getMostBorrowedBookInAYear(year):
     return db(db.book_manager.transact_date.year() == year).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
 
-def getMonthTransactions(month,year):
-    return db((db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select()
-def getYearTransactions(year):
-    return db(db.book_manager.transact_date.year() == year).select()
+def getMonthTransactions(month,year,lib_name):
+    return db.executesql("SELECT b.isbn, b.librarian_id, b.transact_date,b.transact_time,b.transact_type  FROM librarian l INNER JOIN book_manager b ON l.librarian_id = b.librarian_id WHERE lib_name = "+"'"+lib_name+"'"+" AND EXTRACT(YEAR FROM transact_date) = "+year+" AND EXTRACT(MONTH FROM transact_date) ="+month)
+
+def getYearTransactions(year,lib_name):
+    return db.executesql("SELECT b.isbn, b.librarian_id, b.transact_date,b.transact_time,b.transact_type FROM librarian l INNER JOIN book_manager b ON l.librarian_id = b.librarian_id WHERE lib_name = "+"'"+lib_name+"'"+" AND EXTRACT(YEAR FROM transact_date) = "+year)
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
