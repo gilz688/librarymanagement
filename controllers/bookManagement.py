@@ -39,15 +39,12 @@ def getMonthReport(month, year, lib_name):
 	Get a report for a day in a given month and year
 '''
 def getDayReport():
-	if (session.status == 'logged in' and session.lib_name == library.lib_name):
-		day = request.vars.day
-		month = request.vars.month
-		year = request.vars.year
-		library = request.vars.library
-		booksBorrowed = getRecordsInADay(day, month, year, library)
-		return response.json(booksBorrowed)
-	else:
-		return response.json(None)
+	day = request.vars.day
+	month = request.vars.month
+	year = request.vars.year
+	library = request.vars.library
+	booksBorrowed = getRecordsInADay(day, month, year, library)
+	return response.json(booksBorrowed)
 
 '''
 	Get the most borrowed book of a year
