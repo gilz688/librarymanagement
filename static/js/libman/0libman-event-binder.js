@@ -35,6 +35,7 @@ function viewHome(){
 
 function viewLibrarianHome(libraryName){
 	getBooks(libraryName);
+	viewGenerateReportOptionsLoggedIn();
 	$("#session a").html("Log Out");
 }
 
@@ -42,6 +43,25 @@ function viewUserHome(){
 	$("#session a").html("Log In");
 	$("#header").html("<h1>Welcome to LIBMAN</h1><h2>This is a temporary Home Page for not Logged in users.</h2>");
 	$("#data-container").html("");
+	viewGenerateReportOptionsNotLoggedIn();
+}
+
+function viewGenerateReportOptionsNotLoggedIn() {
+	var yearOption = "<li><a href=\"#\" onclick= 'testAlert(\"Year\");'> Year <a></li>";
+	var monthOption = "<li><a href=\"#\" onclick= 'testAlert(\"Month\");'> Month </a></li>";
+	var dayOption = "<li><a href=\"#\" onclick= 'testAlert(\"Day\");'> Day </a></li>";
+	$("#report_options").html('Get most borrowed book by: <div class="most_borrowed_book_options">	<ul> '+ yearOption + monthOption + dayOption + '</ul></div>');
+}
+
+function viewGenerateReportOptionsLoggedIn() {
+	var yearOption = "<li><a href=\"#\" onclick= 'testAlert(\"Year\");'> Year <a></li>";
+	var monthOption = "<li><a href=\"#\" onclick= 'testAlert(\"Month\");'> Month </a></li>";
+	var dayOption = "<li><a href=\"#\" onclick= 'testAlert(\"Day\");'> Day </a></li>";
+	$("#report_options").html('Get most borrowed book by: <div class="most_borrowed_book_options">	<ul>' + yearOption + monthOption + dayOption + '</ul> </div>Get library report by: <div class="most_borrowed_book_options"> <ul>' + yearOption + monthOption + dayOption + '</ul> </div>');
+}
+
+function testAlert(option) {
+	alert(option);
 }
 
 
