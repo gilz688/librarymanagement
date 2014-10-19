@@ -48,9 +48,14 @@ def getDayReport():
 '''
 def getMostBorrowedBookPerYear():
 	year = request.vars.year
-	book = getMostBorrowedBookInAYear(year)
-	bookRecord = {'ISBN': book['book_manager']['ISBN'], 'max_occur': book['_extra']['COUNT(book_manager.ISBN)']}
-	return response.json(bookRecord)
+	bookRecord = getMostBorrowedBookInAYear(year)
+	isbn = bookRecord['book_manager']['ISBN']
+	max_occur = bookRecord['_extra']['COUNT(book_manager.ISBN)']
+	book = getBookByISBN(isbn)
+	title = book.title
+	library = book.lib_name
+	record = {'ISBN': isbn, 'max_occur': max_occur, 'title': title, 'library': library}
+	return response.json(record)
 
 '''
 	Get the most borrowed book of a month in a year
@@ -58,15 +63,14 @@ def getMostBorrowedBookPerYear():
 def getMostBorrowedBookPerMonth():
 	year = request.vars.year
 	month = request.vars.month
-	book = getMostBorrowedBookInAMonth(month, year)
-	bookRecord = {'ISBN': book['book_manager']['ISBN'], 'max_occur': book['_extra']['COUNT(book_manager.ISBN)']}
-	return response.json(bookRecord)
-
-'''
-	Get the most borrowed book of a week in a month of a week
-'''
-def getMostBorrowedBookPerWeek(year, month, week):
-	pass
+	bookRecord = getMostBorrowedBookInAMonth(month, year)
+	isbn = bookRecord['book_manager']['ISBN']
+	max_occur = bookRecord['_extra']['COUNT(book_manager.ISBN)']
+	book = getBookByISBN(isbn)
+	title = book.title
+	library = book.lib_name
+	record = {'ISBN': isbn, 'max_occur': max_occur, 'title': title, 'library': library}
+	return response.json(record)
 
 '''
 	Get the most borrowed book of a day in a month of a week
@@ -75,7 +79,11 @@ def getMostBorrowedBookPerDay():
 	day = request.vars.day
 	month = request.vars.month
 	year = request.vars.year
-	book = getMostBorrowedBookInADay(day, month, year)
-	bookRecord = {'ISBN': book['book_manager']['ISBN'], 'max_occur': book['_extra']['COUNT(book_manager.ISBN)']}
-	return response.json(bookRecord)
-	
+	bookRecord = getMostBorrowedBookInADay(day, month, year)
+	isbn = bookRecord['book_manager']['ISBN']
+	max_occur = bookRecord['_extra']['COUNT(book_manager.ISBN)']
+	book = getBookByISBN(isbn)
+	title = book.title
+	library = book.lib_name
+	record = {'ISBN': isbn, 'max_occur': max_occur, 'title': title, 'library': library}
+	return response.json(record)
