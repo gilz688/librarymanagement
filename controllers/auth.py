@@ -31,7 +31,7 @@ def validate(username,password):
 		return False
 
 def isLoggedIn():
-	if (session.username is not None) and (session.status is not None) and (session.lib_name is not None):
+	if (session.username is not None) and (session.status is not None) and (session.lib_name is not None) and (session.lib_id is not None):
 		return True
 	else:
 		return False
@@ -46,7 +46,8 @@ def getSession():
 	if(isLoggedIn()):
 		mySession = {'username': session.username,
 			'lib_name': session.lib_name,
-			'status': session.status}
+			'status': session.status,
+			'lib_id': session.lib_id}
 		return response.json(mySession)
 	else:
 		return response.json(None)

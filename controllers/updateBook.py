@@ -42,7 +42,7 @@ def returnBook():
 						"num_of_copies":book['num_of_copies']
 						}
 			# add the transaction to the book management here
-			addToBookManagement(session.lib_id, isbn, "return")
+			#addToBookManagement(session.lib_id, isbn, "return")
 			return response.json(bookData)
 		except:
 			raise Exception("Cannot return book")
@@ -60,7 +60,7 @@ def borrowBook():
 							"num_of_copies":book['num_of_copies']
 							}
 				# add the trasaction to the book management here
-				addToBookManagement(session.lib_id, isbn, "borrow")
+				#addToBookManagement(session.lib_id, isbn, "borrow")
 				return response.json(bookData)
 			except:
 				raise Exception('Book is currently unavailable.')

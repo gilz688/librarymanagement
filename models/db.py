@@ -202,7 +202,7 @@ def addReturnTransaction(librarian_id, ISBN, dateNow, timeNow):
 def addBorrowTransaction(librarian_id, ISBN, dateNow, timeNow):
     db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'borrow'})
 
-def getRecordsInADay(day, month, year):
+def getRecordsInADay(day, month, year, library):
     return db((db.book_manager.transact_date.day() == day) & (db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select(db.book_manager.ALL)
 
 def getMostBorrowedBookInADay(day, month, year):
