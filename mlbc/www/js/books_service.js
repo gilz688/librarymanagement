@@ -3,7 +3,8 @@ function booksService($http, $q) {
     // Return public API.
     return ({
         getSpecificBookInfo: getSpecificBookInfo,
-        getAllBooks: getAllBooks
+        getAllBooks: getAllBooks,
+        searchBook: searchBook
     });
 
     // ---
@@ -20,6 +21,7 @@ function booksService($http, $q) {
                 'Content-type': 'application/json'
             }
         });
+
         return (request.then(handleSuccess, handleError));
     }
 
@@ -27,6 +29,18 @@ function booksService($http, $q) {
         var request = $http({
             method: "get",
             url: remote_site + "viewBooks/getAllBooks/",
+        });
+        return (request.then(handleSuccess, handleError));
+    }
+
+
+    function searchBook(key){
+        var request = $http({
+            method: "post",
+            url: remote_site + "searchBook/searchAllBook/",
+            data: {
+                "keyword": key
+            }
         });
         return (request.then(handleSuccess, handleError));
     }

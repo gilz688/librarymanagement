@@ -8,8 +8,11 @@ function booksController($scope, $q, booksService) {
         viewBooks();
     };
 
+
     // bind function to html element with ng-click="viewSpecificBookInfo"
     $scope.viewSpecificBookInfo = viewSpecificBookDetails;
+
+    $scope.searchBook = searchAllBook;
 
     function viewBooks() {
         booksService.getAllBooks().then(
@@ -34,6 +37,21 @@ function booksController($scope, $q, booksService) {
                 mainnav.pushPage("book_details.html", options);
             }
         );
+    }
+
+
+    function searchAllBook(keyword){
+        $scope.books = [];
+        if (keyword == ""){
+            viewBooks();
+        }
+        else{
+            booksService.searchBook(keyword).then(
+                function(books){
+                    setBooks(books);
+                }
+            );
+        }
     }
 	
 	$scope.twoPlusThree = function() {
