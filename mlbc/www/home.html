@@ -7,12 +7,12 @@
         <ons-row class="search_container">
           <ons-col align="center">
             <img src="img/mlbc.png" alt="mlbc">
-            <input type="text" class="search-input" placeholder="Search" data-ng-model="searchQuery" ng-change="searchBook(searchQuery)">
+            <input type="search" class="search-input" placeholder="Search" data-ng-model="searchQuery" ng-change="searchBook(searchQuery)">
           </ons-col>
         </ons-row>
 
         <ons-list style="border-top: none;">
-            <ons-list-item modifier="chevron" class="item" ng-repeat="book in books track by $index" ng-click="viewSpecificBookInfo(book.ISBN)" page="settings.html">
+            <ons-list-item modifier="chevron" class="item" ng-repeat="book in books" ng-click="viewSpecificBookInfo(book.ISBN)" page="settings.html">
                 <ons-row>
                     <ons-col width="20%">
                         <div class="item-thum">
