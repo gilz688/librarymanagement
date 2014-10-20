@@ -1,22 +1,20 @@
 function booksController($scope, $q, booksService) {
-    $scope.books = [];
-    addBooks(1,3);
+    viewBooks();
 
+        // bind function to html element with ng-click="viewSpecificBookInfo"
+    $scope.viewSpecificBookInfo = viewSpecificBookDetails;
+    $scope.searchBook = searchAllBook;
     $scope.baseUrl = remote_site;
-    
-    $scope.viewBooks = function(){
+    $scope.viewBooks = viewBooks;
+
+    function viewBooks(){
         $scope.books = [];
         addBooks(1,3);
-    };
+    }
 
     $scope.nextPage = function(){
         addBooks($scope.books.length,$scope.books.length+1);
     }
-
-    // bind function to html element with ng-click="viewSpecificBookInfo"
-    $scope.viewSpecificBookInfo = viewSpecificBookDetails;
-
-    $scope.searchBook = searchAllBook;
 
     function addBooks(start,end) {
         booksService.getAllBooks(start,end).then(
@@ -60,9 +58,4 @@ function booksController($scope, $q, booksService) {
             );
         }
     }
-	
-	$scope.twoPlusThree = function() {
-		return 2 + 3;
-	}
-
 }
