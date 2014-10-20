@@ -64,10 +64,8 @@ def searchAllBook():
 def searchBookByTitleAuthorISBN(key):
 	booksByTitle = matchBookByTitle(key)
 	booksByISBN = matchBookByISBN(key)
-	new_book = booksByTitle | booksByISBN
-	ISBNs = matchBookByAuthor(key)  #this query returns ISBN only, so looping is needed
-	for i in ISBNs:
-		new_book = new_book | db(db.book.ISBN == i.ISBN).select(orderby=db.book.title)
+	booksByAuthor = matchBookByAuthor(key)
+	new_book = booksByTitle | booksByISBN | booksByAuthor
 	return new_book
 
 def enableCORS():
