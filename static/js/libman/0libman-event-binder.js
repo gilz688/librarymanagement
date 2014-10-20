@@ -35,13 +35,25 @@ function viewMostBorrowedBooks(){
 	var data = $(this).parent().serializeArray();
 
 	if(data[0].value=='')
-		alert('need to fill data');
-	else if(data[0].name=='bdate')
-        alert('Top list by date');
-    else if(data[0].name=='bmonth')
-        alert('Top list by month');
-    else if(data[0].name=='byear')
-        alert('Top list by year');
+		displayPleaseFillDateErrorMessage();
+	else if(data[0].name=='bdate') {
+        date = data[0].value.split("-");
+        year = date[0];
+        month = date[1];
+        day = date[2];
+        displayMostBorrowedBookDaily(day, month, year);
+    		}
+    else if(data[0].name=='bmonth') {
+		date = data[0].value.split("-");
+    	year = date[0];
+        month = date[1];
+        day = date[2];
+        displayMostBorrowedBookMonthly(month, year);
+	}
+    else if(data[0].name=='byear') {
+        year = data[0].value;
+        displayMostBorrowedBookYearly(year);
+	}
     //data[0].name
     //data[0].value
     //data[1].name
@@ -52,13 +64,28 @@ function viewTransactionHistory(){
 	var data = $(this).parent().serializeArray();
 
 	if(data[0].value=='')
-		alert('need to fill data');
-	else if(data[0].name=='hdate')
-        alert('History list by date');
-    else if(data[0].name=='hmonth')
-        alert('History list by month');
-    else if(data[0].name=='hyear')
-        alert('History list by year');
+		displayPleaseFillDateErrorMessage();
+	else if(data[0].name=='hdate') {
+		date = data[0].value.split("-");
+        year = date[0];
+        month = date[1];
+        day = date[2];
+    	library = data[1].value;
+    	displayDayRecord(day, month, year, library);
+	}
+    else if(data[0].name=='hmonth') {
+    	date = data[0].value.split("-");
+    	month = date[1];
+        day = date[2];
+    	library = data[1].value;
+    	displayMonthRecord(month, year, library);
+    }
+    else if(data[0].name=='hyear') {
+    	year = data[0].value;
+    	library = data[1].value;
+    	displayYearRecord(year, library);
+    }
+        
     //data[0].name
     //data[0].value
     //data[1].name
@@ -120,11 +147,6 @@ function viewGenerateReportOptionsNotLoggedIn() {
 function viewGenerateReportOptionsLoggedIn() {
 	$('#historyList').slideDown('slow');
 }
-
-function testAlert(option) {
-	alert(option);
-}
-
 
 function signInOrSignOut(){
 	var session = $( "#session a" ).html();

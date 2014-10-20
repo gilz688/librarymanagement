@@ -45,3 +45,9 @@ function setToastMargin(topM, left_rightM, bottomM){
 function setToastWidth(toastWidth){
 	$("#toast-container>div").width(toastWidth);
 }
+
+function displayPleaseFillDateErrorMessage() {
+    setToastOption();
+    toastr.error('Please enter the date', "Error!");
+    setToastMargin(0,10,6);
+}
