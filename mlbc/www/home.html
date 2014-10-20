@@ -11,7 +11,7 @@
           </ons-col>
         </ons-row>
 
-        <ons-scroller infinit-scroll-enable="true" on-scrolled="nextPage()" threshold="20" style="height:70%" can-load="canLoad">
+        <ons-scroller infinit-scroll-enable="true" on-scrolled="nextPage()" threshold="20" style="height:70%" can-load="ready">
             <ons-list-item modifier="chevron" class="item" ng-repeat="book in books" ng-click="viewSpecificBookInfo(book.ISBN)" page="settings.html">
                 <ons-row>
                     <ons-col width="20%">
