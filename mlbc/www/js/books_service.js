@@ -25,10 +25,10 @@ function booksService($http, $q) {
         return (request.then(handleSuccess, handleError));
     }
 
-    function getAllBooks() {
+    function getAllBooks(start,end) {
         var request = $http({
             method: "get",
-            url: remote_site + "viewBooks/getAllBooks/",
+            url: remote_site + "viewBooks/getAllBooks?start="+start+"&end="+end,
         });
         return (request.then(handleSuccess, handleError));
     }
