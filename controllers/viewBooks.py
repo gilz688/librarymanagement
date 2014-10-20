@@ -35,12 +35,12 @@ def getBookInfo():
 
 def getAllBooks():
     enableCORS()
-    items = request.vars.items;
-    page = request.vars.page;
-    if (not page) | (not items):
+    start = request.vars['start'];
+    end = request.vars['end'];
+    if (not start) | (not end):
         books = getBooksOrderedByISBN()
     else:
-        books = getPaginatedBooksOrderedByISBN(items,page)
+        books = getPaginatedBooksOrderedByISBN(int(start),int(end))
     return response.json(books)
 
 def enableCORS():
