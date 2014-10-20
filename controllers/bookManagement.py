@@ -88,6 +88,5 @@ def getMostBorrowedBookPerDay():
 	book = getBookByISBN(isbn)
 	title = book.title
 	library = book.lib_name
-	book_image = book.pic
-	record = {'ISBN': isbn, 'max_occur': max_occur, 'title': title, 'library': library, 'pic': book_image}
+	record = {'ISBN': isbn, 'max_occur': max_occur, 'title': title, 'library': library}
 	return response.json(record)

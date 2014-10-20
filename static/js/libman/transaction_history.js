@@ -113,10 +113,11 @@ function displayMostBorrowedRecords(records){
 }
 
 function displayRecords(records) {
-	var output = "<table> <tr> <td id = \"isbn\"> </td> </tr> </table>";
+	var output = "<table> <tr> <td> <span id=\"isbnRecord\"> ISBN </span </td>  </tr> </table>";
 	$("#data-container").html(output);
 	for(var i in records) {
 		//$("#data-container").html(records[i]['ISBN']);
-		$("#data-container").html("Hello");
+		//\$("#data-container").html("Hello");
+		$("#isbnRecord").html("Hello")
 	}
 }

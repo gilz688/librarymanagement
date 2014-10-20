@@ -1,23 +1,28 @@
 function booksController($scope, $q, booksService) {
     viewBooks();
 
-    $scope.baseUrl = remote_site;
-    
-    $scope.viewBooks = function(){
-        $scope.books = [];
-        viewBooks();
-    };
-
-
-    // bind function to html element with ng-click="viewSpecificBookInfo"
+        // bind function to html element with ng-click="viewSpecificBookInfo"
     $scope.viewSpecificBookInfo = viewSpecificBookDetails;
-
     $scope.searchBook = searchAllBook;
+    $scope.baseUrl = remote_site;
+    $scope.viewBooks = viewBooks;
 
-    function viewBooks() {
-        booksService.getAllBooks().then(
+    function viewBooks(){
+        $scope.books = [];
+        addBooks(1,3);
+    }
+
+    $scope.nextPage = function(){
+        addBooks($scope.books.length,$scope.books.length+1);
+    }
+
+    function addBooks(start,end) {
+        booksService.getAllBooks(start,end).then(
             function(books) {
-                setBooks(books);
+                console.dir(books);
+                for(var i=0;i<books.length;i++){
+                    $scope.books.push(books[i]);
+                }
             }
         );
     }
@@ -53,9 +58,4 @@ function booksController($scope, $q, booksService) {
             );
         }
     }
-	
-	$scope.twoPlusThree = function() {
-		return 2 + 3;
-	}
-
 }

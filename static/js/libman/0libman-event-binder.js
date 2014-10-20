@@ -54,10 +54,6 @@ function viewMostBorrowedBooks(){
         year = data[0].value;
         displayMostBorrowedBookYearly(year);
 	}
-    //data[0].name
-    //data[0].value
-    //data[1].name
-    //data[1].value
 }
 
 function viewTransactionHistory(){
@@ -85,11 +81,6 @@ function viewTransactionHistory(){
     	library = data[1].value;
     	displayYearRecord(year, library);
     }
-        
-    //data[0].name
-    //data[0].value
-    //data[1].name
-    //data[1].value
 }
 
 function viewBorrowOption(){
