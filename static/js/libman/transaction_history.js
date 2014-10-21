@@ -89,13 +89,14 @@ function displayYearRecord(year, library) {
 		type: "post",
 		url: local_site+ "bookManagement/generateYearlyReport/",
 		data: {
-			year: year,
-			lib_name: library
+			year: '2014',
+			lib_name: 'COE-Library'
 		},
 		dataType: "json",
 		success: function(records){
 			$("#header").html("<h1>Records For Year : " + year+ "<h1>");
-			displayRecords(records);
+			console.log(records);
+			//displayRecords(records);
 		},
 	});
 }
