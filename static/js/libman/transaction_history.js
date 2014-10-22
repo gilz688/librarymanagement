@@ -8,7 +8,7 @@ function displayMostBorrowedBookYearly(year) {
 		},
 		dataType: "json",
 		success: function(records){
-			$("#header").html("<h1>Most Borrowed Book For Year : " +year+ "<h1>");
+			$("#panel_heading").html("Most Borrowed Book For Year : "+year);
 			displayMostBorrowedRecords(records);
 		},
 	});
@@ -26,7 +26,7 @@ function displayMostBorrowedBookDaily(day, month, year) {
 		},
 		dataType: "json",
 		success: function(records){
-			$("#header").html("<h1>Most Borrowed Book For : " +month + "-" + day + "-" + year+ "<h1>");
+			$("#panel_heading").html("<h1>Most Borrowed Book For : " +month + "-" + day + "-" + year+ "<h1>");
 			displayMostBorrowedRecords(records);
 		},
 	});
@@ -43,7 +43,7 @@ function displayMostBorrowedBookMonthly(month, year) {
 		},
 		dataType: "json",
 		success: function(records){
-			$("#header").html("<h1>Most Borrowed Book For : " + month + "-" + year+ "<h1>");
+			$("#panel_heading").html("<h1>Most Borrowed Book For : " + month + "-" + year+ "<h1>");
 			displayMostBorrowedRecords(records);
 		},
 	});
@@ -61,6 +61,7 @@ function displayDayRecord(day, month, year, library) {
 		},
 		dataType: "json",
 		success: function(records){
+
 			var recordsArray = [];
 			for(var i = 0;i<records.length;i++){
 				var rowInRecords = {
@@ -135,9 +136,9 @@ function displayYearRecord(year, library) {
 
 
 function displayMostBorrowedRecords(records){
-	var output = "<table class='table table-bordered'> <ul class='list-group'> <li class='list-group-item'><b>Title :</b> <span id='title'></span></li> <li class='list-group-item'><b>ISBN :</b> <span id='isbn'></span></li> <li class='list-group-item'><b>Library:</b> <span id='library'></span></li> <li class='list-group-item'><b>Total no. of transactions:</b> <span id='numtransacts'></span></li>";
-	output += "</tbody></table></div></div>";
-	$("#data-container").html(output);
+	var output = "<ul class='list-group'> <li class='list-group-item'><b>Title :</b> <span id='title'></span></li> <li class='list-group-item'><b>ISBN :</b> <span id='isbn'></span></li> <li class='list-group-item'><b>Library:</b> <span id='library'></span></li> <li class='list-group-item'><b>Total no. of transactions:</b> <span id='numtransacts'></span></li></ul>"
+	
+	$("#panel_body").html(output);
 
 	$("#title").html(records['title'])
 	$("#isbn").html(records['ISBN']);
