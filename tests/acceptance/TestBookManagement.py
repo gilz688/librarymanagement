@@ -21,16 +21,16 @@ class TestBookManagement(unittest.TestCase):
 	def testGetMostBorrowedBookYearlyNotLoggedIn(self):
 		self.visitBooksUrl()
 
-		option = self.browser.find_by_xpath('//span[text()=\"View most borrowed books\"]').first
+		option = self.browser.find_by_id('borrowList')
 		#optionList = self.browser.find_by_id('borrowListData')
 		#submit = self.browser.find_by_id("borrowButtonM")
 		#optionList = self.browser.find_by_id("borrowListData")
 		#year = self.browser.find_by_xpath('//li[@id=\"borrowListData\"]/ul/li')[2]
-		year = self.browser.find_by_id('borYear')
+		#year = self.browser.find_by_id('borYear')
 		#submit = self.browser.find_by_id('borrowButtonY')
 		
 		option.click()
-		year.click()
+		# year.click()
 		#submit.click()
 
 
