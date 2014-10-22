@@ -121,6 +121,7 @@ function viewLibrarianHome(libraryName){
 	getBooks(libraryName);
 	viewGenerateReportOptionsLoggedIn();
 	$("#session a").html("Log Out");
+	hideBookManagementOption();
 }
 
 function viewUserHome(){
@@ -147,6 +148,7 @@ function signInOrSignOut(){
 	}
 	else{
 		logOutUser();
+		hideBookManagementOption();
 	}
 }
 
@@ -186,4 +188,9 @@ function clearBookModal() {
 	$("#description").html("");
 	$("#book_pic").attr("src", "#");
 	$("#borrow-return-button").html("");
+}
+
+function hideBookManagementOption() {
+	$("#borrowListData").hide();
+	$("#historyListData").hide();
 }

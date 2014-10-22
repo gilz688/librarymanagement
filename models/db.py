@@ -149,6 +149,57 @@ db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 
 db.book_manager.insert(**{'ISBN': '0-07-013151-5', 'librarian_id': '1999-0002', 'transact_date': '2014-07-18', 'transact_time': '17:43:55', 'transact_type': 'borrow'})
 db.book_manager.insert(**{'ISBN': '0-07-013151-3', 'librarian_id': '1999-0002', 'transact_date': '2014-07-18', 'transact_time': '18:43:55', 'transact_type': 'return'})
 db.book_manager.insert(**{'ISBN': '0-07-013151-4', 'librarian_id': '1999-0002', 'transact_date': '2014-07-19', 'transact_time': '19:43:55', 'transact_type': 'return'})
+
+
+#new books here
+
+db.book.insert(**{'ISBN': '0-07-013151-6', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'Computability, Complexity and Languages', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-7', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': '3D Computer Graphics', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-8', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'Fundamentals of Database Systems', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-9', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'Clean Code', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-10', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'SCRUM in Action', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-11', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'Java Foundations', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+db.book.insert(**{'ISBN': '0-07-013151-12', 'lib_name': 'COE-Library','publisher': 'MIT Press',
+                  'title': 'Leanrning Python', 'no_of_copies': 5, 'available_copies': 3,
+                  'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
+                  'description': 'No Available description.'})
+
+#new authors here
+db.author.bulk_insert([{'ISBN': '0-07-013151-6', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-013151-7', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
+                        {'ISBN': '0-07-013151-8', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-013151-9', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-013151-10', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
+                        {'ISBN': '0-07-013151-11', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-013151-12', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-013151-6', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
+                        {'ISBN': '0-07-013151-7', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'}])
+
+
 db.commit()
 '''
 
