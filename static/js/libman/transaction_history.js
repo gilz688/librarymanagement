@@ -73,7 +73,7 @@ function displayDayRecord(day, month, year, library) {
 				}
 				recordsArray.push(rowInRecords);
 			}
-			displayRecords(recordsArray);
+			displayRecords(recordsArray,library);
 		},
 	});
 }
@@ -101,7 +101,7 @@ function displayMonthRecord(month, year, library) {
 				}
 				recordsArray.push(rowInRecords);
 			}
-			displayRecords(recordsArray);
+			displayRecords(recordsArray,library);
 		},
 	});
 }
@@ -148,7 +148,7 @@ function displayMostBorrowedRecords(records){
 function displayRecords(records, library) {
 	var output = '<div class="panel panel-info"><div id="panel_heading" class="panel-heading"></div><div class="panel-body"><div class="table-responsive"><table id="history" class="table table-striped table-hover table-condensed" cellspacing="0" width="100%"><thead><tr><th>Title</th><th>ISBN</th><th>Librarian ID</th><th>Date</th><th>Time</th><th>Type</th></tr></thead></table></div></div></div></div>'
     $("#data-container").html(output);
-    $("#panel_heading").html(+library+ " transaction history");
+    $("#panel_heading").html("<b>"+library+ " transaction history</b>");
 
     $('#history').DataTable( {
 	    data: records,
