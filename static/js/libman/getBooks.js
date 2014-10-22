@@ -7,12 +7,12 @@ function getBooks(libraryName){
 		dataType: "json",
 		success: function(books){
 			$("#header").html("<h1>Home Library: " +libraryName+ "<h1>");
-			displayBooks(books);
+			displayBooks(books,libraryName);
 		},
 	});
 }
 
-function displayBooks(books){
+function displayBooks(books,libraryName){
 	var output = "<table class=\"table table-bordered\">";
 	output += "<thead>";
 	output += "<tr><th style=\"text-align:center\">Book Title</th><th style=\"text-align:center\">ISBN</th></tr>";
@@ -21,5 +21,7 @@ function displayBooks(books){
 		output +="<tr><td><a href=\"#\" onClick='getBookInfo(\"" +books[i].ISBN+ "\");'>"+ books[i].title+  "</a></td><td>" +books[i].ISBN+ "</td></tr>";
 	}
 	output += "</tbody></table></div></div>";
-	$("#data-container").html(output);
+
+	$("#panel_heading").html("<b>"+libraryName+" books</b>");
+	$("#panel_body").html(output);
 }
