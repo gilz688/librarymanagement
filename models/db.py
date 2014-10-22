@@ -173,10 +173,8 @@ def getBookByISBN(ISBN):
 def getBooksOrderedByISBN():
     return db(db.book).select(orderby=db.book.ISBN)
 
-def getPaginatedBooksOrderedByISBN(items,page):
-    start = (page-1)*items
-    end = page*items
-    return db(db.book).select(orderby=db.book.ISBN,limitby=(start,end))
+def getPaginatedBooksOrderedByISBN(start,end):
+    return db(db.book).select(orderby=db.book.ISBN,limitby=(start,end+1))
 
 def getBookAuthor(ISBN):
     return db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
@@ -188,13 +186,13 @@ def reduceAvailableBookCopies(isbn, available_copies):
     db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
 
 def matchBookByISBN(isbn):
-    return db(db.book.ISBN.like('%' + isbn + '%')).select(orderby=db.book.ISBN)
+    return db(db.book.ISBN.like('%' + isbn + '%')).select(orderby=db.book.title)
 
 def matchBookByTitle(book_title):
     return db(db.book.title.like('%'+book_title+'%')).select(orderby=db.book.title)
 
 def matchBookByAuthor(book_author):
-    return db(db.author.lname.like('%'+book_author+'%')).select(db.author.ISBN, orderby=db.author.ISBN, distinct=True)
+    return db((db.book.ISBN == db.author.ISBN) & db.author.lname.like('%'+book_author+'%')).select(db.book.ALL, orderby=db.book.title, distinct=True)
 
 def addReturnTransaction(librarian_id, ISBN, dateNow, timeNow):
     db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'return'})

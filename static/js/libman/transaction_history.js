@@ -61,8 +61,19 @@ function displayDayRecord(day, month, year, library) {
 		},
 		dataType: "json",
 		success: function(records){
-			$("#header").html("<h1>Records For : " + day + "-" + month + "-" + year+ "<h1>");
-			displayRecords(records);
+			var recordsArray = [];
+			for(var i = 0;i<records.length;i++){
+				var rowInRecords = {
+					title: records[i].book.title,
+					isbn: records[i].book_manager.ISBN,
+					libID: records[i].book_manager.librarian_id,
+					date: records[i].book_manager.transact_date,
+					time: records[i].book_manager.transact_time,
+					type: records[i].book_manager.transact_type,
+				}
+				recordsArray.push(rowInRecords);
+			}
+			displayRecords(recordsArray,library);
 		},
 	});
 }
@@ -78,8 +89,19 @@ function displayMonthRecord(month, year, library) {
 		},
 		dataType: "json",
 		success: function(records){
-			$("#header").html("<h1>Records For : " + month + "-" + year+ "<h1>");
-			displayRecords(records);
+			var recordsArray = [];
+			for(var i = 0;i<records.length;i++){
+				var rowInRecords = {
+					title: records[i].book.title,
+					isbn: records[i].book_manager.ISBN,
+					libID: records[i].book_manager.librarian_id,
+					date: records[i].book_manager.transact_date,
+					time: records[i].book_manager.transact_time,
+					type: records[i].book_manager.transact_type,
+				}
+				recordsArray.push(rowInRecords);
+			}
+			displayRecords(recordsArray,library);
 		},
 	});
 }
@@ -87,23 +109,33 @@ function displayMonthRecord(month, year, library) {
 function displayYearRecord(year, library) {
 	$.ajax({
 		type: "post",
-		url: local_site+ "bookManagement/generateYearlyReport/",
+		url: local_site+ "bookManagement/generateYearlyReport",
 		data: {
-			year: '2014',
-			lib_name: 'COE-Library'
+			year: year,
+			lib_name: library,
 		},
 		dataType: "json",
 		success: function(records){
-			$("#header").html("<h1>Records For Year : " + year+ "<h1>");
-			console.log(records);
-			//displayRecords(records);
-		},
+			var recordsArray = [];
+			for(var i = 0;i<records.length;i++){
+				var rowInRecords = {
+					title: records[i].book.title,
+					isbn: records[i].book_manager.ISBN,
+					libID: records[i].book_manager.librarian_id,
+					date: records[i].book_manager.transact_date,
+					time: records[i].book_manager.transact_time,
+					type: records[i].book_manager.transact_type,
+				}
+				recordsArray.push(rowInRecords);
+			}
+			displayRecords(recordsArray,library);
+		}
 	});
 }
 
 
 function displayMostBorrowedRecords(records){
-	var output = "<table class=\"table table-bordered\"> <ul class=\"list-group\"> <li class=\"list-group-item\"><b>Title :</b> <span id=\"title\"></span></li> <li class=\"list-group-item\"><b>ISBN :</b> <span id=\"isbn\"></span></li> <li class=\"list-group-item\"><b>Library:</b> <span id=\"library\"></span></li> <li class=\"list-group-item\"><b>Total no. of transactions:</b> <span id=\"numtransacts\"></span></li> ";
+	var output = "<table class='table table-bordered'> <ul class='list-group'> <li class='list-group-item'><b>Title :</b> <span id='title'></span></li> <li class='list-group-item'><b>ISBN :</b> <span id='isbn'></span></li> <li class='list-group-item'><b>Library:</b> <span id='library'></span></li> <li class='list-group-item'><b>Total no. of transactions:</b> <span id='numtransacts'></span></li>";
 	output += "</tbody></table></div></div>";
 	$("#data-container").html(output);
 
@@ -113,12 +145,28 @@ function displayMostBorrowedRecords(records){
 	$("#numtransacts").html(records['max_occur']);
 }
 
-function displayRecords(records) {
-	var output = "<table> <tr> <td> <span id=\"isbnRecord\"> ISBN </span </td>  </tr> </table>";
-	$("#data-container").html(output);
-	for(var i in records) {
-		//$("#data-container").html(records[i]['ISBN']);
-		//\$("#data-container").html("Hello");
-		$("#isbnRecord").html("Hello")
-	}
+function displayRecords(records, library) {
+	var output = '<div class="panel panel-info"><div id="panel_heading" class="panel-heading"></div><div class="panel-body"><div class="table-responsive"><table id="history" class="table table-striped table-hover table-condensed" cellspacing="0" width="100%"><thead><tr><th>Title</th><th>ISBN</th><th>Librarian ID</th><th>Date</th><th>Time</th><th>Type</th></tr></thead></table></div></div></div></div>'
+    $("#data-container").html(output);
+    $("#panel_heading").html("<b>"+library+ " transaction history</b>");
+
+    $('#history').DataTable( {
+	    data: records,
+	    columns: [
+	    	{ data: 'title' },
+	        { data: 'isbn' },
+	        { data: 'libID' },
+	        { data: 'date' },
+	        { data: 'time' },
+	        { data: 'type' }
+	    ],
+	    "columnDefs": [
+		    { "width": "30%", "targets": 0 },
+		    { "width": "15%", "targets": 1 },
+		    { "width": "12%", "targets": 2 },
+		    { "width": "12%", "targets": 3 },
+		    { "width": "10%", "targets": 4 },
+		    { "width": "5%", "targets": 5 },
+		 ]
+	});
 }
