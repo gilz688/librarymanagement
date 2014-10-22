@@ -203,6 +203,10 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-6', 'lname': 'Boydell', 'fname': 'B
 db.commit()
 '''
 
+
+
+"""View Books Query"""
+
 def getLibrary(lib_name):
   return db(db.library.lib_name == lib_name).select()
 
@@ -230,11 +234,23 @@ def getPaginatedBooksOrderedByISBN(start,end):
 def getBookAuthor(ISBN):
     return db(db.author.ISBN == ISBN).select(db.author.lname, db.author.fname, db.author.middle_initial, orderby=db.author.lname)
 
+
+
+
+
+"""Update Book Query"""
+
 def addBookAvailableBookCopies(isbn, available_copies):
     db(db.book.ISBN == isbn).update(available_copies = available_copies + 1)
 
 def reduceAvailableBookCopies(isbn, available_copies):
     db(db.book.ISBN == isbn).update(available_copies = available_copies - 1)
+
+
+
+
+
+"""Search Query"""
 
 def matchBookByISBN(isbn):
     return db(db.book.ISBN.like('%' + isbn + '%')).select(orderby=db.book.title)
@@ -244,6 +260,25 @@ def matchBookByTitle(book_title):
 
 def matchBookByAuthor(book_author):
     return db((db.book.ISBN == db.author.ISBN) & db.author.lname.like('%'+book_author+'%')).select(db.book.ALL, orderby=db.book.title, distinct=True)
+
+def matchBook(keyword):
+    booksByTitle = matchBookByTitle(keyword)
+    booksByISBN = matchBookByISBN(keyword)
+    booksByAuthor = matchBookByAuthor(keyword)
+    new_book = booksByTitle | booksByISBN | booksByAuthor
+    return new_book
+
+def matchPaginatedBook(keyword,start,end):
+    q1 = "select * from book where (ISBN ilike '%%"+keyword+"%%') or (title ilike '%%"+keyword+"%%')"
+    q2 = "select distinct(book.*) from book join author on (book.ISBN=author.ISBN) where author.lname ilike '%%"+keyword+"%%'"
+    query = "select books.isbn as \"ISBN\", books.lib_name, books.title, books.pic, books.publisher, books.no_of_copies, books.available_copies, books.description from (("+q1+") union ("+q2+")) as books order by books.title limit "+str(int(end)+1)+" offset "+start+";"
+    return db.executesql(query,as_dict=True)
+
+
+
+
+
+"""Report Query"""
 
 def addReturnTransaction(librarian_id, ISBN, dateNow, timeNow):
     db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'return'})
