@@ -70,9 +70,9 @@ function viewTransactionHistory(){
     	displayDayRecord(day, month, year, library);
 	}
     else if(data[0].name=='hmonth') {
-    	date = data[0].value.split("-");
-    	month = date[1];
-        day = date[2];
+		date = data[0].value.split("-");
+        year = date[0];
+        month = date[1];
     	library = data[1].value;
     	displayMonthRecord(month, year, library);
     }
