@@ -245,7 +245,6 @@ db.book.insert(**{'ISBN': '0-13-291548-0', 'lib_name': 'COE-Library',
                   'pic': 'book.pic.9208293388898e2d.363165705643427772774c202831292e6a7067.jpg',
                   'description': 'In his revision of Engineering Mechanics, R.C. Hibbeler empowers¿readers to succeed in the whole learning experience. Hibbeler achieves this by calling on his everyday classroom experience and his knowledge of how people learn inside and outside of lecture. This text is ideal for civil and mechanical engineering professionals.'})
 
-
 # more authors here
 
 db.author.bulk_insert([{'ISBN': '0-13-262226-2', 'lname': 'Boylestad', 'fname': 'Robert', 'middle_initial': 'L'},
