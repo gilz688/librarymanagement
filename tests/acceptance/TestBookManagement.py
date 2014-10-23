@@ -174,7 +174,28 @@ class TestBookManagement(unittest.TestCase):
 		self.browser.find_by_css('#session').click()
 
 	def testGetMonthlyReportSETLibBlankQuery(self):
-		pass
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian2")
+		self.browser.find_by_css("#password").fill("password2")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		month = self.browser.find_by_id('histMonth')
+		month.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonM')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
 
 
 	def testGetDailyReportCOELibBlankQuery(self):
