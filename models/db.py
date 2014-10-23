@@ -120,7 +120,7 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-1', 'lname': 'Cormen', 'fname': 'Th
                         {'ISBN': '0-07-013151-4', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
                         {'ISBN': '0-07-013151-5', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'}])
 
-db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo', 'lname': 'Wiggins', 'fname': 'Adrew'})
+db.librarian.insert(**{'librarian_id': '1999-0001', 'lib_name': 'COE-Library', 'username': 'librarian1', 'password': '$pbkdf2-sha256$20000$mZMSIkSo9V5rLWUsxfh/Lw$82WC7e84b4BWFxvf/RFRxvXP5c0l0e5IlArPTdOmrms', 'lname': 'Wiggins', 'fname': 'Adrew'})
 db.librarian.insert(**{'librarian_id': '1999-0002', 'lib_name': 'SET-Library', 'username': 'librarian2', 'password': '$pbkdf2-sha256$20000$c671PkeI8b5Xytm7FyKkdA$jEPtNjoJCOnYGWBUIrpuy5bcrL4/XETiOtKJluu2Uhw', 'lname': 'Wiggins Jr.', 'fname': 'Adrew'})
 
 

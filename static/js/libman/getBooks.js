@@ -18,7 +18,7 @@ function displayBooks(books,libraryName){
 	var recordsArray = [];
 	for(var i in books){
 		var rowInRecords = {
-			title: '<a href="#" onClick="getBookInfo('+books[i].ISBN+');">'+ books[i].title+ '</a>',
+			title: '<a href="#" onClick="getBookInfo(\''+books[i].ISBN+'\');">'+ books[i].title+ '</a>',
 			isbn: books[i].ISBN,
 		}
 		recordsArray.push(rowInRecords);
@@ -49,7 +49,7 @@ function displaySearchedBooks(books,keyword){
 	
 	for(var i in books){
 		var rowInRecords = {
-			title: '<a href="#" onClick="getBookInfo('+books[i].ISBN+');">'+ books[i].title+ '</a>',
+			title: '<a href="#" onClick="getBookInfo(\''+books[i].ISBN+'\');">'+ books[i].title+ '</a>',
 			isbn: books[i].ISBN,
 		}
 		recordsArray.push(rowInRecords);
