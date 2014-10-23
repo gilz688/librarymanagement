@@ -10,6 +10,7 @@ function searchBookByAuthor(author){
 			displayBooks(books);
 		},
 		error: function(e){
+			$("#panel_body").html("<b>No book Found.</b>");
 			if(results == 0){
 				displayErrorMessage("Not found!");
 			}

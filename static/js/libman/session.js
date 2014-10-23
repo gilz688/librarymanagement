@@ -10,6 +10,8 @@ function logOutUser(){
 			type: "post",
 			url: local_site+ "auth/logout",
 			success: function(result){
+				$("#panel_heading").html("");
+				$("#panel_body").html("");
 				viewUserHome();
 			},
 		});

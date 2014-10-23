@@ -8,7 +8,7 @@ function searchBook(){
 		displayErrorMessage("Please don't leave blank.");
 	}
 	else{
-		$("#data-container").html("<b>No book Found.</b>");
+		
 
 		var mode = $("#mode-selected").val();
 		switch(mode){

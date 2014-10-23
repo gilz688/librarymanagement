@@ -6,6 +6,7 @@ function searchBookByISBN(isbn){
 			displayBooks(books);
 		},
 		error: function(e, status, error){
+			$("#panel_body").html("<b>No book Found.</b>");
 			if(results == 0){
 				displayErrorMessage("No Book Found");
 			}
