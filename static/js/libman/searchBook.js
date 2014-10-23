@@ -8,8 +8,6 @@ function searchBook(){
 		displayErrorMessage("Please don't leave blank.");
 	}
 	else{
-		
-
 		var mode = $("#mode-selected").val();
 		switch(mode){
 			case "Title":
@@ -24,7 +22,7 @@ function searchBook(){
 			default:
 				searchBookByTitle(keyword);
 		}
-		$("#header").html("<h1>Search results for '" + keyword + "'</h1>");
+		$("#panel_heading").html("<b>Search results for '" + keyword + "'</b>");
 	}
 	$("#search-input").val("");
 	return false;
