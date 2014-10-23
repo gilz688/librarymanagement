@@ -17,74 +17,282 @@ class TestBookManagement(unittest.TestCase):
 	def visitBooksUrl(self):
 		url = "http://127.0.0.1:8000/librarymanagement/default/" 
 		self.browser.visit(url)
-
-	def testGetMostBorrowedBookYearlyNotLoggedIn(self):
+	
+	# Yearly
+	def testGetMostBorrowedBookYearly(self):
 		self.visitBooksUrl()
 
 		option = self.browser.find_by_id('borrowList')
-		#optionList = self.browser.find_by_id('borrowListData')
-		#submit = self.browser.find_by_id("borrowButtonM")
-		#optionList = self.browser.find_by_id("borrowListData")
-		#year = self.browser.find_by_xpath('//li[@id=\"borrowListData\"]/ul/li')[2]
-		#year = self.browser.find_by_id('borYear')
-		#submit = self.browser.find_by_id('borrowButtonY')
-		
 		option.click()
-		# year.click()
-		#submit.click()
-
-
-	def testGetMostBorrowedBookYearlyLoggedIn(self):
-		pass
-
-	def testGetMostBorrowedBookMonthlyNotLoggedIn(self):
-		pass
-
-	def testGetMostBorrowedBookMonthlyLoggedIn(self):
-		pass
-
-	def testGetMostBorrowedBookDailyNotLoggedIn(self):
-		pass
-		'''
-		self.visitBooksUrl()
-		option = self.browser.find_by_xpath('//span[text()=\"View most borrowed books\"]').first
-		day = self.browser.find_by_id('borDay')
-		submit = self.browser.find_by_id('borrowButtonD')
-
-		option.click()
-		day.click()
+		time.sleep(5)
+		year = self.browser.find_by_id('borYear')
+		year.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('borrowButtonY')
 		submit.click()
-		'''
+		time.sleep(5)
 
-	def testGetMostBorrowedBookDailyLoggedIn(self):
-		pass
+		assert self.browser.is_text_present('Introduction to Electricity')
+		assert self.browser.is_text_present("0-07-013151-3")
+		assert self.browser.is_text_present("SET-Library")
+		assert self.browser.is_text_present("6")
+
+	# Yearly blank query
+	def testGetMostBorrowedBookYearlyWithBlankQuery(self):
+		self.visitBooksUrl()
+
+		option = self.browser.find_by_id('borrowList')
+		option.click()
+		time.sleep(5)
+		year = self.browser.find_by_id('borYear')
+		year.click()
+		time.sleep(5)
+		yearInput = self.browser.find_by_id('borYearInput')
+		yearInput.fill("")
+		submit = self.browser.find_by_id('borrowButtonY')
+		submit.click()
+
+		assert self.browser.is_text_present('Error')
+		assert self.browser.is_text_present("Please enter the date")
+
+	# Monthly blank query
+	def testGetMostBorrowedBookMonthlyWithBlankQuery(self):
+		self.visitBooksUrl()
+
+		option = self.browser.find_by_id('borrowList')
+		option.click()
+		time.sleep(5)
+		year = self.browser.find_by_id('borMonth')
+		year.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('borrowButtonM')
+		submit.click()
+
+		assert self.browser.is_text_present('Error')
+		assert self.browser.is_text_present("Please enter the date")
+
+	# Daily blank query
+	def testGetMostBorrowedBookDailyWithBlankQuery(self):
+		self.visitBooksUrl()
+
+		option = self.browser.find_by_id('borrowList')
+		option.click()
+		time.sleep(5)
+		year = self.browser.find_by_id('borDay')
+		year.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('borrowButtonD')
+		submit.click()
+
+		assert self.browser.is_text_present('Error')
+		assert self.browser.is_text_present("Please enter the date")
 
 	def testGetYearlyReportCOELib(self):
-		pass
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
 
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		year = self.browser.find_by_id('histYear')
+		year.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonY')
+		submit.click()
+
+		assert self.browser.is_text_present('Data Structures Using C++')
+		assert self.browser.is_text_present('0-07-013151-2')
+		assert self.browser.is_text_present('1999-0001')
+		assert self.browser.is_text_present('2014-06-16')
+		assert self.browser.is_text_present('09:43:55')	
+		assert self.browser.is_text_present('return')
+
+		# logout
+		self.browser.find_by_css('#session').click()
+	
 	def testGetYearlyReportSETLib(self):
-		pass
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
 
-	def testGetYearlyReportCEDLib(self):
-		pass
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		year = self.browser.find_by_id('histYear')
+		year.click()
+		time.sleep(5)
+		dropDown = self.browser.find_by_id('hlibY')
+		dropDown.click()
+		time.sleep(2)
+		library = self.browser.find_by_id('hSETY')
+		library.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonY')
+		submit.click()
 
-	def testGetMonthlyReportCOELib(self):
-		pass
+		assert self.browser.is_text_present('Introduction to Electricity')
+		assert self.browser.is_text_present('0-07-013151-3')
+		assert self.browser.is_text_present('1999-0002')
+		assert self.browser.is_text_present('2014-06-15')
+		assert self.browser.is_text_present('09:43:55')	
+		assert self.browser.is_text_present('borrow')
 
-	def testGetMonthlyReportSETLib(self):
-		pass
+		# logout
+		self.browser.find_by_css('#session').click()
 
-	def testGetMonthlyReportCEDLib(self):
-		pass
+	def testGetMonthlyReportCOELibBlankQuery(self):
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
 
-	def testGetDailyReportCOELib(self):
-		pass
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		month = self.browser.find_by_id('histMonth')
+		month.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonM')
+		submit.click()
 
-	def testGetDailyReportSETLib(self):
-		pass
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
 
-	def testGetDailyReportCEDLib(self):
-		pass
+		# logout
+		self.browser.find_by_css('#session').click()
+
+	def testGetMonthlyReportSETLibBlankQuery(self):
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian2")
+		self.browser.find_by_css("#password").fill("password2")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		month = self.browser.find_by_id('histMonth')
+		month.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonM')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
+
+
+	def testGetDailyReportCOELibBlankQuery(self):
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		day = self.browser.find_by_id('histDay')
+		day.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonD')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
+
+	def testGetDailyReportSETLibBlankQuery(self):
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian2")
+		self.browser.find_by_css("#password").fill("password2")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		day = self.browser.find_by_id('histDay')
+		day.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonD')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
+
+	def testGetYearlyReportCOELibBlankQuery(self):
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		day = self.browser.find_by_id('histYear')
+		day.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonY')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
+
+	def testGetYearlyReportSETLibBlankQuery(self):
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian2")
+		self.browser.find_by_css("#password").fill("password2")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		day = self.browser.find_by_id('histYear')
+		day.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonY')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestBookManagement))
