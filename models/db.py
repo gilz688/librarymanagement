@@ -250,9 +250,7 @@ db.author.bulk_insert([{'ISBN': '0-13-262226-2', 'lname': 'Boylestad', 'fname': 
                         {'ISBN': '00-07-322278-X', 'lname': 'Frenzel', 'fname': 'Louis', 'middle_initial': 'E'},
                         {'ISBN': '0-07-243202-0', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
                         {'ISBN': '0-07-338066-0', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
-                        {'ISBN': '0-13-291548-0', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'},
-                        {'ISBN': '0-07-013151-12', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
-                        {'ISBN': '0-07-013151-6', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'})
+                        {'ISBN': '0-13-291548-0', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'}])
 
 db.commit()
 '''
