@@ -12,26 +12,26 @@
         
           <li class="list-group-item" id="borrowListData">
               <ul class="nav nav-pills" role="tablist">
-                <li class="active" id="borDay"><a style="padding:5px" href="#bdate" role="tab" data-toggle="tab">Day</a></li>
-                <li id="borMonth"><a style="padding:5px" href="#bmonth" role="tab" data-toggle="tab">Month</a></li>
-                <li id="borYear"><a style="padding:5px" href="#byear" role="tab" data-toggle="tab">Year</a></li>
+                <li class="active"><a style="padding:5px" href="#bdate" role="tab" data-toggle="tab" id="borDay">Day</a></li>
+                <li><a style="padding:5px" href="#bmonth" role="tab" data-toggle="tab" id="borMonth">Month</a></li>
+                <li><a style="padding:5px" href="#byear" role="tab" data-toggle="tab" id="borYear">Year</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="bdate">
                   <form>
-                    <input class="transaction" type="date" name="bdate">
+                    <input class="transaction" type="date" name="bdate" id="borDayInput">
                     <button id="borrowButtonD" type="button" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
                 <div class="tab-pane fade" id="bmonth">
                   <form>
-                    <input class="transaction" type="month" name="bmonth">
+                    <input class="transaction" type="month" name="bmonth" id="borMonthInput">
                     <button id="borrowButtonM" type="button" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
                 <div class="tab-pane fade" id="byear">
                   <form>
-                    <input type="number" name="byear" style="padding:0px 5px;height:25px;margin-top:5px" class="form-control"   min="1990" max="2030" step="1" value="2014">
+                    <input type="number" name="byear" style="padding:0px 5px;height:25px;margin-top:5px" class="form-control"   min="1990" max="2030" step="1" value="2014" id="borYearInput">
                     <button id="borrowButtonY" type="button" class="btn btn-primary">Submit</button>
                   </form>
                 </div>
@@ -45,17 +45,17 @@
         </li>
           <li class="list-group-item" id="historyListData">
               <ul class="nav nav-pills" role="tablist">
-                <li class="active"><a style="padding:5px" href="#hdate" role="tab" data-toggle="tab">Day</a></li>
-                <li ><a style="padding:5px" href="#hmonth" role="tab" data-toggle="tab">Month</a></li>
-                <li ><a style="padding:5px" href="#hyear" role="tab" data-toggle="tab">Year</a></li>
+                <li class="active"><a style="padding:5px" href="#hdate" role="tab" data-toggle="tab" id="histDay">Day</a></li>
+                <li ><a style="padding:5px" href="#hmonth" role="tab" data-toggle="tab" id="histMonth">Month</a></li>
+                <li ><a style="padding:5px" href="#hyear" role="tab" data-toggle="tab" id="histYear">Year</a></li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane fade in active" id="hdate">
                   <form>
                     <input class="transaction" type="date" name="hdate">
-                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
-                      <option value="COE-Library">COE-Library</option>
-                      <option value="SET-Library">SET-Library</option>
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlibD">
+                      <option value="COE-Library" id="hCOED">COE-Library</option>
+                      <option value="SET-Library" id="hSETD">SET-Library</option>
                     </select>
                     <button id="historyButtonD" type="button" class="btn btn-primary">Submit</button>
                   </form>
@@ -63,9 +63,9 @@
                 <div class="tab-pane fade" id="hmonth">
                   <form>
                     <input class="transaction" type="month" name="hmonth">
-                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
-                      <option value="COE-Library">COE-Library</option>
-                      <option value="SET-Library">SET-Library</option>
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlibM">
+                      <option value="COE-Library" id="hCOEM">COE-Library</option>
+                      <option value="SET-Library" id="hSETM">SET-Library</option>
                     </select>
                     <button id="historyButtonM" type="button" class="btn btn-primary">Submit</button>
                   </form>
@@ -73,9 +73,9 @@
                 <div class="tab-pane fade" id="hyear">
                   <form>
                     <input style="padding:0px 5px;height:25px;margin-top:5px" class="form-control" type="number" name="hyear" min="1990" max="2030" step="1" value="2014">
-                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlib">
-                      <option value="COE-Library">COE-Library</option>
-                      <option value="SET-Library">SET-Library</option>
+                    <select name="lib_name" style="padding:0px;height:25px;margin-top:5px" class="form-control" id="hlibY">
+                      <option value="COE-Library" id="hCOEY">COE-Library</option>
+                      <option value="SET-Library" id="hSETY">SET-Library</option>
                     </select>
                     <button id="historyButtonY" type="button" class="btn btn-primary">Submit</button>
                   </form>
