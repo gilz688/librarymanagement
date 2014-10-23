@@ -339,7 +339,7 @@ def addBorrowTransaction(librarian_id, ISBN, dateNow, timeNow):
     db.book_manager.insert(**{'ISBN': ISBN, 'librarian_id': librarian_id, 'transact_date': dateNow, 'transact_time': timeNow, 'transact_type': 'borrow'})
 
 def getRecordsInADay(day, month, year, library):
-    return db((db.book_manager.transact_date.day() == day) & (db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year) & (db.book.lib_name == library)).select(db.book_manager.ALL, db.book.title, db.book.lib_name, left = db.book_manager.on(db.book.ISBN == db.book_manager.ISBN), orderby=db.book.title)
+    return db((db.book_manager.transact_date.day() == day) & (db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year) & (db.book.lib_name == library)).select(db.book_manager.ALL, db.book.title, db.book.lib_name, left = db.book_manager.on(db.book.ISBN == db.book_manager.ISBN), orderby=db.book_manager.transact_time|db.book_manager.transact_date)
 
 def getMostBorrowedBookInADay(day, month, year):
     return db((db.book_manager.transact_date.day() == day) & (db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year)).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
@@ -351,10 +351,10 @@ def getMostBorrowedBookInAYear(year):
     return db(db.book_manager.transact_date.year() == year).select(db.book_manager.ISBN, db.book_manager.ISBN.count(), groupby=db.book_manager.ISBN, orderby = db.book_manager.ISBN.count()).last()
 
 def getMonthTransactions(month,year,library):
-    return db((db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year) & (db.book.lib_name == library)).select(db.book_manager.ALL, db.book.title, db.book.lib_name, left = db.book_manager.on(db.book.ISBN == db.book_manager.ISBN), orderby=db.book.title)
+    return db((db.book_manager.transact_date.month() == month) & (db.book_manager.transact_date.year() == year) & (db.book.lib_name == library)).select(db.book_manager.ALL, db.book.title, db.book.lib_name, left = db.book_manager.on(db.book.ISBN == db.book_manager.ISBN), orderby=db.book_manager.transact_time|db.book_manager.transact_date)
 
 def getYearTransactions(year,library):
-    return db((db.book_manager.transact_date.year() == year) & (db.book.lib_name == library)).select(db.book_manager.ALL, db.book.title, db.book.lib_name, left = db.book_manager.on(db.book.ISBN == db.book_manager.ISBN), orderby=db.book.title)
+    return db((db.book_manager.transact_date.year() == year) & (db.book.lib_name == library)).select(db.book_manager.ALL, db.book.title, db.book.lib_name, left = db.book_manager.on(db.book.ISBN == db.book_manager.ISBN), orderby=db.book_manager.transact_time|db.book_manager.transact_date)
 
 ## by default give a view/generic.extension to all actions from localhost
 ## none otherwise. a pattern can be 'controller/function.extension'
