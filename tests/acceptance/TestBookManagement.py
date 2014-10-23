@@ -199,10 +199,52 @@ class TestBookManagement(unittest.TestCase):
 
 
 	def testGetDailyReportCOELibBlankQuery(self):
-		pass
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		day = self.browser.find_by_id('histDay')
+		day.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonD')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
 
 	def testGetDailyReportSETLibBlankQuery(self):
-		pass
+		self.visitBooksUrl()
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian2")
+		self.browser.find_by_css("#password").fill("password2")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
+
+		option = self.browser.find_by_id('historyList')
+		option.click()
+		time.sleep(5)
+		day = self.browser.find_by_id('histDay')
+		day.click()
+		time.sleep(5)
+		submit = self.browser.find_by_id('historyButtonD')
+		submit.click()
+
+		assert self.browser.is_text_present('Error!')
+		assert self.browser.is_text_present('Please enter the date')
+
+		# logout
+		self.browser.find_by_css('#session').click()
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestBookManagement))
