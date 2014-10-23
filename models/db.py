@@ -188,6 +188,8 @@ db.book.insert(**{'ISBN': '0-07-013151-12', 'lib_name': 'COE-Library','publisher
                   'pic': 'book.pic.82ce9fecdf325cb3.556e6b6e6f776e2d426f6f6b2e6a7067.jpg',
                   'description': 'No Available description.'})
 
+
+
 #new authors here
 db.author.bulk_insert([{'ISBN': '0-07-013151-6', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
                         {'ISBN': '0-07-013151-7', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
@@ -242,19 +244,18 @@ db.book.insert(**{'ISBN': '0-13-291548-0', 'lib_name': 'COE-Library',
                   'no_of_copies': 2, 'available_copies': 2,
                   'pic': 'book.pic.9208293388898e2d.363165705643427772774c202831292e6a7067.jpg',
                   'description': 'In his revision of Engineering Mechanics, R.C. Hibbeler empowers¿readers to succeed in the whole learning experience. Hibbeler achieves this by calling on his everyday classroom experience and his knowledge of how people learn inside and outside of lecture. This text is ideal for civil and mechanical engineering professionals.'})
+'''
 
 # more authors here
 
 db.author.bulk_insert([{'ISBN': '0-13-262226-2', 'lname': 'Boylestad', 'fname': 'Robert', 'middle_initial': 'L'},
                         {'ISBN': '0-07-352957-5', 'lname': 'Hayt', 'fname': 'William', 'middle_initial': 'H'},
-                        {'ISBN': '00-07-322278-X', 'lname': 'Frenzel', 'fname': 'Louis', 'middle_initial': 'E'},
+                        {'ISBN': '0-07-322278-X', 'lname': 'Frenzel', 'fname': 'Louis', 'middle_initial': 'E'},
                         {'ISBN': '0-07-243202-0', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
                         {'ISBN': '0-07-338066-0', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
                         {'ISBN': '0-13-291548-0', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'}])
 
 db.commit()
-'''
-
 
 
 """View Books Query"""
