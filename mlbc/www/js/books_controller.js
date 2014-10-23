@@ -10,7 +10,7 @@ function booksController($scope, $q, booksService) {
 
     function viewBooks() {
         $scope.books = [];
-        addBooks(1, 3);
+        addBooks(0, 4);
         bindViewBooksToNextPage();
     }
 
@@ -67,4 +67,36 @@ function booksController($scope, $q, booksService) {
             );
         }
     }
+
+
+
+    function searchAllBook(keyword) {
+        $scope.books = [];
+        searchAddBook(keyword, 0, 4);
+        bindSearchBookToNextPage(keyword);
+    }
+
+    function searchAddBook(keyword,start, end) {
+        if ($scope.ready){
+            $scope.ready = false;
+            booksService.searchBook(keyword,start, end).then(
+                function(books) {
+
+                    console.dir(books);
+                    for (var i = 0; i < books.length; i++) {
+                        $scope.books.push(books[i]);
+                    }
+
+                    $scope.ready = true;
+                }
+            );
+        }
+    }
+
+     function bindSearchBookToNextPage(keyword){
+        $scope.nextPage = function() {
+            searchAddBook(keyword, $scope.books.length, $scope.books.length + 1);
+        }
+    }
+
 }
