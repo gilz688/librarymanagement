@@ -7,8 +7,6 @@ from gluon.globals import Request
 
 execfile("applications/librarymanagement/controllers/viewBooks.py", globals())
 
-
-
 class TestViewBook(unittest.TestCase):
 	def setUp(self):
 		request = Request("")
