@@ -26,7 +26,7 @@ function displayMostBorrowedBookDaily(day, month, year) {
 		},
 		dataType: "json",
 		success: function(records){
-			$("#panel_heading").html("<h1>Most Borrowed Book For : " +month + "-" + day + "-" + year+ "<h1>");
+			$("#panel_heading").html("Most Borrowed Book For : " +month + "-" + day + "-" + year);
 			displayMostBorrowedRecords(records);
 		},
 	});
@@ -43,7 +43,7 @@ function displayMostBorrowedBookMonthly(month, year) {
 		},
 		dataType: "json",
 		success: function(records){
-			$("#panel_heading").html("<h1>Most Borrowed Book For : " + month + "-" + year+ "<h1>");
+			$("#panel_heading").html("Most Borrowed Book For : " + month + "-" + year);
 			displayMostBorrowedRecords(records);
 		},
 	});
