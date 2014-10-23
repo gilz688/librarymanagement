@@ -7,7 +7,7 @@ function searchBookByAuthor(author){
 		},
 		dataType: "json",
 		success: function(books){
-			displayBooks(books);
+			displaySearchedBooks(books,author);
 		},
 		error: function(e){
 			$("#panel_body").html("<b>No book Found.</b>");

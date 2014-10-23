@@ -22,7 +22,6 @@ function searchBook(){
 			default:
 				searchBookByTitle(keyword);
 		}
-		$("#panel_heading").html("<b>Search results for '" + keyword + "'</b>");
 	}
 	$("#search-input").val("");
 	return false;

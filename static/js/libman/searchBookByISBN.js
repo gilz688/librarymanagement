@@ -3,7 +3,7 @@ function searchBookByISBN(isbn){
 		url: local_site+ "searchBook/searchByISBN/" + isbn,
 		dataType: "json",
 		success: function(books){
-			displayBooks(books);
+			displaySearchedBooks(books,isbn);
 		},
 		error: function(e, status, error){
 			$("#panel_body").html("<b>No book Found.</b>");

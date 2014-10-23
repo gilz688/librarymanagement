@@ -14,13 +14,59 @@ function getBooks(libraryName){
 }
 
 function displayBooks(books,libraryName){
-	var output = "<table class=\"table table-bordered\">";
-	output += "<thead>";
-	output += "<tr><th style=\"text-align:center\">Book Title</th><th style=\"text-align:center\">ISBN</th></tr>";
-	output += "</thead><tbody>"; 
+
+	var recordsArray = [];
 	for(var i in books){
-		output +="<tr><td><a href=\"#\" onClick='getBookInfo(\"" +books[i].ISBN+ "\");'>"+ books[i].title+  "</a></td><td>" +books[i].ISBN+ "</td></tr>";
+		var rowInRecords = {
+			title: '<a href="#" onClick="getBookInfo('+books[i].ISBN+');">'+ books[i].title+ '</a>',
+			isbn: books[i].ISBN,
+		}
+		recordsArray.push(rowInRecords);
 	}
-	output += "</tbody></table></div></div>";
-	$("#panel_body").html(output);
+
+	var output = '<div class="panel panel-info"><div id="panel_heading" class="panel-heading"></div><div class="panel-body"><div class="table-responsive"><table id="history" class="table table-striped table-hover table-condensed" cellspacing="0" width="100%"><thead><tr><th>Title</th><th>ISBN</th></tr></thead></table></div></div></div></div>'
+    $("#data-container").html(output);
+    $("#panel_heading").html("<b>"+libraryName+ " transaction history</b>");
+
+    $('#history').DataTable( {
+	    data: recordsArray,
+	    columns: [
+	    	{ data: 'title' },
+	        { data: 'isbn' },
+	    ],
+	    "columnDefs": [
+		    { "width": "30%", "targets": 0 },
+		    { "width": "15%", "targets": 1 },
+		 ]
+	});
+}
+
+function displaySearchedBooks(books,keyword){
+
+	
+	
+	var recordsArray = [];
+	
+	for(var i in books){
+		var rowInRecords = {
+			title: '<a href="#" onClick="getBookInfo('+books[i].ISBN+');">'+ books[i].title+ '</a>',
+			isbn: books[i].ISBN,
+		}
+		recordsArray.push(rowInRecords);
+	}
+	
+	var output = '<div class="panel panel-info"><div id="panel_heading" class="panel-heading"></div><div class="panel-body"><div class="table-responsive"><table id="history" class="table table-striped table-hover table-condensed" cellspacing="0" width="100%"><thead><tr><th>Title</th><th>ISBN</th></tr></thead></table></div></div></div></div>'
+    $("#data-container").html(output);
+    $("#panel_heading").html("<b>Search results for '" + keyword + "'</b>");
+    $('#history').DataTable( {
+	    data: recordsArray,
+	    columns: [
+	    	{ data: 'title' },
+	        { data: 'isbn' },
+	    ],
+	    "columnDefs": [
+		    { "width": "30%", "targets": 0 },
+		    { "width": "15%", "targets": 1 },
+		 ]
+	});
 }
