@@ -34,14 +34,11 @@ function booksService($http, $q) {
     }
 
 
-    function searchBook(key){
-        var request = $http({
-            method: "post",
-            url: remote_site + "searchBook/searchAllBook/",
-            data: {
-                "keyword": key
-            }
-        });
+    function searchBook(key,start,end){
+            var request = $http({
+                method: "get",
+                url: remote_site + "searchBook/searchAllBook/?keyword="+key+"&start="+start+"&end="+end,
+            });
         return (request.then(handleSuccess, handleError));
     }
 
