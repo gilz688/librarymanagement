@@ -199,6 +199,58 @@ db.author.bulk_insert([{'ISBN': '0-07-013151-6', 'lname': 'Boydell', 'fname': 'B
                         {'ISBN': '0-07-013151-6', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
                         {'ISBN': '0-07-013151-7', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'}])
 
+# more books here
+
+db.book.insert(**{'ISBN': '0-13-262226-2', 'lib_name': 'COE-Library',
+                  'publisher': 'Prentice Hall',
+                  'title': 'Electronic Devices and Circuit Theory',
+                  'no_of_copies': 3, 'available_copies': 3,
+                  'pic': 'book.pic.838a2b9c48a17234.3431713174784b6166734c2e6a7067.jpg',
+                  'description': 'Electronic Devices and Circuit Theory, Eleventh Edition, offers a complete, comprehensive survey, focusing on all the essentials you will need to succeed on the job. Setting the standard for nearly 30 years, this highly accurate text is supported by strong pedagogy and content that is ideal for new students of this rapidly changing field. The colorful layout with ample photographs and examples helps you better understand important topics. This text is an excellent reference work for anyone involved with electronic devices and other circuitry applications, such as electrical and technical engineers.'})
+
+db.book.insert(**{'ISBN': '0-07-352957-5', 'lib_name': 'COE-Library',
+                  'publisher': 'McGraw-Hill',
+                  'title': 'Engineering Circuit Analysis',
+                  'no_of_copies': 2, 'available_copies': 2,
+                  'pic': 'book.pic.b4c4fdb69ffb8951.353136684f47617941524c2e6a7067.jpg',
+                  'description': 'The hallmark feature of this classic text is its focus on the student - it is written so that students may teach the science of circuit analysis to themselves.'})
+
+db.book.insert(**{'ISBN': '0-07-322278-X', 'lib_name': 'COE-Library',
+                  'publisher': 'McGraw-Hill',
+                  'title': 'Principles of Electronic Communication Systems', 
+                  'no_of_copies': 5, 'available_copies': 5,
+                  'pic': 'book.pic.a3321ba89a154bbc.636f6d7379732e6a706567.jpeg',
+                  'description': 'The hallmark feature of this classic text is its focus on the student - it is written so that students may teach the science of circuit analysis to themselves.'})
+
+db.book.insert(**{'ISBN': '0-07-243202-0', 'lib_name': 'COE-Library',
+                  'publisher': 'McGraw-Hill',
+                  'title': 'Fluid Mechanics With Engineering Applications', 
+                  'no_of_copies': 6, 'available_copies': 6,
+                  'pic': 'book.pic.bc339d1b7dcf5449.3531775376684a6f74444c2e6a7067.jpg',
+                  'description': 'This book is well known and well respected in the civil engineering market and has a following among civil engineers. This book is for civil engineers that teach fluid mechanics both within their discipline and as a service course to mechanical engineering students.'})
+
+db.book.insert(**{'ISBN': '0-07-338066-0', 'lib_name': 'COE-Library',
+                  'publisher': 'McGraw-Hill',
+                  'title': 'Engineering Electromagnetics', 
+                  'no_of_copies': 2, 'available_copies': 2,
+                  'pic': 'book.pic.86ebd8d29e30bab8.343141396c5674396f624c2e6a7067.jpg',
+                  'description': 'First published just over 50 years ago and now in its Eighth Edition, Bill Hayt and John Buck’s Engineering Electromagnetics is a classic text that has been updated for electromagnetics education today. This widely-respected book stresses fundamental concepts and problem solving, and discusses the material in an understandable and readable way.'})
+
+db.book.insert(**{'ISBN': '0-13-291548-0', 'lib_name': 'COE-Library',
+                  'publisher': 'Prentice Hall',
+                  'title': 'Engineering Mechanics: Statics & Dynamics', 
+                  'no_of_copies': 2, 'available_copies': 2,
+                  'pic': 'book.pic.9208293388898e2d.363165705643427772774c202831292e6a7067.jpg',
+                  'description': 'In his revision of Engineering Mechanics, R.C. Hibbeler empowers¿readers to succeed in the whole learning experience. Hibbeler achieves this by calling on his everyday classroom experience and his knowledge of how people learn inside and outside of lecture. This text is ideal for civil and mechanical engineering professionals.'})
+
+# more authors here
+
+db.author.bulk_insert([{'ISBN': '0-13-262226-2', 'lname': 'Boylestad', 'fname': 'Robert', 'middle_initial': 'L'},
+                        {'ISBN': '0-07-352957-5', 'lname': 'Hayt', 'fname': 'William', 'middle_initial': 'H'},
+                        {'ISBN': '00-07-322278-X', 'lname': 'Frenzel', 'fname': 'Louis', 'middle_initial': 'E'},
+                        {'ISBN': '0-07-243202-0', 'lname': 'Boydell', 'fname': 'B.J.', 'middle_initial': 'T'},
+                        {'ISBN': '0-07-338066-0', 'lname': 'Burns', 'fname': 'Martial', 'middle_initial': 'L'},
+                        {'ISBN': '0-13-291548-0', 'lname': 'Paynter', 'fname': 'Robert', 'middle_initial': 'T'}])
 
 db.commit()
 '''
