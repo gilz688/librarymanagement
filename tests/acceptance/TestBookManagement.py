@@ -57,6 +57,7 @@ class TestBookManagement(unittest.TestCase):
 		time.sleep(5)
 		yearInput = self.browser.find_by_id('borYearInput')
 		yearInput.fill("")
+		time.sleep(5)
 		submit = self.browser.find_by_id('borrowButtonY')
 		submit.click()
 
@@ -95,7 +96,7 @@ class TestBookManagement(unittest.TestCase):
 		assert self.browser.is_text_present('Error')
 		assert self.browser.is_text_present("Please enter the date")
 
-	def testGetYearlyReportCOELib(self):
+	def testGetYearlyReportLib(self):
 		self.visitBooksUrl()
 		self.login()
 
@@ -117,7 +118,7 @@ class TestBookManagement(unittest.TestCase):
 
 		# logout
 		self.browser.find_by_css('#session').click()
-
+'''
 	def testGetYearlyReportSETLib(self):
 		self.visitBooksUrl()
 		self.login()
@@ -146,8 +147,8 @@ class TestBookManagement(unittest.TestCase):
 
 		# logout
 		self.browser.find_by_css('#session').click()
-		
-	def testGetMonthlyReportCOELibBlankQuery(self):
+	'''	
+	def testGetMonthlyReportLibBlankQuery(self):
 		self.visitBooksUrl()
 		self.login()
 
@@ -166,32 +167,8 @@ class TestBookManagement(unittest.TestCase):
 		# logout
 		self.browser.find_by_css('#session').click()
 
-	def testGetMonthlyReportSETLibBlankQuery(self):
-		self.visitBooksUrl()
-		self.login()
 
-		option = self.browser.find_by_id('historyList')
-		option.click()
-		time.sleep(5)
-		month = self.browser.find_by_id('histMonth')
-		month.click()
-		time.sleep(5)
-		dropDown = self.browser.find_by_id('hlibM')
-		dropDown.click()
-		time.sleep(5)
-		library = self.browser.find_by_id('hSETM')
-		library.click()
-		submit = self.browser.find_by_id('historyButtonM')
-		submit.click()
-
-		assert self.browser.is_text_present('Error!')
-		assert self.browser.is_text_present('Please enter the date')
-
-		# logout
-		self.browser.find_by_css('#session').click()
-
-
-	def testGetDailyReportCOELibBlankQuery(self):
+	def testGetDailyReportLibBlankQuery(self):
 		self.visitBooksUrl()
 		self.login()
 
@@ -210,31 +187,8 @@ class TestBookManagement(unittest.TestCase):
 		# logout
 		self.browser.find_by_css('#session').click()
 
-	def testGetDailyReportSETLibBlankQuery(self):
-		self.visitBooksUrl()
-		self.login()
-
-		option = self.browser.find_by_id('historyList')
-		option.click()
-		time.sleep(5)
-		day = self.browser.find_by_id('histDay')
-		day.click()
-		time.sleep(5)
-		dropDown = self.browser.find_by_id('hlibD')
-		dropDown.click()
-		time.sleep(5)
-		library = self.browser.find_by_id('hCOED')
-		library.click()
-		submit = self.browser.find_by_id('historyButtonD')
-		submit.click()
-
-		assert self.browser.is_text_present('Error!')
-		assert self.browser.is_text_present('Please enter the date')
-
-		# logout
-		self.browser.find_by_css('#session').click()
 		
-	def testGetYearlyReportCOELibBlankQuery(self):
+	def testGetYearlyReportLibBlankQuery(self):
 		self.visitBooksUrl()
 		self.login()
 
@@ -246,6 +200,7 @@ class TestBookManagement(unittest.TestCase):
 		time.sleep(5)
 		yearInput = self.browser.find_by_id('histInputY')
 		yearInput.fill("")
+		time.sleep(5)
 		submit = self.browser.find_by_id('historyButtonY')
 		submit.click()
 
@@ -255,31 +210,6 @@ class TestBookManagement(unittest.TestCase):
 		# logout
 		self.browser.find_by_css('#session').click()
 
-	def testGetYearlyReportSETLibBlankQuery(self):
-		self.visitBooksUrl()
-		self.login()
-
-		option = self.browser.find_by_id('historyList')
-		option.click()
-		time.sleep(5)
-		year = self.browser.find_by_id('histYear')
-		year.click()
-		time.sleep(5)
-		yearInput = self.browser.find_by_id('histInputY')
-		yearInput.fill("")
-		dropDown = self.browser.find_by_id('hlibY')
-		dropDown.click()
-		time.sleep(5)
-		library = self.browser.find_by_id('hSETY')
-		library.click()
-		submit = self.browser.find_by_id('historyButtonY')
-		submit.click()
-
-		assert self.browser.is_text_present('Error!')
-		assert self.browser.is_text_present('Please enter the date')
-
-		# logout
-		self.browser.find_by_css('#session').click()
 
 suite = unittest.TestSuite()
 suite.addTest(unittest.makeSuite(TestBookManagement))
