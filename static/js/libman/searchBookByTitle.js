@@ -7,13 +7,11 @@ function searchBookByTitle(book_title){
 		},
 		dataType: "json",
 		success: function(books){
-			displaySearchedBooks(books,book_title);
+			displayBooks(books);
 		},
 		error: function(e){
 			$("#panel_body").html("<b>No book Found.</b>");
-			if(results == 0){
-				displayErrorMessage("Not found!");
-			}
+			displayErrorMessage("Not found!");
 		}
 	});
 }

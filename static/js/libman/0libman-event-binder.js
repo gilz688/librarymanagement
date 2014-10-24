@@ -127,7 +127,9 @@ function viewLibrarianHome(libraryName){
 function viewUserHome(){
 	$("#session a").html("Log In");
 	$("#header").html("<h1>Welcome to LIBMAN</h1>");
-	//$("#data-container").html("");
+	$("#panel_body").html("");
+	$("#panel_heading").html("");
+	//$("#data-container").hide();
 	viewGenerateReportOptionsNotLoggedIn();
 }
 

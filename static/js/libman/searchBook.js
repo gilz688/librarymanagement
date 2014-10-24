@@ -8,6 +8,7 @@ function searchBook(){
 		displayErrorMessage("Please don't leave blank.");
 	}
 	else{
+		$("#panel_heading").html("<b>Search results for '" + keyword + "'</b>");
 		var mode = $("#mode-selected").val();
 		switch(mode){
 			case "Title":
