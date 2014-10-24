@@ -118,7 +118,7 @@ class TestBookManagement(unittest.TestCase):
 
 		# logout
 		self.browser.find_by_css('#session').click()
-'''
+
 	def testGetYearlyReportSETLib(self):
 		self.visitBooksUrl()
 		self.login()
@@ -147,7 +147,7 @@ class TestBookManagement(unittest.TestCase):
 
 		# logout
 		self.browser.find_by_css('#session').click()
-	'''	
+	
 	def testGetMonthlyReportLibBlankQuery(self):
 		self.visitBooksUrl()
 		self.login()
