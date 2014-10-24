@@ -154,10 +154,10 @@ class TestBookManagement(unittest.TestCase):
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
-		time.sleep(5)
+		time.sleep(2)
 		month = self.browser.find_by_id('histMonth')
 		month.click()
-		time.sleep(5)
+		time.sleep(2)
 		submit = self.browser.find_by_id('historyButtonM')
 		submit.click()
 
@@ -174,10 +174,10 @@ class TestBookManagement(unittest.TestCase):
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
-		time.sleep(5)
+		time.sleep(2)
 		day = self.browser.find_by_id('histDay')
 		day.click()
-		time.sleep(5)
+		time.sleep(2)
 		submit = self.browser.find_by_id('historyButtonD')
 		submit.click()
 
@@ -194,13 +194,13 @@ class TestBookManagement(unittest.TestCase):
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
-		time.sleep(5)
+		time.sleep(2)
 		year = self.browser.find_by_id('histYear')
 		year.click()
-		time.sleep(5)
+		time.sleep(2)
 		yearInput = self.browser.find_by_id('histInputY')
 		yearInput.fill("")
-		time.sleep(5)
+		time.sleep(2)
 		submit = self.browser.find_by_id('historyButtonY')
 		submit.click()
 
