@@ -119,34 +119,6 @@ class TestBookManagement(unittest.TestCase):
 		# logout
 		self.browser.find_by_css('#session').click()
 
-	def testGetYearlyReportSETLib(self):
-		self.visitBooksUrl()
-		self.login()
-
-		option = self.browser.find_by_id('historyList')
-		option.click()
-		time.sleep(5)
-		year = self.browser.find_by_id('histYear')
-		year.click()
-		time.sleep(5)
-		dropDown = self.browser.find_by_id('hlibY')
-		dropDown.click()
-		time.sleep(5)
-		library = self.browser.find_by_id('hSETY')
-		library.click()
-		time.sleep(5)
-		submit = self.browser.find_by_id('historyButtonY')
-		submit.click()
-
-		assert self.browser.is_text_present('Introduction to Electricity')
-		assert self.browser.is_text_present('0-07-013151-3')
-		assert self.browser.is_text_present('1999-0002')
-		assert self.browser.is_text_present('2014-06-15')
-		assert self.browser.is_text_present('09:43:55')	
-		assert self.browser.is_text_present('borrow')
-
-		# logout
-		self.browser.find_by_css('#session').click()
 	
 	def testGetMonthlyReportLibBlankQuery(self):
 		self.visitBooksUrl()
