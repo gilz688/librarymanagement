@@ -1,6 +1,9 @@
 function booksController($scope, $q, booksService) {
     $scope.ready = true;
-    viewBooks();
+
+    ons.ready(function() {
+        viewBooks();
+    });
 
     // bind function to html element with ng-click="viewSpecificBookInfo"
     $scope.viewSpecificBookInfo = viewSpecificBookDetails;
@@ -8,7 +11,12 @@ function booksController($scope, $q, booksService) {
     $scope.baseUrl = remote_site;
     $scope.viewBooks = viewBooks;
 
+    function setBusy(busy){
+        $scope.ready = !busy;
+    }
+
     function viewBooks() {
+        nullResults = false;
         $scope.books = [];
         addBooks(0, 4);
         bindViewBooksToNextPage();
@@ -22,7 +30,7 @@ function booksController($scope, $q, booksService) {
 
     function addBooks(start, end) {
         if ($scope.ready){
-            $scope.ready = false;
+            setBusy(true);
             booksService.getAllBooks(start, end).then(
                 function(books) {
 
@@ -31,7 +39,7 @@ function booksController($scope, $q, booksService) {
                         $scope.books.push(books[i]);
                     }
 
-                    $scope.ready = true;
+                    setBusy(false);
                 }
             );
         }
@@ -78,7 +86,7 @@ function booksController($scope, $q, booksService) {
 
     function searchAddBook(keyword,start, end) {
         if ($scope.ready){
-            $scope.ready = false;
+            setBusy(true);
             booksService.searchBook(keyword,start, end).then(
                 function(books) {
 
@@ -87,7 +95,8 @@ function booksController($scope, $q, booksService) {
                         $scope.books.push(books[i]);
                     }
 
-                    $scope.ready = true;
+                    $scope.nullResults = $scope.books.length == 0;
+                    setBusy(false);
                 }
             );
         }

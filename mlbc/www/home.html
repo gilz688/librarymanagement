@@ -1,7 +1,7 @@
 <ons-navigator var="mainnav">
     <ons-page>
         <ons-toolbar>
-            
+            <div class="center"><div ng-hide="ready" id="loaderImage"></div></div>  
         </ons-toolbar>
 
         <ons-row class="search_container">
@@ -11,7 +11,7 @@
           </ons-col>
         </ons-row>
 
-        <ons-scroller infinit-scroll-enable="true" on-scrolled="nextPage()" threshold="20" style="height:70%" can-load="ready">
+        <ons-scroller infinit-scroll-enable="true" on-scrolled="nextPage()" threshold="20" style="height:70%" can-load="ready" ng-hide="nullResults">
             <ons-list-item modifier="chevron" class="item" ng-repeat="book in books" ng-click="viewSpecificBookInfo(book.ISBN)" page="settings.html">
                 <ons-row>
                     <ons-col width="20%">
@@ -26,5 +26,12 @@
                 </ons-row>
             </ons-list-item>
         </ons-scroller>
+
+        <ons-row class="NullResults" ng-show="nullResults">
+          <ons-col align="center">
+            <div>No books found.</div>
+          </ons-col>
+        </ons-row>
+
     </ons-page>
 </ons-navigator>
