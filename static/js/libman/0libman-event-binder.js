@@ -34,12 +34,26 @@ $(document).ready(function() {
     $("#borDay").click(setCurrentDate);
     $("#borYear").click(setCurrentDate);
     $("#histDay").click(setCurrentDate);
+
+    setCurrentMonth();
+    $("#borMonth").click(setCurrentMonth);
+    $("#histMonth").click(setCurrentMonth);
 });
 
 function setCurrentDate() {
     dateFormat();
     $('#borDayInput').val(new Date().toDateInputValue());
     $("#histInputD").val(new Date().toDateInputValue());
+}
+
+function setCurrentMonth() {
+    var d = new Date();
+    var year = d.getYear() + 1900;
+    var month = (d.getMonth() + 1).toString();
+    if(month.length == 1)
+    	month = "0" + month
+    $('#borMonthInput').val(year.toString() + '-' + month);
+    $("#histInputM").val(year.toString() + '-' + month);
 }
 
 function dateFormat() {
