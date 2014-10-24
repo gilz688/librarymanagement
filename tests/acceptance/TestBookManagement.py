@@ -17,6 +17,14 @@ class TestBookManagement(unittest.TestCase):
 	def visitBooksUrl(self):
 		url = "http://127.0.0.1:8000/librarymanagement/default/" 
 		self.browser.visit(url)
+
+	def login(self):
+		self.browser.find_by_css('#session').click()
+		time.sleep(1)
+		self.browser.find_by_css("#username").fill("librarian1")
+		self.browser.find_by_css("#password").fill("password1")
+		self.browser.find_by_css("#submitLogIn").click()
+		time.sleep(5)
 	
 	# Yearly
 	def testGetMostBorrowedBookYearly(self):
@@ -89,12 +97,7 @@ class TestBookManagement(unittest.TestCase):
 
 	def testGetYearlyReportCOELib(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian1")
-		self.browser.find_by_css("#password").fill("password1")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -117,12 +120,7 @@ class TestBookManagement(unittest.TestCase):
 
 	def testGetYearlyReportSETLib(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian1")
-		self.browser.find_by_css("#password").fill("password1")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -132,7 +130,7 @@ class TestBookManagement(unittest.TestCase):
 		time.sleep(5)
 		dropDown = self.browser.find_by_id('hlibY')
 		dropDown.click()
-		time.sleep(2)
+		time.sleep(5)
 		library = self.browser.find_by_id('hSETY')
 		library.click()
 		time.sleep(5)
@@ -151,12 +149,7 @@ class TestBookManagement(unittest.TestCase):
 		
 	def testGetMonthlyReportCOELibBlankQuery(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian2")
-		self.browser.find_by_css("#password").fill("password2")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -164,10 +157,6 @@ class TestBookManagement(unittest.TestCase):
 		month = self.browser.find_by_id('histMonth')
 		month.click()
 		time.sleep(5)
-		dropDown = self.browser.find_by_id('hlibM')
-		dropDown.click()
-		library = self.browser.find_by_id('hCOEM')
-		library.click()
 		submit = self.browser.find_by_id('historyButtonM')
 		submit.click()
 
@@ -179,12 +168,7 @@ class TestBookManagement(unittest.TestCase):
 
 	def testGetMonthlyReportSETLibBlankQuery(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian2")
-		self.browser.find_by_css("#password").fill("password2")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -194,6 +178,7 @@ class TestBookManagement(unittest.TestCase):
 		time.sleep(5)
 		dropDown = self.browser.find_by_id('hlibM')
 		dropDown.click()
+		time.sleep(5)
 		library = self.browser.find_by_id('hSETM')
 		library.click()
 		submit = self.browser.find_by_id('historyButtonM')
@@ -208,12 +193,7 @@ class TestBookManagement(unittest.TestCase):
 
 	def testGetDailyReportCOELibBlankQuery(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian2")
-		self.browser.find_by_css("#password").fill("password2")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -221,10 +201,6 @@ class TestBookManagement(unittest.TestCase):
 		day = self.browser.find_by_id('histDay')
 		day.click()
 		time.sleep(5)
-		dropDown = self.browser.find_by_id('hlibD')
-		dropDown.click()
-		library = self.browser.find_by_id('hCOED')
-		library.click()
 		submit = self.browser.find_by_id('historyButtonD')
 		submit.click()
 
@@ -236,12 +212,7 @@ class TestBookManagement(unittest.TestCase):
 
 	def testGetDailyReportSETLibBlankQuery(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian2")
-		self.browser.find_by_css("#password").fill("password2")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -251,6 +222,7 @@ class TestBookManagement(unittest.TestCase):
 		time.sleep(5)
 		dropDown = self.browser.find_by_id('hlibD')
 		dropDown.click()
+		time.sleep(5)
 		library = self.browser.find_by_id('hCOED')
 		library.click()
 		submit = self.browser.find_by_id('historyButtonD')
@@ -264,12 +236,7 @@ class TestBookManagement(unittest.TestCase):
 		
 	def testGetYearlyReportCOELibBlankQuery(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian2")
-		self.browser.find_by_css("#password").fill("password2")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -290,12 +257,7 @@ class TestBookManagement(unittest.TestCase):
 
 	def testGetYearlyReportSETLibBlankQuery(self):
 		self.visitBooksUrl()
-		self.browser.find_by_css('#session').click()
-		time.sleep(1)
-		self.browser.find_by_css("#username").fill("librarian2")
-		self.browser.find_by_css("#password").fill("password2")
-		self.browser.find_by_css("#submitLogIn").click()
-		time.sleep(5)
+		self.login()
 
 		option = self.browser.find_by_id('historyList')
 		option.click()
@@ -307,6 +269,7 @@ class TestBookManagement(unittest.TestCase):
 		yearInput.fill("")
 		dropDown = self.browser.find_by_id('hlibY')
 		dropDown.click()
+		time.sleep(5)
 		library = self.browser.find_by_id('hSETY')
 		library.click()
 		submit = self.browser.find_by_id('historyButtonY')
