@@ -30,7 +30,7 @@ class TestAuth(unittest.TestCase):
 			request.post_vars['password'] = 'password1'
 
 			result = login()
-			expected = '{"username": "librarian1", "librarian_id": "1999-0001", "lname": "Wiggins", "fname": "Adrew", "lib_name": "COE-Library", "password": "$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo"}'
+			expected = '{"username": "librarian1", "librarian_id": "1999-0001", "lname": "Wiggins", "fname": "Adrew", "lib_name": "COE-Library", "password": "$pbkdf2-sha256$20000$mZMSIkSo9V5rLWUsxfh/Lw$82WC7e84b4BWFxvf/RFRxvXP5c0l0e5IlArPTdOmrms"}'
 			self.assertEquals(result, expected)
 		except Exception as e:
 			self.assertEquals(0,1)
@@ -91,7 +91,7 @@ class TestAuth(unittest.TestCase):
 		request.post_vars['password'] = 'password1'
 		login()
 		result = getLibrarian('librarian1')
-		expected = {'username': 'librarian1', 'librarian_id': '1999-0001', 'lname': 'Wiggins', 'fname': 'Adrew', 'lib_name': 'COE-Library', 'password': '$pbkdf2-sha256$200000$rfW.F4JQaq2VUiqltNaakw$Sh4DXKNrGLmUTOKI0GpungW3bM2rfFYx5jrm3yUyYgo'}
+		expected = {'username': 'librarian1', 'librarian_id': '1999-0001', 'lname': 'Wiggins', 'fname': 'Adrew', 'lib_name': 'COE-Library', 'password': '$pbkdf2-sha256$20000$mZMSIkSo9V5rLWUsxfh/Lw$82WC7e84b4BWFxvf/RFRxvXP5c0l0e5IlArPTdOmrms'}
 		self.assertEquals(result, expected)
 
 
