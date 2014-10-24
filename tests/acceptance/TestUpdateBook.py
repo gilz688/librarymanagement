@@ -38,9 +38,22 @@ class TestUpdateBook(unittest.TestCase):
         self.browser.find_by_css("#submitLogIn").click()
         time.sleep(3)
 
+    def searchBook(self):
+        dropDown = self.browser.find_by_xpath('//a[@class="dropdown-toggle"]').first
+        category = self.browser.find_by_xpath('//li[@class="mode-menu"]/a[text()=\"Title\"]').first
+        form = self.browser.find_by_id('search-input')
+        searchButton = self.browser.find_by_id('search-button')
+        dropDown.click()
+        category.click()
+        form.fill('Introduction To Algorithms')
+        searchButton.click()
+
     def testBorrowBook(self):
-        #User logs in
+        # User logs in
         self.login()
+
+        # User searches for book "Introduction to Algorithm"
+        self.searchBook()
 
         # User clicks the "Introduction to Algorithm"
         book = self.browser.find_by_xpath('//a[text()=\"Introduction to Algorithms\"]').first
@@ -71,6 +84,9 @@ class TestUpdateBook(unittest.TestCase):
 
     def testReturnBook(self):
         self.visitBooksUrl()
+
+        # User searches for book "Introduction to Algorithm"
+        self.searchBook()
 
         # User clicks the "Introduction to Algorithm"
         book = self.browser.find_by_xpath('//a[text()=\"Introduction to Algorithms\"]').first
@@ -103,6 +119,9 @@ class TestUpdateBook(unittest.TestCase):
     def testCannotBorrowBook(self):
         self.visitBooksUrl()
         
+        # User searches for book "Introduction to Algorithm"
+        self.searchBook()
+
         #User clicks the Introduction to Algorithm"
         book = self.browser.find_by_xpath('//a[text()=\"Introduction to Algorithms\"]').first
         book.click()
@@ -139,6 +158,9 @@ class TestUpdateBook(unittest.TestCase):
     def testCannotReturnBook(self):
         self.visitBooksUrl()
         
+        # User searches for book "Introduction to Algorithm"
+        self.searchBook()
+
         #User clicks the Introduction to Algorithm"
         book = self.browser.find_by_xpath('//a[text()=\"Introduction to Algorithms\"]').first
         book.click()
