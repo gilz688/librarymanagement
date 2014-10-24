@@ -38,6 +38,10 @@ $(document).ready(function() {
     setCurrentMonth();
     $("#borMonth").click(setCurrentMonth);
     $("#histMonth").click(setCurrentMonth);
+
+    setCurrentYear();
+    $("#borYear").click(setCurrentMonth);
+    $("#histYear").click(setCurrentMonth);   
 });
 
 function setCurrentDate() {
@@ -54,6 +58,13 @@ function setCurrentMonth() {
     	month = "0" + month
     $('#borMonthInput').val(year.toString() + '-' + month);
     $("#histInputM").val(year.toString() + '-' + month);
+}
+
+function setCurrentYear() {
+    var d = new Date();
+    var year = d.getYear() + 1900;
+    $('#borYearInput').val(year.toString());
+    $("#histInputY").val(year.toString());
 }
 
 function dateFormat() {
