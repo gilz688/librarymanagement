@@ -114,7 +114,7 @@ class TestBookManagement(unittest.TestCase):
 
 		# logout
 		self.browser.find_by_css('#session').click()
-	
+
 	def testGetYearlyReportSETLib(self):
 		self.visitBooksUrl()
 		self.browser.find_by_css('#session').click()
@@ -148,7 +148,7 @@ class TestBookManagement(unittest.TestCase):
 
 		# logout
 		self.browser.find_by_css('#session').click()
-
+		
 	def testGetMonthlyReportCOELibBlankQuery(self):
 		self.visitBooksUrl()
 		self.browser.find_by_css('#session').click()
@@ -261,7 +261,7 @@ class TestBookManagement(unittest.TestCase):
 
 		# logout
 		self.browser.find_by_css('#session').click()
-
+		
 	def testGetYearlyReportCOELibBlankQuery(self):
 		self.visitBooksUrl()
 		self.browser.find_by_css('#session').click()
@@ -274,13 +274,11 @@ class TestBookManagement(unittest.TestCase):
 		option = self.browser.find_by_id('historyList')
 		option.click()
 		time.sleep(5)
-		day = self.browser.find_by_id('histYear')
-		day.click()
+		year = self.browser.find_by_id('histYear')
+		year.click()
 		time.sleep(5)
-		dropDown = self.browser.find_by_id('hlibY')
-		dropDown.click()
-		library = self.browser.find_by_id('hCOEY')
-		library.click()
+		yearInput = self.browser.find_by_id('histInputY')
+		yearInput.fill("")
 		submit = self.browser.find_by_id('historyButtonY')
 		submit.click()
 
@@ -302,12 +300,14 @@ class TestBookManagement(unittest.TestCase):
 		option = self.browser.find_by_id('historyList')
 		option.click()
 		time.sleep(5)
-		day = self.browser.find_by_id('histYear')
-		day.click()
+		year = self.browser.find_by_id('histYear')
+		year.click()
 		time.sleep(5)
+		yearInput = self.browser.find_by_id('histInputY')
+		yearInput.fill("")
 		dropDown = self.browser.find_by_id('hlibY')
 		dropDown.click()
-		library = self.browser.find_by_id('hCOEY')
+		library = self.browser.find_by_id('hSETY')
 		library.click()
 		submit = self.browser.find_by_id('historyButtonY')
 		submit.click()
